@@ -1,4 +1,4 @@
-# TizenWearableWebCommon
+# Tizen Wearable Web Common
 Tizen Wearable Web application common components
 
 ## Introduction
