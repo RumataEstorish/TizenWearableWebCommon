@@ -6,7 +6,7 @@ I've developed tizen apps since Gear 2.0. And now I want to share some of my cod
 
 At this moment codes are not documented and described. No samples. But I will change it soon.
 
-Please, don't be rude - I hate javascript development and if you want to support very old devices, you have to stay old javascript.
+Please, don't be rude - I hate javascript and if you want to support very old devices, you have to stay old javascript.
 
 ### Compatibility
 All codes works from Gear 1 till Galaxy Watch Active, so main purpose is backward compatibility.
