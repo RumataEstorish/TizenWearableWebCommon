@@ -18,7 +18,55 @@ Project built with rather old tizen libs, but they work stable (v0.13.29, it's l
 
 ## Valuable code
 ### ActionMenu
-ActionMenu shows circular menu for circle devices and popup for rectangular
+ActionMenu shows circular menu for circle devices and popup for rectangular.
+Creation: 
+```
+var actionMenu = new ActionMenu('actionMenuPageName', 'actionMenuName', itemsList);
+```
+actionMenuPageName - page name, which menu will create to draw itsels
+actionMenuName - name of menu component
+itemsList - array of items in following format:
+```
+[{name : 'unique name of menu item', title : 'display name', image : 'path to icon', onclick : function(){ alert('this will be fired on click')}]
+```
+Get menu items:
+`actionMenu.menuItems`. Array of menu items
+`actionMenu.getMenuItemByName`. Find menu item by name or undefined
+
+
+Menu items visibility:
+`actionMenu.showMenuItem('itemName');`
+`actionMenu.hideMenuItem('menuName');`
+
+Check menu is opened:
+`actionMenu.isOpened`. Returns true or false
+
+Open menu:
+`actionMenu.show();`
+
+Close menu:
+`actionMenu.close(function(){ alert('Fires when menu is closed');});`. Argument is optional.
+
+Icons guide:
+The best option to create icon is to create 32x32 icon and make empty space around to make it 48x48. System will crop icon, but it would be visible good.
+
+NOTE!
+1. Always add check if menu isOpened to `tizenhwkey.back` processing event like this:
+```
+document.addEventListener('tizenhwkey', function(e){
+  if (e.keyName === 'back'){
+    if (actionMenu.isOpened === true){
+      actionMenu.close();
+      return;
+    }
+    //YOUR CODE
+  }
+}
+```
+2. Use `lib\tau'wearable\theme\default\tau.circle-patch-0.0.0.1.min.css` from this project instead of system `tau.circle.min.css` to avoid display bug.
+
+Known bugs:
+When you open menu from page 'A', and menu item opens input (from this project), page 'A' would receive 'pagehide' and then 'pageshow' event when input opens.
 
 ### Circle-helper
 Patch for Tizen circle-helper allows to force bezel rotation for element. Anyway not working with virtual-list
