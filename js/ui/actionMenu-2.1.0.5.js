@@ -277,37 +277,37 @@ ActionMenu.prototype.show = function() {
 			alert(e);
 		}
 	}, createMenu = function(){
-		var res = "", i = 0, self = this;
+		var res = "", i = 0;
 
-		if (!$(this.page).length) {
-			$('body').append('<div class="ui-page" id="' + this.page.substring(1) + '"></div>');
+		if (!$(self.page).length) {
+			$('body').append('<div class="ui-page" id="' + self.page.substring(1) + '"></div>');
 		}
 
 		if (tau.support.shape.circle) {
-			if (!$(this.page + " " + this.menuName.substring(1)).length) {
-				res = '<div id="' + this.menuName.substring(1) + '" class="ui-popup"><div id="selector" class="ui-selector">';
+			if (!$(self.page + " " + self.menuName.substring(1)).length) {
+				res = '<div id="' + self.menuName.substring(1) + '" class="ui-popup"><div id="selector" class="ui-selector">';
 
-				for (i = 0; i < this.menuItems.length; i++) {
-					if (this.menuItems[i].isHidden) {
+				for (i = 0; i < self.menuItems.length; i++) {
+					if (self.menuItems[i].isHidden) {
 						continue;
 					}
-					ActionMenu.addStyle('.' + this.menuItems[i].name + '::before {-webkit-mask-image: url(' + (this.menuItems[i].image[0] === '/' ? this.menuItems[i].image : '/' + this.menuItems[i].image) + ');}');
-					res += '<div class="ui-item popup-icon ' + this.menuItems[i].name + '" data-title="' + this.menuItems[i].title + '" id="' + this.menuItems[i].name + '"></div>';
+					ActionMenu.addStyle('.' + self.menuItems[i].name + '::before {-webkit-mask-image: url(' + (self.menuItems[i].image[0] === '/' ? self.menuItems[i].image : '/' + self.menuItems[i].image) + ');}');
+					res += '<div class="ui-item popup-icon ' + self.menuItems[i].name + '" data-title="' + self.menuItems[i].title + '" id="' + self.menuItems[i].name + '"></div>';
 				}
 				res += '</div>';
 			}
 		} else {
-			res = '<div id="' + this.menuName.substring(1) + '" class="ui-popup" data-transition="slideup"><div class="ui-popup-content"><ul class="ui-listview">';
-			for (i = 0; i < this.menuItems.length; i++) {
-				if (this.menuItems[i].isHidden) {
+			res = '<div id="' + self.menuName.substring(1) + '" class="ui-popup" data-transition="slideup"><div class="ui-popup-content"><ul class="ui-listview">';
+			for (i = 0; i < self.menuItems.length; i++) {
+				if (self.menuItems[i].isHidden) {
 					continue;
 				}
-				res += '<li id="' + this.menuItems[i].name + '"><a href="#">' + this.menuItems[i].title + '</a></li>';
+				res += '<li id="' + self.menuItems[i].name + '"><a href="#">' + self.menuItems[i].title + '</a></li>';
 			}
 			res += '</ul></div></div></div>';
 		}
-		$(this.page).append(res);
-		for (i = 0; i < this.menuItems.length; i++) {
+		$(self.page).append(res);
+		for (i = 0; i < self.menuItems.length; i++) {
 			(function(i){
 				$("#" + self.menuItems[i].name).on("click", function() {
 					self.close(function() {
