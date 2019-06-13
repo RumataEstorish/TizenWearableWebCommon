@@ -90,6 +90,8 @@ Tiny wrapper around system swipe list
 ### ToastMessage
 Tiny wrapper around system toast
 
+![ToastMessage](/screenshots/toastMessage.png)
+
 Create:
 ``var toastMessage = new ToastMessage('popupToast', 'popupToastContent');``
 popupToast - unique name of toast element.
