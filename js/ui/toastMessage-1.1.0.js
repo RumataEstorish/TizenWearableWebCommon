@@ -1,24 +1,21 @@
 /*global $, tau*/
 
 /*
- * v1.1
- * Insert html content automatically
- **/
+ * v1.0.1
+ * added click on popup to close it
+ * popup closing after 1500ms
+ * */
 
+ToastMessage.CLOSE_DELAY = 1500;
 
 /**
- * Toast message
+ * Constructor of class ToastMessage
+ * @param popupName - popup element name on page. Should be unique.
+ * @param popupContent - popup content element name on page. Should be unique.
  */
 function ToastMessage(popupName, popupContent) {
-	var isOpened = false, self = this, _pName = popupName[0] === '#' ? popupName : '#' + popupName, _pContent = popupContent[0] === '#' ? popupContent : '#' + popupContent;
+	var isOpened = false, self = this;
 
-	if (!$(_pName).length){
-		$('body').append('<div id="' + _pName.substring(1) + '" class="ui-popup ui-popup-toast"><div id="' + _pContent.substring(1) + '" class="ui-popup-content"></div></div>');
-	}
-	
-	/**
-	 * Is returns true if toast opened, false if not
-	 */
 	Object.defineProperty(this, "isOpened", {
 		get : function() {
 			return isOpened;
@@ -28,33 +25,26 @@ function ToastMessage(popupName, popupContent) {
 		}
 	});
 
-	/**
-	 * Name of popup component
-	 */
 	Object.defineProperty(this, "popupName", {
 		get : function() {
-			return _pName;
+			return popupName;
 		}
 	});
 
-	/**
-	 * Name of popup content
-	 */
 	Object.defineProperty(this, "popupContent", {
 		get : function() {
-			return _pContent;
+			return popupContent;
 		}
 	});
-	
 	$(this.popupName).on("popuphide", function() {
 		self.isOpened = false;
 	});
 }
 
 /**
- * Show toast
- * @param txt text to show
- * @param delay before toast closes. If not set, toast won't auto close
+ * Show toast popup
+ * @param txt - text to show
+ * @param delay - open toast delay
  */
 ToastMessage.prototype.show = function(txt, delay) {
 	var self = this;
@@ -68,7 +58,8 @@ ToastMessage.prototype.show = function(txt, delay) {
 	
 	setTimeout(function(){
 		tau.closePopup(self.popupName);
-	},1500);
+	}, ToastMessage.CLOSE_DELAY);
+	
 	$(this.popupContent).html(txt);
 	if (this.isOpened !== true) {
 		if (delay) {
@@ -84,7 +75,7 @@ ToastMessage.prototype.show = function(txt, delay) {
 };
 
 /**
- * Close toast message
+ * Close popup
  */
 ToastMessage.prototype.close = function() {
 	if (this.isOpened === true) {
