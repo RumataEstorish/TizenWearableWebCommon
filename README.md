@@ -14,6 +14,8 @@ All codes works from Gear 1 till Galaxy Watch Active, so main purpose is backwar
 ### Base
 Project built with rather old tizen libs, but they work stable (v0.13.29, it's libs from Gear S2 or Tizen 3.0. I don't remember). Also jquery requires. jquery-3.3.1 is ok. Every component can use Utils library, so it's important to download and include it either. If some code don't use it, next update I can rely on it either.
 
+Don't forget to copy "style.css" to make it looks better (yes, Samsung didn't include all styles into their libraries)
+
 
 
 ## Valuable code
