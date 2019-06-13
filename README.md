@@ -14,6 +14,8 @@ All codes works from Gear 1 till Galaxy Watch Active, so main purpose is backwar
 ### Base
 Project built with rather old tizen libs, but they work stable (v0.13.29, it's libs from Gear S2 or Tizen 3.0. I don't remember). Also jquery requires. jquery-3.3.1 is ok. Every component can use Utils library, so it's important to download and include it either. If some code don't use it, next update I can rely on it either.
 
+Don't forget to copy "style.css" to make it looks better (yes, Samsung didn't include all styles into their libraries)
+
 
 
 ## Valuable code
@@ -45,7 +47,8 @@ Open menu:
 `actionMenu.show();`
 
 Close menu:
-`actionMenu.close(function(){ alert('Fires when menu is closed');});`. Argument is optional.
+`actionMenu.close(function(){ alert('Fires when menu is closed');});`
+Argument: function which fires when action menu is closed. Optional.
 
 Icons guide:
 The best option to create icon is to create 32x32 icon and make empty space around to make it 48x48. System will crop icon, but it would be visible good.
@@ -65,6 +68,8 @@ document.addEventListener('tizenhwkey', function(e){
 ```
 2. Use `lib\tau'wearable\theme\default\tau.circle-patch-0.0.0.1.min.css` from this project instead of system `tau.circle.min.css` to avoid display bug.
 
+3. Init menu on window.load event because it adds markup in code.
+
 Known bugs:
 When you open menu from page 'A', and menu item opens input (from this project), page 'A' would receive 'pagehide' and then 'pageshow' event when input opens.
 
@@ -82,6 +87,24 @@ Tiny wrapper around system swipe list
 
 ### ToastMessage
 Tiny wrapper around system toast
+
+Create:
+``var toastMessage = new ToastMessage('popupToast', 'popupToastContent');``
+popupToast - unique name of toast element.
+popupToastContent - unique name of toast content element.
+
+Elements are added to document automatically.
+
+Show:
+``toastMessage.show('MESSAGE TEXT', 100)``
+Arguments:
+  - text which will be displayed
+  - delay before toast shows. Optional
+
+Close:
+``toastMessage.close()``
+Also toastMessage will be closed after 1500ms automatically
+ 
 
 ### VirtualList
 Patched system virtual list allowing dynamic content f.e. when you refresh data. Highly unrecommended to use it, works really bad especially when list item size is not the same
