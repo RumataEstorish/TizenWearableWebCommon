@@ -1,20 +1,21 @@
 /*global $, tau*/
 
 /*
- * v1.0.1.1
- * documented
- * v1.0.1
- * added click on popup to close it
- * popup closing after 1500ms
- * */
+ * v1.1
+ * Insert html content automatically
+ **/
 
 
 /**
  * Toast message
  */
 function ToastMessage(popupName, popupContent) {
-	var isOpened = false, self = this;
+	var isOpened = false, self = this, _pName = popupName[0] === '#' ? popupName : '#' + popupName, _pContent = popupContent[0] === '#' ? popupContent : '#' + popupContent;
 
+	if (!$(_pName).length){
+		$('body').append('<div id="' + _pName.substring(1) + '" class="ui-popup ui-popup-toast"><div id="' + _pContent.substring(1) + '" class="ui-popup-content"></div></div>');
+	}
+	
 	/**
 	 * Is returns true if toast opened, false if not
 	 */
@@ -32,7 +33,7 @@ function ToastMessage(popupName, popupContent) {
 	 */
 	Object.defineProperty(this, "popupName", {
 		get : function() {
-			return popupName;
+			return _pName;
 		}
 	});
 
@@ -41,7 +42,7 @@ function ToastMessage(popupName, popupContent) {
 	 */
 	Object.defineProperty(this, "popupContent", {
 		get : function() {
-			return popupContent;
+			return _pContent;
 		}
 	});
 	
