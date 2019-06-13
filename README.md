@@ -21,6 +21,8 @@ Don't forget to copy "style.css" to make it looks better (yes, Samsung didn't in
 ## Valuable code
 ### ActionMenu
 ActionMenu shows circular menu for circle devices and popup for rectangular.
+![ActionMenu](/screenshots/actionMenu.png)
+
 Creation: 
 ```
 var actionMenu = new ActionMenu('actionMenuPageName', 'actionMenuName', itemsList);
