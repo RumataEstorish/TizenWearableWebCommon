@@ -21,6 +21,8 @@ Don't forget to copy "style.css" to make it looks better (yes, Samsung didn't in
 ## Valuable code
 ### ActionMenu
 ActionMenu shows circular menu for circle devices and popup for rectangular.
+![ActionMenu](/screenshots/actionMenu.png)
+
 Creation: 
 ```
 var actionMenu = new ActionMenu('actionMenuPageName', 'actionMenuName', itemsList);
@@ -87,6 +89,8 @@ Tiny wrapper around system swipe list
 
 ### ToastMessage
 Tiny wrapper around system toast
+
+![ToastMessage](/screenshots/toastMessage.png)
 
 Create:
 ``var toastMessage = new ToastMessage('popupToast', 'popupToastContent');``
