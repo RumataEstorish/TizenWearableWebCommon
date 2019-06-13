@@ -47,7 +47,8 @@ Open menu:
 `actionMenu.show();`
 
 Close menu:
-`actionMenu.close(function(){ alert('Fires when menu is closed');});`. Argument is optional.
+`actionMenu.close(function(){ alert('Fires when menu is closed');});`
+Argument: function which fires when action menu is closed. Optional.
 
 Icons guide:
 The best option to create icon is to create 32x32 icon and make empty space around to make it 48x48. System will crop icon, but it would be visible good.
@@ -86,6 +87,24 @@ Tiny wrapper around system swipe list
 
 ### ToastMessage
 Tiny wrapper around system toast
+
+Create:
+``var toastMessage = new ToastMessage('popupToast', 'popupToastContent');``
+popupToast - unique name of toast element.
+popupToastContent - unique name of toast content element.
+
+Elements are added to document automatically.
+
+Show:
+``toastMessage.show('MESSAGE TEXT', 100)``
+Arguments:
+  - text which will be displayed
+  - delay before toast shows. Optional
+
+Close:
+``toastMessage.close()``
+Also toastMessage will be closed after 1500ms automatically
+ 
 
 ### VirtualList
 Patched system virtual list allowing dynamic content f.e. when you refresh data. Highly unrecommended to use it, works really bad especially when list item size is not the same
