@@ -65,6 +65,8 @@ document.addEventListener('tizenhwkey', function(e){
 ```
 2. Use `lib\tau'wearable\theme\default\tau.circle-patch-0.0.0.1.min.css` from this project instead of system `tau.circle.min.css` to avoid display bug.
 
+3. Init menu on window.load event because it adds markup in code.
+
 Known bugs:
 When you open menu from page 'A', and menu item opens input (from this project), page 'A' would receive 'pagehide' and then 'pageshow' event when input opens.
 
