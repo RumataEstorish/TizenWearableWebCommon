@@ -1,64 +1,7 @@
 /*global $, tau*/
 /*jslint bitwise: true */
 
-/* v2.1.4.8
- * fixed stringToBoolean. returns defaultVal on error
- * v2.1.4.7 
- * bugfix
- * v2.1.4.6
- * added toYYYYMMDDTHHMMSS
- * tryParseInt
- * v2.1.4.5
- * added Gear Sport
- * v2.1.4.4
- * added hashCode function
- * v2.1.4.3
- * added stringToBoolean
- * v2.1.4.2
- * added Gear Fit 2 to models
- * v2.1.4.1
- * added Gear S3 to models
- * v2.1.4
- * added Date.toDateInputValue
- * added Date.toYYYYMMDD
- * added Date.toYYYYMMDDTHHMM
- * renamed generageUUID to generateUUID
- * v2.1.3
- * fixed createIndexScrollBar when list have no items
- * v2.1.2
- * added Date.prototype.toDisplayDateTime
- * added Date.prototype.toDisplayDate
- * added Date.prototype.toDisplayTime
- * v2.1.1
- * added getFileNameWithoutExtension
- * added getFileName
- * v2.1.0
- * fixed model definition if null
- * added putCursorAtEnd
- * added Gear S2 models
- * added generateUUID
- * added setTheme
- * added getTheme
- * added focusToEnd
- * jQuery required
- * fixed isNewGear
- * added getGearVersion
- * added createIndexScrollBar
- * v2.0.2
- * added appendHtmlAtCaret
- * v2.0.1
- * added isNewGear method 
- * v2.0.0
- * wrapped to class Utils
- * v1.0.2
- * added bytesToSize
- * v1.0.1
- * added dynamicSortMultiple
- * added getActivePage
- * added isString
- */
-
-/*
+/**
  * Date for filling date input box
  */
 Date.prototype.toDateInputValue = function() {
@@ -67,6 +10,12 @@ Date.prototype.toDateInputValue = function() {
 	return local.toJSON().slice(0, 10);
 };
 
+/**
+ * Try to parse int
+ * @param str. String to parse
+ * @param defaultValue. Value should be returned if can't parse
+ * @returns int or defaultValue if cannot parse
+ */
 Utils.tryParseInt = function(str,defaultValue) {
     var retValue = defaultValue;
     if(str !== null) {
@@ -82,8 +31,7 @@ Utils.tryParseInt = function(str,defaultValue) {
 
 /**
  * Time for display without seconds
- * 
- * @returns {String}time in hh:mm and minutes with leading zero
+ * @returns time in hh:mm and minutes with leading zero
  */
 tizen.TZDate.prototype.toDisplayTime = function(){
 	return this.getHours() + ":" + (this.getMinutes() < 10 ? "0" + this.getMinutes() : this.getMinutes());
@@ -91,8 +39,7 @@ tizen.TZDate.prototype.toDisplayTime = function(){
 
 /**
  * Date for display without year
- * 
- * @returns {String} date in dd.mm and month with leading zero
+ * @returns date in dd.mm and month with leading zero
  */
 tizen.TZDate.prototype.toDisplayDate = function() {
 	return this.getDate() + "." + (this.getMonth() < 9 ? "0" + (this.getMonth() + 1) : this.getMonth() + 1);
@@ -100,8 +47,7 @@ tizen.TZDate.prototype.toDisplayDate = function() {
 
 /**
  * Time for display without seconds
- * 
- * @returns {String}time in hh:mm and minutes with leading zero
+ * @returns time in hh:mm and minutes with leading zero
  */
 Date.prototype.toDisplayTime = function() {
 	return this.getHours() + ":" + (this.getMinutes() < 10 ? "0" + this.getMinutes() : this.getMinutes());
@@ -109,15 +55,17 @@ Date.prototype.toDisplayTime = function() {
 
 /**
  * Date for display without year
- * 
- * @returns {String} date in dd.mm and month with leading zero
+ * @returns date in dd.mm and month with leading zero
  */
 Date.prototype.toDisplayDate = function() {
 	"use strict";
 	return this.getDate() + "." + (this.getMonth() < 9 ? "0" + (this.getMonth() + 1) : this.getMonth() + 1);
 };
 
-
+/**
+ * Date to string
+ * @returns YYYY-MM-DD
+ */
 Date.prototype.toYYYYMMDD = function(){
 	var month = (this.getMonth() + 1), date = this.getDate();
 	if (month < 10){
@@ -131,7 +79,8 @@ Date.prototype.toYYYYMMDD = function(){
 };
 
 /**
- * Date to UTC. Returns in YYY-MM-DDTHH:MM
+ * Date to UTC. 
+ * @returns YYYY-MM-DDTHH:MM
  */
 Date.prototype.toYYYYMMDDTHHMM = function(){
 	var minutes = this.getMinutes(), hours = this.getHours();
@@ -145,6 +94,10 @@ Date.prototype.toYYYYMMDDTHHMM = function(){
 	return this.toYYYYMMDD() + "T" + hours + ":" + minutes;
 };
 
+/**
+ * Date to string.
+ * @returns YYYY-MM-DD
+ */
 tizen.TZDate.prototype.toYYYYMMDD = function(){
 	var month = (this.getMonth() + 1), date = this.getDate();
 	if (month < 10){
@@ -157,6 +110,10 @@ tizen.TZDate.prototype.toYYYYMMDD = function(){
 	return this.getFullYear() + "-" + month + "-" + date;
 };
 
+/**
+ * Date to string. 
+ * @returns YYYY-MM-DDThh:mm
+ */
 tizen.TZDate.prototype.toYYYYMMDDTHHMM = function(){
 	var minutes = this.getMinutes(), hours = this.getHours();
 	
@@ -170,6 +127,10 @@ tizen.TZDate.prototype.toYYYYMMDDTHHMM = function(){
 	return this.toYYYYMMDD() + "T" + hours + ":" + minutes;
 };
 
+/**
+ * Date to string. 
+ * @returns YYYY-MM-DDThh:mm:ss
+ */
 tizen.TZDate.prototype.toYYYYMMDDTHHMMSS = function() {
 	var minutes = this.getMinutes(), hours = this.getHours(), seconds = this.getSeconds();
 
@@ -188,8 +149,7 @@ tizen.TZDate.prototype.toYYYYMMDDTHHMMSS = function() {
 
 /**
  * Date and time for display without year
- * 
- * @returns {String} dd.mm hh:MM, mm and MM with leading zero
+ * @returns dd.mm hh:MM, mm and MM with leading zero
  */
 Date.prototype.toDisplayDateTime = function() {
 	return this.toDisplayDate() + " " + this.toDisplayTime();
@@ -197,30 +157,15 @@ Date.prototype.toDisplayDateTime = function() {
 
 /**
  * Date and time for display without year
- * 
- * @returns {String} dd.mm hh:MM, mm and MM with leading zero
+ * @returns dd.mm hh:MM, mm and MM with leading zero
  */
 tizen.TZDate.prototype.toDisplayDateTime = function() {
 	return this.toDisplayDate() + " " + this.toDisplayTime();
 };
 
-var Theme = {
-	'BLUE' : 0,
-	'BROWN' : 1,
-	properties : {
-		0 : {
-			name : "blue",
-			value : 0,
-			code : "BL"
-		},
-		1 : {
-			name : "brown",
-			value : 1,
-			code : "BR"
-		}
-	}
-};
-
+/**
+ * GearModels. Not updated anymore because after GearS are all the same
+ */
 var GearModel = {
 	'GEAR_1' : 0,
 	'GEAR_2' : 1,
@@ -268,13 +213,19 @@ var GearModel = {
 	}
 };
 
+/**
+ * JQuery extension. Focus end.
+ */
 $.fn.focusToEnd = function() {
 	return this.each(function() {
 		var v = $(this).val();
-		$(this).focus().val("").val(v);
+		$(this).focus().val('').val(v);
 	});
 };
 
+/**
+ * JQuery extension. Put cursot at the end of element
+ */
 $.fn.putCursorAtEnd = function() {
 
 	return this.each(function() {
@@ -303,14 +254,12 @@ $.fn.putCursorAtEnd = function() {
 		this.scrollTop = 999999;
 
 	});
-
 };
 
 function Utils() {
 	this.temp = null;
 }
 
-Utils.THEME_STORAGE = "THEME";
 Utils.AUDIO_MIME = "audio/*";
 Utils.VIDEO_MIME = "video/*";
 Utils.IMAGE_MIME = "image/*";
@@ -319,26 +268,8 @@ Utils.OTHER_MIME = "*/*";
 Utils.TEXT_MIME = "text/*";
 
 /**
- * Get current stored theme
- * 
- * @returns Theme enum value
- */
-Utils.getTheme = function() {
-	switch (localStorage.getItem("THEME")) {
-	case "0":
-		return Theme.BLUE;
-	case "1":
-		return Theme.BROWN;
-	default:
-		return Theme.BLUE;
-	}
-};
-
-/**
- * Get file name without extension
- * 
- * @param fileName -
- *            full file name with extension
+ * Get file name without extension from path
+ * @param full file name with extension
  * @returns file name without extension
  */
 Utils.getFileNameWithoutExtension = function(fileName) {
@@ -346,10 +277,8 @@ Utils.getFileNameWithoutExtension = function(fileName) {
 };
 
 /**
- * Get file name with extension
- * 
- * @param fileName -
- *            full file name
+ * Get file name with extension from path
+ * @param full file name
  * @returns file name with extension
  */
 Utils.getFileName = function(fileName) {
@@ -357,25 +286,11 @@ Utils.getFileName = function(fileName) {
 };
 
 /**
- * Set theme and store selected
- * 
- * @param themeLink -
- *            theme link
- * @param theme -
- *            new theme to set
+ * Create indexed scrollbar
+ * @param indexPage. Page where create
+ * @param indexScrollBar indexScrollBar
+ * @param listName name of list for which index scrollbar should be created
  */
-Utils.setTheme = function(themeLink, theme) {
-	switch (theme) {
-	case Theme.BLUE:
-		$("#" + themeLink).attr("href", "lib/tau/wearable/theme/default/tau.min.css");
-		break;
-	case Theme.BROWN:
-		$("#" + themeLink).attr("href", "lib/tau/wearable/theme/brown/tau.min.css");
-		break;
-	}
-	localStorage.setItem("THEME", theme);
-};
-
 Utils.createIndexScrollBar = function(indexPage, indexScrollBar, listName) {
 	var page = document.getElementById(indexPage), listviewElement = document.getElementById(listName), isCircle = tau.support.shape.circle, scroller, indexScrollbar;
 
@@ -437,6 +352,10 @@ Utils.createIndexScrollBar = function(indexPage, indexScrollBar, listName) {
 	});
 };
 
+/**
+ * Generate random UUID
+ * @returns UUID
+ */
 Utils.generateUUID = function() {
 	var d = new Date().getTime(), uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
 		var r = (d + Math.random() * 16) % 16 | 0;
@@ -498,11 +417,8 @@ Utils.appendHtmlAtCaret = function(html, selectPastedContent) {
 
 /**
  * Gets random integer number between min and max
- * 
- * @param min -
- *            minimum value
- * @param max -
- *            maximum value
+ * @param minimum value
+ * @param maximum value
  * @returns random integer number
  */
 Utils.getRandomInt = function(min, max) {
@@ -511,9 +427,7 @@ Utils.getRandomInt = function(min, max) {
 
 /**
  * Get gear version
- * 
- * @param model -
- *            current gear model
+ * @param current gear model
  * @returns GearModel enum value
  */
 Utils.getGearVersion = function(model) {
@@ -556,10 +470,8 @@ Utils.getGearVersion = function(model) {
 
 /**
  * Check if GearS+
- * 
- * @param model -
- *            current model of Gear
- * @returns {Boolean} true if GearS+ models or false if older
+ * @param current model of Gear
+ * @returns true if GearS+ models or false if older
  */
 Utils.isNewGear = function(model) {
 	switch (Utils.getGearVersion(model)) {
@@ -572,9 +484,8 @@ Utils.isNewGear = function(model) {
 };
 
 /**
- * Get active page
- * 
- * @returns active page
+ * Get active page name
+ * @returns active page name
  */
 Utils.getActivePage = function() {
 	var page = document.getElementsByClassName('ui-page-active')[0];
@@ -584,9 +495,7 @@ Utils.getActivePage = function() {
 
 /**
  * Convert bytes to size
- * 
- * @param bytes
- *            to convert
+ * @param bytes to convert
  * @returns size + dimension
  */
 Utils.bytesToSize = function(bytes) {
@@ -600,9 +509,7 @@ Utils.bytesToSize = function(bytes) {
 
 /**
  * Check if object is string
- * 
- * @param o -
- *            object to check
+ * @param object to check
  * @returns true if string, false if not
  */
 Utils.isString = function(o) {
@@ -610,21 +517,19 @@ Utils.isString = function(o) {
 };
 
 /**
- * Получение расширения файла
- * 
- * @param имя
- *            файла
- * @returns расширение файла
+ * Get file extension
+ * @param file name
+ * @returns file extension
  */
 Utils.getFileExtension = function(fname) {
 	return fname.substr((~-fname.lastIndexOf(".") >>> 0) + 2).toLowerCase();
 };
 
 /**
- * Динамеческая сортировка массива
+ * Dynamic sort array with property set
  * 
  * @param property
- * @returns {Function}
+ * @returns sorted array
  * @example var People = [ {Name: "Name", Surname: "Surname"}, {Name:"AAA", Surname:"ZZZ"}, {Name: "Name", Surname: "AAA"} ]; People.sort(dynamicSort("Name")); People.sort(dynamicSort("Surname")); People.sort(dynamicSort("-Surname"));
  */
 Utils.dynamicSort = function(property) {
@@ -645,6 +550,10 @@ Utils.dynamicSort = function(property) {
 	};
 };
 
+/**
+ * Dynamic sort with multiple fields
+ * @returns sorted array
+ */
 Utils.dynamicSortMultiple = function() {
 	/*
 	 * save the arguments object as it will be overwritten note that arguments object is an array-like object consisting of the names of the properties to sort by
@@ -665,6 +574,11 @@ Utils.dynamicSortMultiple = function() {
 	};
 };
 
+/**
+ * String startsWith extension
+ * @param s - substring to test
+ * @returns true when starts, false when not
+ */
 String.prototype.startsWith = function(s) {
 	if (this.indexOf(s) === 0) {
 		return true;
@@ -692,7 +606,14 @@ Utils.stringToBoolean = function(val, defaultVal) {
 };
 
 /**
- * @returns {String} image/asterisk for images, audio/asterisk for sounds, video/asterisk for movies, application/asterisk for documents, text/asterisk for text files, and asterisk/asterisk for others
+ * Get mime of filename
+ * @returns {String} 
+ * image/asterisk for images, 
+ * audio/asterisk for sounds, 
+ * video/asterisk for movies, 
+ * application/asterisk for documents, 
+ * text/asterisk for text files, 
+ * asterisk/asterisk for others
  */
 Utils.getMime = function(fileName) {
 	var extension = Utils.getFileExtension(fileName);
@@ -763,7 +684,11 @@ Utils.getMime = function(fileName) {
 	}
 };
 
-
+/**
+ * Generate hashcode from string
+ * @param s - source string
+ * @returns hashcode
+ */
 Utils.hashCode = function(s){
 	  return s.split("").reduce(function(a,b){a=((a<<5)-a)+b.charCodeAt(0);return a&a;},0);              
 	};
