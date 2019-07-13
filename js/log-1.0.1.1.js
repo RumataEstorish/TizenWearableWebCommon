@@ -20,17 +20,33 @@ Log.ITEM = null;
 Log.FORCE_ERROR_ALERT = false;
 
 /**
+ * Write debug to log
+ * @param e. Log data
+ */
+Log.debug = function(d){
+	if (!Log.DEBUG){
+		return;
+	}
+	console.debug(d);
+	if (Log.ITEM){
+		Log.ITEM.append('d: ' + d + '\
+				');
+	}
+};
+
+
+/**
  * Write info to log
  * @param e. Log data
  * @param al. If set, alert info
  */
-Log.info = function(e, al){
-	console.info(e);
+Log.info = function(i, al){
+	console.info(i);
 	if (al){
-		alert(e);
+		alert(i);
 	}
 	if (Log.ITEM){
-		Log.ITEM.append('i: ' + e + '\
+		Log.ITEM.append('i: ' + i + '\
 				');
 	}
 };
@@ -40,13 +56,13 @@ Log.info = function(e, al){
  * @param e. Log data
  * @param al. If set, alert warning
  */
-Log.warn = function(e, al){
-	console.warn(e);
+Log.warn = function(w, al){
+	console.warn(w);
 	if (al){
-		alert(e);
+		alert(w);
 	}
 	if (Log.ITEM){
-		Log.ITEM.append('w: ' + e + '\
+		Log.ITEM.append('w: ' + w + '\
 				');
 	}
 };
@@ -71,23 +87,26 @@ Log.error = function(e, silent){
  * Write debug to log
  * @param e. Log data
  */
-Log.debug = function(e){
-	if (!Log.DEBUG){
-		return;
-	}
-	console.debug(e);
-	if (Log.ITEM){
-		Log.ITEM.append('d: ' + e + '\
-				');
-	}
+Log.d = function(d){
+	Log.debug(d);
 };
 
 /**
- * Write debug to log
+ * Write info to log
  * @param e. Log data
+ * @param al. If set, alert on info
  */
-Log.d = function(e){
-	Log.debug(e);
+Log.i = function(i, al){
+	Log.info(i, al);
+};
+
+/**
+ * Write warning to log
+ * @param e. Log data
+ * @param al. If set, alert on warning
+ */
+Log.w = function(w, al) {
+	Log.warn(w, al);
 };
 
 /**
@@ -97,22 +116,4 @@ Log.d = function(e){
  */
 Log.e = function(e, silent){
 	Log.error(e, silent);
-};
-
-/**
- * Write warning to log
- * @param e. Log data
- * @param al. If set, alert on warning
- */
-Log.w = function(e, al) {
-	Log.warn(e, al);
-};
-
-/**
- * Write info to log
- * @param e. Log data
- * @param al. If set, alert on info
- */
-Log.i = function(e, al){
-	Log.info(e, al);
 };
