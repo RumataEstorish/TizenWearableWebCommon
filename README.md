@@ -114,7 +114,43 @@ Also toastMessage will be closed after 1500ms automatically
 Patched system virtual list allowing dynamic content f.e. when you refresh data. Highly unrecommended to use it, works really bad especially when list item size is not the same
 
 ### Log
-Tiny wrapper around console. Just like android log syntax
+Tiny wrapper around console. Just like android log syntax.
+
+Global properties:
+``Log.DEBUG``
+When set to true, debug log will be written. If set to false, no debug log.
+``Log.ITEM``
+Set DOM element to write log into
+``Log.FORCE_ERROR_ALERT``
+When set to true, error will be always alerted
+
+Methods:
+Debug
+``Log.debug(d)``
+``Log.d(d)``
+Arguments:
+d - debug data
+
+Info
+``Log.info(i, al)``
+``Log.i(i, al)``
+Arguments:
+i - log data
+al - if set, alert on info
+
+Warn
+``Log.warn(w, al)``
+``Log.w(w, al)``
+Arguments:
+w - log data
+al - if set, alert on warn
+
+Error
+``Log.error(e, silent)``
+``Log.e(e, silent)``
+Arguments:
+e - log data
+silent - if not set, alert on error
 
 ### SAP
 Wrapper around samsung accessory protocol. Android part codes I will add later. Utilizes connection, reconnection, sending data etc
