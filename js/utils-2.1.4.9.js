@@ -288,7 +288,7 @@ Utils.getFileName = function(fileName) {
 /**
  * Create indexed scrollbar
  * @param indexPage. Page where create
- * @param indexScrollBar indexScrollBar
+ * @param indexScrollBar indexScrollBar element name
  * @param listName name of list for which index scrollbar should be created
  */
 Utils.createIndexScrollBar = function(indexPage, indexScrollBar, listName) {
@@ -367,6 +367,8 @@ Utils.generateUUID = function() {
 
 /**
  * Append html to div with contenteditable attribute
+ * @params html - code to insert at caret
+ * @params selectPastedContent - if set, select inserted html
  */
 Utils.appendHtmlAtCaret = function(html, selectPastedContent) {
 	var sel, range;
