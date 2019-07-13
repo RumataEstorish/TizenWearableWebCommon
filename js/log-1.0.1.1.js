@@ -21,7 +21,7 @@ Log.FORCE_ERROR_ALERT = false;
 
 /**
  * Write debug to log
- * @param e. Log data
+ * @param d. Log data
  */
 Log.debug = function(d){
 	if (!Log.DEBUG){
@@ -37,7 +37,7 @@ Log.debug = function(d){
 
 /**
  * Write info to log
- * @param e. Log data
+ * @param i. Log data
  * @param al. If set, alert info
  */
 Log.info = function(i, al){
@@ -53,7 +53,7 @@ Log.info = function(i, al){
 
 /**
  * Write warning to log
- * @param e. Log data
+ * @param w. Log data
  * @param al. If set, alert warning
  */
 Log.warn = function(w, al){
@@ -85,7 +85,7 @@ Log.error = function(e, silent){
 
 /**
  * Write debug to log
- * @param e. Log data
+ * @param d. Log data
  */
 Log.d = function(d){
 	Log.debug(d);
@@ -93,7 +93,7 @@ Log.d = function(d){
 
 /**
  * Write info to log
- * @param e. Log data
+ * @param i. Log data
  * @param al. If set, alert on info
  */
 Log.i = function(i, al){
@@ -102,7 +102,7 @@ Log.i = function(i, al){
 
 /**
  * Write warning to log
- * @param e. Log data
+ * @param w. Log data
  * @param al. If set, alert on warning
  */
 Log.w = function(w, al) {
