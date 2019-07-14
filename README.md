@@ -156,7 +156,44 @@ silent - if not set, alert on error
 Wrapper around samsung accessory protocol. Android part codes I will add later. Utilizes connection, reconnection, sending data etc
 
 ### Utils
-Different methods and everything else. Usually needed for other components
+Date time methods:
+Date extensions:
+``toDateInputValue``
+Date for filling date input box
+
+``toDisplayDateTime``
+Date and time for display without year. Returns dd.mm hh:MM with leading zero
+
+``toDisplayTime``
+Time for display without seconds. Returns hh:mm with leading zero
+
+``toDisplayDate``
+Date for display without year. Returns dd.mm with leading zero
+
+``toYYYYMMDD``
+Returns date in YYYY-MM-DD format
+
+``toYYYYMMDDTHHMM``
+Returns date in YYYY-MM-DDThh:mm format
+
+TZDate extensions:
+``toDisplayTime``
+Returns date in hh:mm with leading zero
+
+``toDisplayDate``
+Returns date in dd.mm with leading zero
+
+``toYYYYMMDD``
+Returns date in YYYY-MM-DD format
+
+``toYYYYMMDDTHHMM``
+Returns date in YYYY-MM-DDThh:mm format
+
+``toYYYYMMDDTHHMMSS``
+Returns date in YYYY-MM-DDThh:mm:ss format
+
+``toDisplayDateTime``
+Returns date in format DD.MM hh:mm with leading zero.
 
 ### GearHttp
 Network utilization module. It sends web requests through XMLHttpRequest for devices newer then Gear 2.0, for Gear 2.0 it passthrough requests through Android phone. You can always force traffic through Android via flag (can be useful when ssl sertificates don't work with particular watch model). It also needs Android part of code I'll share later
