@@ -11,38 +11,11 @@ Date.prototype.toDateInputValue = function() {
 };
 
 /**
- * Try to parse int
- * @param str. String to parse
- * @param defaultValue. Value should be returned if can't parse
- * @returns int or defaultValue if cannot parse
+ * Date and time for display without year
+ * @returns dd.mm hh:MM, mm and MM with leading zero
  */
-Utils.tryParseInt = function(str,defaultValue) {
-    var retValue = defaultValue;
-    if(str !== null) {
-        if(str.length > 0) {
-            if (!isNaN(str)) {
-                retValue = parseInt(str);
-            }
-        }
-    }
-    return retValue;
-};
-
-
-/**
- * Time for display without seconds
- * @returns time in hh:mm and minutes with leading zero
- */
-tizen.TZDate.prototype.toDisplayTime = function(){
-	return this.getHours() + ":" + (this.getMinutes() < 10 ? "0" + this.getMinutes() : this.getMinutes());
-};
-
-/**
- * Date for display without year
- * @returns date in dd.mm and month with leading zero
- */
-tizen.TZDate.prototype.toDisplayDate = function() {
-	return this.getDate() + "." + (this.getMonth() < 9 ? "0" + (this.getMonth() + 1) : this.getMonth() + 1);
+Date.prototype.toDisplayDateTime = function() {
+	return this.toDisplayDate() + " " + this.toDisplayTime();
 };
 
 /**
@@ -93,6 +66,24 @@ Date.prototype.toYYYYMMDDTHHMM = function(){
 	
 	return this.toYYYYMMDD() + "T" + hours + ":" + minutes;
 };
+
+
+/**
+ * Time for display without seconds
+ * @returns time in hh:mm and minutes with leading zero
+ */
+tizen.TZDate.prototype.toDisplayTime = function(){
+	return this.getHours() + ":" + (this.getMinutes() < 10 ? "0" + this.getMinutes() : this.getMinutes());
+};
+
+/**
+ * Date for display without year
+ * @returns date in dd.mm and month with leading zero
+ */
+tizen.TZDate.prototype.toDisplayDate = function() {
+	return this.getDate() + "." + (this.getMonth() < 9 ? "0" + (this.getMonth() + 1) : this.getMonth() + 1);
+};
+
 
 /**
  * Date to string.
@@ -151,16 +142,26 @@ tizen.TZDate.prototype.toYYYYMMDDTHHMMSS = function() {
  * Date and time for display without year
  * @returns dd.mm hh:MM, mm and MM with leading zero
  */
-Date.prototype.toDisplayDateTime = function() {
+tizen.TZDate.prototype.toDisplayDateTime = function() {
 	return this.toDisplayDate() + " " + this.toDisplayTime();
 };
 
 /**
- * Date and time for display without year
- * @returns dd.mm hh:MM, mm and MM with leading zero
+ * Try to parse int
+ * @param str. String to parse
+ * @param defaultValue. Value should be returned if can't parse
+ * @returns int or defaultValue if cannot parse
  */
-tizen.TZDate.prototype.toDisplayDateTime = function() {
-	return this.toDisplayDate() + " " + this.toDisplayTime();
+Utils.tryParseInt = function(str,defaultValue) {
+    var retValue = defaultValue;
+    if(str !== null) {
+        if(str.length > 0) {
+            if (!isNaN(str)) {
+                retValue = parseInt(str);
+            }
+        }
+    }
+    return retValue;
 };
 
 /**
