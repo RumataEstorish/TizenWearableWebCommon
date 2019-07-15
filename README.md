@@ -139,28 +139,28 @@ When set to true, error will be always alerted
 
 Methods:
 Debug
-``Log.debug(d)``
-``Log.d(d)``
+`Log.debug(d)
+Log.d(d)`
 Arguments:
 d - debug data
 
 Info
-``Log.info(i, al)``
-``Log.i(i, al)``
+`Log.info(i, al)
+Log.i(i, al)`
 Arguments:
 i - log data
 al - if set, alert on info
 
 Warn
-``Log.warn(w, al)``
-``Log.w(w, al)``
+`Log.warn(w, al)
+Log.w(w, al)`
 Arguments:
 w - log data
 al - if set, alert on warn
 
 Error
-``Log.error(e, silent)``
-``Log.e(e, silent)``
+`Log.error(e, silent)
+Log.e(e, silent)`
 Arguments:
 e - log data
 silent - if not set, alert on error
