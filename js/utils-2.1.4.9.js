@@ -286,6 +286,7 @@ Utils.getFileName = function(fileName) {
 	return fileName.substr(fileName.lastIndexOf("/") + 1);
 };
 
+// TODO move to separate class
 /**
  * Create indexed scrollbar
  * @param indexPage. Page where create
