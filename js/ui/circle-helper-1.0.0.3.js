@@ -8,10 +8,20 @@
 	snapList = [],
 	i, len, ignoreList = ['pageMarqueeList', 'pageTestVirtualList', 'pageAnimation'];
 	
+
+/**
+ * Adds page to ignore scroll create
+ * @param id - page id without #
+ */
 function addScrollerIgnorePage(id){
 	ignoreList.push(id);
 }
-	
+
+/**
+ * Creates scroller on element
+ * @params e -  object with field target contains dom element
+ * @example {target : document.getElementById('mainPage')}
+ */
 function createScroller(e){
 
 	if (!tau.support.shape.circle) {
