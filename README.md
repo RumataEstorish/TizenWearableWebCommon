@@ -195,6 +195,76 @@ Returns date in YYYY-MM-DDThh:mm:ss format
 ``toDisplayDateTime``
 Returns date in format DD.MM hh:mm with leading zero.
 
+Other methods:
+Try parse int from string
+``Utils.tryParseInt(str, defaultValue)``
+str - string to parse
+defaultValue - returns defaultValue, when string cannot be parsed
+
+Get file name without extension from path
+``Utils.getFileNameWithoutExtension(fileName)``
+
+Get file name with extension from path
+``Utils.getFileName(fileName)``
+
+Get file extension from path
+``Utils.getFileExtension(fname)``
+
+Generate random UUID
+``Utils.generateUUID``
+
+Append html to div where cursor is
+``Utils.appendHtmlAtCaret(html, selectPastedContent)``
+html - html should be appended
+selectPastedContent - if set to true, new content will be selected
+
+Get random integer between min and max
+``Utils.getRandomInt(min, max)``
+
+Get gear version from model. Method not updated since GearS3 because no need and hard to find models codenames list
+``Utils.getGearVersion(model)``
+Returns enum GearModel.
+
+Check if GearS+. Method is absolete, better check tau.support.shape.circle
+``Utils.isNewGear(model)``
+
+Get active page name
+``Utils.getActivePage``
+Returns currently active page name without #
+
+Convert bytes to size (kb,mb etc) in English locale
+``Utils.bytesToSize(bytes)``
+
+Check if object is string
+``Utils.isString(object)``
+
+Dynamic sort array with property set
+``Utils.dynamicSort(property)``
+Example:
+`var People = [ {Name: "Name", Surname: "Surname"}, {Name:"AAA", Surname:"ZZZ"}, {Name: "Name", Surname: "AAA"} ]; People.sort(dynamicSort("Name")); 
+People.sort(dynamicSort("Surname"));
+People.sort(dynamicSort("-Surname"));`
+
+Dynamic sort multiple properties
+``Utils.dynamcSortMultiple``
+Example:
+`Utils.dynamicSortMultiple('date', '-name')`
+
+String extension - starts with string:
+``startsWith(str)``
+Returns true or false
+
+String to boolean
+``Utils.stringToBoolean(val, defaultVal)``
+Converts string to boolean or returns defaultValue
+
+Get mime of file name
+``Utils.getMime(fileName)``
+
+Get hash code
+``Utils.hashCode(string)``
+
+
 ### GearHttp
 Network utilization module. It sends web requests through XMLHttpRequest for devices newer then Gear 2.0, for Gear 2.0 it passthrough requests through Android phone. You can always force traffic through Android via flag (can be useful when ssl sertificates don't work with particular watch model). It also needs Android part of code I'll share later
 
