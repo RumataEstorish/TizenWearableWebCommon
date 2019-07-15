@@ -275,7 +275,10 @@ People.sort(dynamicSort("-Surname"));`
 Dynamic sort multiple properties
 ``Utils.dynamcSortMultiple``
 Example:
-`Utils.dynamicSortMultiple('date', '-name')`
+```
+var array = [{name: 'A', date: 11}, {name: 'B', date: 12}];
+array.sort(Utils.dynamicSortMultiple('date', '-name'))
+```
 
 String extension - starts with string:
 ``startsWith(str)``
