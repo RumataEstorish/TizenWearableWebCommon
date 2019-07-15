@@ -286,6 +286,16 @@ Utils.getFileName = function(fileName) {
 	return fileName.substr(fileName.lastIndexOf("/") + 1);
 };
 
+/**
+ * Get file extension
+ * @param file name
+ * @returns file extension
+ */
+Utils.getFileExtension = function(fname) {
+	return fname.substr((~-fname.lastIndexOf(".") >>> 0) + 2).toLowerCase();
+};
+
+
 // TODO move to separate class
 /**
  * Create indexed scrollbar
@@ -521,15 +531,6 @@ Utils.isString = function(o) {
 };
 
 /**
- * Get file extension
- * @param file name
- * @returns file extension
- */
-Utils.getFileExtension = function(fname) {
-	return fname.substr((~-fname.lastIndexOf(".") >>> 0) + 2).toLowerCase();
-};
-
-/**
  * Dynamic sort array with property set
  * 
  * @param property
@@ -557,6 +558,7 @@ Utils.dynamicSort = function(property) {
 /**
  * Dynamic sort with multiple fields
  * @returns sorted array
+ * @example Utils.dynamicSortMultiple('date', '-name')
  */
 Utils.dynamicSortMultiple = function() {
 	/*
