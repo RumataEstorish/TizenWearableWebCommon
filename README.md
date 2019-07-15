@@ -77,6 +77,19 @@ When you open menu from page 'A', and menu item opens input (from this project),
 
 ### Circle-helper
 Patch for Tizen circle-helper allows to force bezel rotation for element. Anyway not working with virtual-list
+Two global methods:
+
+Force create scroller
+``createScroller(e)``
+e - object with field target contains dom element
+Example:
+``createScroller({target : document.getElementById('mainPage')})``
+
+Add page to ignore list avoid create scroller
+``addScrollerIgnorePage(id)``
+id - page name without #
+Example: 
+``addScrollerIgnorePage('mainPage')``
 
 ### CircleProgress
 Small wrapper around progress bar
