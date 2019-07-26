@@ -120,7 +120,7 @@ Arguments:
 
 Close:
 ``toastMessage.close()``
-Also toastMessage will be closed after 1500ms automatically
+Also toastMessage will be closed after 2000ms automatically
  
 
 ### VirtualList
