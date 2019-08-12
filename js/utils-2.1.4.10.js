@@ -67,6 +67,27 @@ Date.prototype.toYYYYMMDDTHHMM = function(){
 	return this.toYYYYMMDD() + "T" + hours + ":" + minutes;
 };
 
+/**
+ * Date to UTC. 
+ * @returns YYYY-MM-DDTHH:MM:SS
+ */
+Date.prototype.toYYYYMMDDTHHMMSS = function(){
+	var minutes = this.getMinutes(), hours = this.getHours(), seconds = this.getSeconds();
+	
+	if (seconds < 10){
+		seconds = '0' + seconds;
+	}
+	
+	if (minutes < 10){
+		minutes = '0' + minutes;
+	}
+	if (hours < 10){
+		hours = '0' + hours;
+	}
+	
+	return this.toYYYYMMDD() + 'T' + hours + ':' + minutes + ':' + seconds;
+};
+
 
 /**
  * Time for display without seconds
