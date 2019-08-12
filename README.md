@@ -203,6 +203,9 @@ Returns date in YYYY-MM-DD format
 ``toYYYYMMDDTHHMM``
 Returns date in YYYY-MM-DDThh:mm format
 
+``toYYYYMMDDTHHMMSS``
+Returns date in YYYY-MM-DDThh:mm:ss format
+
 TZDate extensions:
 ``toDisplayTime``
 Returns date in hh:mm with leading zero
