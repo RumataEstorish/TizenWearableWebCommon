@@ -437,7 +437,7 @@ SAP.prototype.connect = function() {
 
 			self.saSocket.setSocketStatusListener(function(reason) {
 				Log.debug("setSocketStatusListener: " + reason);
-				self.close();
+				//self.close();
 				d.reject(SAP.ERRORS.SOCKET_CLOSED);
 			});
 			self.saSocket.setDataReceiveListener(function(channelId, data) {
