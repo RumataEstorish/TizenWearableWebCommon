@@ -2,73 +2,94 @@
 /*jslint laxbreak: true*/
 
 /*
+ * v 2.0.2.0
+ * bug fixes
+ * ref
+ * comments in english
  * v 2.0.1.0
  * fixed fileSendCallback, fileReceiveCallback
- * v 1.1.13.6
- * removed webapis error on emulator
- * v 1.1.13.5
- * added NO_RESPONSE constant
- * v 1.1.13.4
- * Improved logging 
- * v 1.1.13.3
- * added REAUTH_NEEDED constant
- * v 1.1.13.2
- * fixed sendFile
- * v 1.1.13.1
- * bug fixed
- * v 1.1.13.0
- * added property to reconnect if DEVICE_NOT_CONNECTED (connectOnDeviceNotConnected). Default: true
- * removed 'deviceAttached' property
- * v 1.1.12.0
- * added sendFile
- * v 1.1.11.1
- * added ondisconnected event. Fires when device detached, other cases onerror
- * v 1.1.11.0
- * Bug fixed
- * v 1.1.10.3
- * On connect try to disconnect
- * Stability
- * v 1.1.10.2 
- * On PEER_DISCONNECT try to connect on timer
- * v 1.1.10.1
- * On INVALID_PEERAGENT send onerror event
- * Close also close socket
- * v 1.1.10
- * When device is not attached, don't try to reconnect due to battery drain
- * Added property isDeviceAttached instead deviceAttached
- * On INVALID_PEERAGENT also try to findPeerAgent
- * v 1.1.9
- * When DEVICE_NOT_CONNECTED, PEER_NOT_FOUND, PEERAGENT_NO_RESPONSE agentcallback.onerror, tries to reconnect every 2 sec
- * v 1.1.8
- * When DEVICE_NOT_CONNECTED error happens, sends onerror event to allow UI handle it
- * v 1.1.7
- * added ontoastmessage to constructor for general purposes
- * v 1.1.6
- * added setFileSendListener
- * v 1.1.3
- * removed peer agent appName check due to empty value
- * fixed fileTransfer callback
- * v 1.1.2
- * removed excess findPeerAgent calling
- * v 1.1.1
- * stability improvements
- * SAP 1.1.0:
- * added FileTransfer
- * added onnetreceive where response from 99th channel goes
- * added network channel 99
- * added openPhoneApp. Need 98 channel
  */
 
-function SAP(providerName, onReceive, ontoastmessage) {
-	var fileReceiveCallback = null, fileSendCallback = null, saSocket = null, peerAgent = null, deviceAttached = false, connectOnDeviceNotConnected = true, fileOrder = [], fileTransfer = null, receiveListeners = [], 
-	saAgent = null, _onreceive = onReceive, onnetreceive = null, onImageReceive = null;
+/**
+ * SAP common errors
+ */
+SAP.ERRORS = {
+	INVALID_PEER_AGENT : 'INVALID_PEER_AGENT',
+	PEER_NOT_FOUND : 'PEER_NOT_FOUND',
+	NO_AGENTS_FOUND : 'NO_AGENTS_FOUND',
+	SOCKET_CLOSED : 'SOCKET_CLOSED',
+	DEVICE_NOT_CONNECTED : 'DEVICE_NOT_CONNECTED',
+	DUPLICATE_REQUEST : 'DUPLICATE_REQUEST'
+};
 
+/**
+ * Temp folder path
+ */
+SAP.tempFolder = null;
+
+/** ************System commands************* */
+/**
+ * Authorization request
+ */
+SAP.AUTH_NEEDED = 'AUTH_NEEDED';
+
+/**
+ * Reauthorization request
+ */
+SAP.REAUTH_NEEDED = 'REAUTH_NEEDED';
+
+/**
+ * No response from web
+ */
+SAP.NO_RESPONSE = 'NO_RESPONSE';
+
+/**
+ * Open host app command
+ */
+SAP.OPEN_APP = 'OPEN_APP';
+
+/**
+ * Open link on host app
+ */
+SAP.OPEN_LINK = 'OPEN_LINK';
+
+/** ************System channels************* */
+/**
+ * Channel for some service info
+ */
+SAP.SERVICE_CHANNEL_ID = 98;
+
+/**
+ * Channel for network requests through android phone
+ */
+SAP.NETWORK_CHANNEL_ID = 99;
+
+/**
+ * Reconnect timeout
+ */
+SAP.RECONNECT_TIMEOUT = 5000;
+
+/**
+ * Constructor of SAP class
+ * @param providerName - name of host app
+ * @param onReceive - on receive from host callback (function(channelId, data))
+ * @param 
+ */
+function SAP(providerName, onReceive) {
+	var fileReceiveCallback = null, fileSendCallback = null, saSocket = null, peerAgent = null, deviceAttached = false, connectOnDeviceNotConnected = true, fileOrder = [], fileTransfer = null, receiveListeners = [], saAgent = null, _onreceive = onReceive, onnetreceive = null, onImageReceive = null;
+
+	/**
+	 * Array of onReceive listeners. [function(channelId, data)]
+	 */
 	Object.defineProperty(this, 'receiveListeners', {
 		get : function() {
 			return receiveListeners;
 		}
 	});
 
+	/**
+	 * Is phone device attached
+	 */
 	Object.defineProperty(this, "isDeviceAttached", {
 		get : function() {
 			return deviceAttached;
@@ -78,6 +99,9 @@ function SAP(providerName, onReceive, ontoastmessage) {
 		}
 	});
 
+	/**
+	 * If set to true, repeat attempts to connect phone if it's not connected
+	 */
 	Object.defineProperty(this, "connectOnDeviceNotConnected", {
 		get : function() {
 			return connectOnDeviceNotConnected;
@@ -87,24 +111,27 @@ function SAP(providerName, onReceive, ontoastmessage) {
 		}
 	});
 
-	Object.defineProperty(this, "ontoastmessage", {
-		get : function() {
-			return ontoastmessage;
-		}
-	});
-
+	/**
+	 * Provider name
+	 */
 	Object.defineProperty(this, "providerName", {
 		get : function() {
 			return providerName;
 		}
 	});
 
+	/**
+	 * Receiving files order
+	 */
 	Object.defineProperty(this, "fileOrder", {
 		get : function() {
 			return fileOrder;
 		}
 	});
 
+	/**
+	 * File transfer object
+	 */
 	Object.defineProperty(this, "fileTransfer", {
 		get : function() {
 			return fileTransfer;
@@ -114,12 +141,15 @@ function SAP(providerName, onReceive, ontoastmessage) {
 			if (fileTransfer && fileReceiveCallback) {
 				fileTransfer.setFileReceiveListener(fileReceiveCallback);
 			}
-			if (fileTransfer && fileSendCallback){
+			if (fileTransfer && fileSendCallback) {
 				fileTransfer.setFileSendListener(fileSendCallback);
 			}
 		}
 	});
 
+	/**
+	 * Peer agent
+	 */
 	Object.defineProperty(this, 'peerAgent', {
 		get : function() {
 			return peerAgent;
@@ -129,63 +159,78 @@ function SAP(providerName, onReceive, ontoastmessage) {
 		}
 	});
 
+	/**
+	 * Is connected to phone 
+	 */
 	Object.defineProperty(this, 'isConnected', {
 		get : function() {
 			return (this.peerAgent ? true : false) && (this.saSocket ? true : false);
 		}
 	});
-	
+
+	/**
+	 * OnReceive callback. function(channelId, data)
+	 */
 	Object.defineProperty(this, 'onReceive', {
-		get : function(){
+		get : function() {
 			return _onreceive;
 		},
-		set : function(val){
+		set : function(val) {
 			_onreceive = val;
 		}
 	});
-	
+
+	/**
+	 * Received response from network request to phone (when all net via phone) (function(channelId, data))
+	 * Used internally for GearHttp
+	 */
 	Object.defineProperty(this, 'onnetreceive', {
-		get : function(){
+		get : function() {
 			return onnetreceive;
 		},
-		set : function(val){
+		set : function(val) {
 			onnetreceive = val;
 		}
 	});
 
-	Object.defineProperty(this, 'saSocket',{
-		get : function(){
+	/**
+	 * SASocket
+	 */
+	Object.defineProperty(this, 'saSocket', {
+		get : function() {
 			return saSocket;
 		},
-		set : function(val){
+		set : function(val) {
 			saSocket = val;
 		}
 	});
-	
+
+	/**
+	 * SAAgent
+	 */
 	Object.defineProperty(this, 'saAgent', {
-		get : function(){
+		get : function() {
 			return saAgent;
 		},
-		set : function(val){
+		set : function(val) {
 			saAgent = val;
 		}
 	});
-	
-	
+
+	/**
+	 * Event when image receive from phone over net request
+	 */
 	Object.defineProperty(this, 'onImageReceive', {
-		get : function(){
+		get : function() {
 			return onImageReceive;
 		},
-		set : function(val){
+		set : function(val) {
 			onImageReceive = val;
 		}
 	});
-	
-	
-	
-	
+
 	/**
-	 * Объект получения файла. Методы onreceive, onsuccess, onerror, onprogress
+	 * File receive callback { onreceive, onsuccess, onerror, onprogress }
 	 */
 	Object.defineProperty(this, "fileReceiveCallback", {
 		get : function() {
@@ -198,46 +243,26 @@ function SAP(providerName, onReceive, ontoastmessage) {
 			}
 		}
 	});
-	
+
 	/**
-	 * Объект отправки файла. Методы oncomplete, onerror, onprogress
+	 * File send callback { oncomplete, onerror, onprogress }
 	 */
 	Object.defineProperty(this, 'fileSendCallback', {
-		get : function(){
+		get : function() {
 			return fileSendCallback;
 		},
-		set : function(val){
+		set : function(val) {
 			fileSendCallback = val;
-			 if (this.fileTransfer){
-				 this.fileTransfer.setFileSendListener(fileSendCallback);
-			 }
+			if (this.fileTransfer) {
+				this.fileTransfer.setFileSendListener(fileSendCallback);
+			}
 		}
 	});
 }
 
-SAP.tempFolder = null;
-
 /**
- * Запрос авторизации от телефона
+ * Close connection and clear cache
  */
-SAP.AUTH_NEEDED = "AUTH_NEEDED";
-
-/**
- * Запрос переавторизации на телефоне
- */
-SAP.REAUTH_NEEDED = "REAUTH_NEEDED";
-
-/*
- * No response from web
- */
-SAP.NO_RESPONSE = "NO_RESPONSE";
-
-SAP.SERVICE_CHANNEL_ID = 98;
-/**
- * Канал для отправки сетевых запросов
- */
-SAP.NETWORK_CHANNEL_ID = 99;
-
 SAP.prototype.close = function() {
 	if (this.saSocket) {
 		this.saSocket.close();
@@ -276,117 +301,108 @@ SAP.prototype.close = function() {
 };
 
 /**
- * Отправляем запрос развернуть приложение
+ * Send request to open host app
  */
 SAP.prototype.openPhoneApp = function() {
 	var data = {
-		name : "OPEN_APP"
+		name : SAP.OPEN_APP
 	};
 	this.saSocket.sendData(SAP.SERVICE_CHANNEL_ID, JSON.stringify(data));
 };
 
 /**
- * Отправляем запрос открытия ссылки на телефоне
- * 
- * @param url -
- *            адрес, который надо открыть
+ * Send request to open link on phone
+ * @param url - url to open
  */
 SAP.prototype.openLinkOnPhone = function(url) {
 	var data = {
-		name : "OPEN_LINK",
+		name : SAP.OPEN_LINK,
 		value : url
 	};
 	this.saSocket.sendData(SAP.SERVICE_CHANNEL_ID, JSON.stringify(data));
 };
 
-SAP.prototype.receive = function(channelId, data) {
-	var res = null;
-
-	if (this.onReceive && channelId !== SAP.NETWORK_CHANNEL_ID) {
-		this.onReceive(channelId, data);
-	}
-
-	this.receiveListeners.forEach(function(x) {
-		x(channelId, data);
-	});
-
-	if (this.onnetreceive && channelId === SAP.NETWORK_CHANNEL_ID) {
-		res = JSON.parse(data);
-		if (res.type === "IMAGE") {
-			this.fileOrder.push(res);
-		} else {
-			this.onnetreceive(channelId, data);
-		}
-	}
-
-};
-
 /**
- * Отправка данных на телефон
- * 
- * @param channelId -
- *            номер канала
- * @param data -
- *            данные для отправки
- * @returns {Boolean} - истина, если устройство сейчас подключено и ложь если
- *          нет
+ * Send data to phone
+ * @param channelId - channel number
+ * @param data - data to send
+ * @returns promise. Resolved when sent successfully or reject on error
  */
 SAP.prototype.sendData = function(channelId, data) {
 	var self = this, d = $.Deferred();
 
 	this.connect().then(function() {
-		self.saSocket.sendData(channelId, data);
+		if (self.saSocket) {
+			self.saSocket.sendData(channelId, data);
+		}
 		d.resolve();
-	},
-	function(){
-		self.saSocket.sendData(channelId, data);
-		d.resolve();
+	}, function(err) {
+		d.reject(err);
 	});
 	return d.promise();
-};
-
-SAP.prototype.sendFile = function(path) {
-	var self = this, d = $.Deferred();
-	
-	this.connect().then(function(){
-		var transferId = self.fileTransfer.sendFile(self.peerAgent, path);
-		d.resolve(transferId);
-	}, 
-	function(){
-		
-	});
-	
-	return d.promise();
-};
-
-SAP.prototype.error = function(err) {
-	Log.warn(err, true);
-};
-
-SAP.ERRORS = {
-	PEER_NOT_FOUND : 'PEER_NOT_FOUND',
-	NO_AGENTS_FOUND : 'NO_AGENTS_FOUND',
-	SOCKET_CLOSED : 'SOCKET_CLOSED'
 };
 
 /**
- * Первичное подключение к телефону
- * 
- * @returns {Boolean} значение игнорируется
+ * Send file to phone
+ * @param path to file
+ * @returns promise. Resolved with transfer Id on success or reject on error
+ */
+SAP.prototype.sendFile = function(path) {
+	var self = this, d = $.Deferred();
+
+	this.connect().then(function() {
+		var transferId = self.fileTransfer.sendFile(self.peerAgent, path);
+		d.resolve(transferId);
+	}, function(err) {
+		d.reject(err);
+	});
+
+	return d.promise();
+};
+
+/**
+ * Connect to phone
+ * @returns promise. Resolved when connected, rejected when cannot connect
  */
 SAP.prototype.connect = function() {
-	var self = this, d = $.Deferred(), handleError = function(err) {
+	var self = this, d = $.Deferred(),
+	
+	onReceive = function(channelId, data){
+		var res = null;
+
+		if (self.onReceive && channelId !== SAP.NETWORK_CHANNEL_ID) {
+			self.onReceive(channelId, data);
+		}
+
+		self.receiveListeners.forEach(function(x) {
+			x(channelId, data);
+		});
+
+		if (self.onnetreceive && channelId === SAP.NETWORK_CHANNEL_ID) {
+			res = JSON.parse(data);
+			if (res.type === "IMAGE") {
+				self.fileOrder.push(res);
+			} else {
+				self.onnetreceive(channelId, data);
+			}
+		}
+		self.receive(channelId, data);
+	},
+	
+	handleError = function(err) {
 		Log.warn(err);
 
 		switch (err) {
-		case 'DUPLICATE_REQUEST':
+		case SAP.ERRORS.DUPLICATE_REQUEST:
 			break;
-		case 'INVALID_PEERAGENT':
-			self.error('INVALID_PEERAGENT');
-			d.reject('INVALID_PEERAGENT');
+		case SAP.ERRORS.INVALID_PEER_AGENT:
+			Log.w(SAP.ERRORS.INVALID_PEER_AGENT);
+			d.reject(SAP.ERRORS.INVALID_PEER_AGENT);
 			break;
 		default:
-			if (err === 'DEVICE_NOT_CONNECTED' && !self.connectOnDeviceNotConnected) {
+			if (err === SAP.ERRORS.DEVICE_NOT_CONNECTED && !self.connectOnDeviceNotConnected) {
+				Log.d('CONNECT ERROR: ' + SAP.ERRORS.DEVICE_NOT_CONNECTED);
+				d.reject(SAP.ERRORS.DEVICE_NOT_CONNECTED);
 				break;
 			}
 			setTimeout(function() {
@@ -395,32 +411,28 @@ SAP.prototype.connect = function() {
 				} else {
 					d.resolve();
 				}
-			}, 2000);
+			}, SAP.RECONNECT_TIMEOUT);
 			break;
 		}
 	},
 
 	peerAgentFindCallback = {
-
-		/* Агент найден */
 		onpeeragentfound : function(peerAgent) {
-			Log.debug("PeerAgent found: " + peerAgent.appName);
+			Log.d('PEERAGENT FOUND: ' + peerAgent.appName);
 			self.peerAgent = peerAgent;
 			self.saAgent.setServiceConnectionListener(agentCallback);
 			self.saAgent.requestServiceConnection(peerAgent);
 		},
-
-		/* Агент обновлён */
 		onpeeragentupdated : function(peerAgent, status) {
-			Log.debug("Peeragentupdated: " + peerAgent + " " + status);
+			Log.d('PEERAGENT UPDATED: ' + peerAgent + ' status: ' + status);
 			switch (status) {
-			case "AVAILABLE":
+			case 'AVAILABLE':
 				self.saAgent.requestServiceConnection(peerAgent);
 				self.peerAgent = peerAgent;
 				break;
-			case "UNAVAILABLE":
+			case 'UNAVAILABLE':
 				self.peerAgent = null;
-				Log.debug("Uninstalled application package of peerAgent on remote device.");
+				Log.d("Uninstalled application package of peerAgent on remote device.");
 				break;
 			}
 		},
@@ -428,33 +440,32 @@ SAP.prototype.connect = function() {
 		onerror : handleError
 	},
 
-	/* Надо в перевод добавить PEER_DISCONNECTED */
 	agentCallback = {
 		onconnect : function(socket) {
-			Log.debug('Agentcallback onconnect');
+			Log.d('AGENT CALLBACK: onconnect');
 			self.isDeviceAttached = true;
 			self.saSocket = socket;
 
 			self.saSocket.setSocketStatusListener(function(reason) {
-				Log.debug("setSocketStatusListener: " + reason);
-				//self.close();
+				Log.d("SOCKET STATUS: " + reason);
 				d.reject(SAP.ERRORS.SOCKET_CLOSED);
 			});
 			self.saSocket.setDataReceiveListener(function(channelId, data) {
-				self.receive(channelId, data);
+				onReceive(channelId, data);
 			});
 
 			d.resolve();
 		},
 		onerror : handleError
 	};
-
+	
 	if (self.saAgent && self.isConnected) {
 		d.resolve();
 		return d.promise();
 	}
 
 	if (self.saAgent && !self.isConnected) {
+		self.saAgent.setPeerAgentFindListener(peerAgentFindCallback);
 		self.saAgent.findPeerAgents();
 		return d.promise();
 	}
@@ -542,18 +553,19 @@ SAP.prototype.connect = function() {
 
 			self.saAgent.findPeerAgents();
 		}, function(err) {
-			self.error(err);
+			Log.error(err, false);
+			d.reject(err);
 		});
 
 		webapis.sa.setDeviceStatusListener(function(type, status) {
 			switch (status) {
 			case 'ATTACHED':
-				Log.debug('DEVICE ATTACHED: ' + type);
+				Log.d('DEVICE ATTACHED: ' + type);
 				self.isDeviceAttached = true;
 				break;
 			case 'DETACHED':
 				self.peerAgent = null;
-				Log.debug('DEVICE DETACHED: ' + type);
+				Log.d('DEVICE DETACHED: ' + type);
 				self.isDeviceAttached = false;
 				break;
 			}
