@@ -2,6 +2,9 @@
 /*jslint laxbreak: true*/
 
 /*
+ * v 2.0.2.1
+ * fixed self.receive is not a function
+ * setServiceConnectionListener moved to webapis.sa.requestSAAgent 
  * v 2.0.2.0
  * bug fixes
  * ref
@@ -386,7 +389,6 @@ SAP.prototype.connect = function() {
 				self.onnetreceive(channelId, data);
 			}
 		}
-		self.receive(channelId, data);
 	},
 	
 	handleError = function(err) {
@@ -420,7 +422,6 @@ SAP.prototype.connect = function() {
 		onpeeragentfound : function(peerAgent) {
 			Log.d('PEERAGENT FOUND: ' + peerAgent.appName);
 			self.peerAgent = peerAgent;
-			self.saAgent.setServiceConnectionListener(agentCallback);
 			self.saAgent.requestServiceConnection(peerAgent);
 		},
 		onpeeragentupdated : function(peerAgent, status) {
@@ -477,6 +478,7 @@ SAP.prototype.connect = function() {
 				return;
 			}
 			self.saAgent = agents[0];
+			self.saAgent.setServiceConnectionListener(agentCallback);
 			self.saAgent.setPeerAgentFindListener(peerAgentFindCallback);
 			self.fileTransfer = self.saAgent.getSAFileTransfer();
 
