@@ -2,6 +2,8 @@
 /*jslint laxbreak: true*/
 
 /*
+ * v 2.0.2.2
+ * accept connection
  * v 2.0.2.1
  * fixed self.receive is not a function
  * setServiceConnectionListener moved to webapis.sa.requestSAAgent 
@@ -392,7 +394,7 @@ SAP.prototype.connect = function() {
 	},
 	
 	handleError = function(err) {
-		Log.warn(err);
+		Log.warn('HandleError: ' + err);
 
 		switch (err) {
 		case SAP.ERRORS.DUPLICATE_REQUEST:
@@ -422,6 +424,7 @@ SAP.prototype.connect = function() {
 		onpeeragentfound : function(peerAgent) {
 			Log.d('PEERAGENT FOUND: ' + peerAgent.appName);
 			self.peerAgent = peerAgent;
+			self.saAgent.acceptServiceConnectionRequest(peerAgent);
 			self.saAgent.requestServiceConnection(peerAgent);
 		},
 		onpeeragentupdated : function(peerAgent, status) {
@@ -457,6 +460,10 @@ SAP.prototype.connect = function() {
 
 			d.resolve();
 		},
+		onrequest : function(peerAgent) {
+			Log.d('AGENT CALLBACK: onrequest');
+            self.sAAgent.acceptServiceConnectionRequest(peerAgent);
+        },
 		onerror : handleError
 	};
 	
@@ -555,7 +562,7 @@ SAP.prototype.connect = function() {
 
 			self.saAgent.findPeerAgents();
 		}, function(err) {
-			Log.error(err, false);
+			Log.e(err);
 			d.reject(err);
 		});
 
