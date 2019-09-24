@@ -59,12 +59,12 @@ Wrapper around samsung accessory protocol. Android part codes I will add later. 
 Different methods, which can be helpful
 #### [More on wiki](https://github.com/RumataEstorish/TizenWearableWebCommon/wiki/Utils)
 
-
 ### GearHttp
 Network utilization module. It sends web requests through XMLHttpRequest for devices newer then Gear 2.0, for Gear 2.0 it passthrough requests through Android phone. You can always force traffic through Android via flag (can be useful when ssl sertificates don't work with particular watch model). It also needs Android part of code I'll share later
 
 ### Input
-Input draws input window and handles input from all watch generation. For Gear 2.0 it requires TypeGear app, for Gear S it draws rectangular input window, for cirle devices other
+Draws input window and handles input from all watch generation. For Gear 2.0 it requires TypeGear app, for Gear S it draws rectangular window, for circle devices other shape :)
+#### [More on wiki](https://github.com/RumataEstorish/TizenWearableWebCommon/wiki/Input)
 
 ### Bonus
 You can find lib/tau/wearable/theme/default/tau.circle-patch-0.0.0.1.min.cs which fixes circular menu icons bug, when they grow full screen. You know.
