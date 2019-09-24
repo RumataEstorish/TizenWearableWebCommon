@@ -23,9 +23,9 @@ Don't forget to copy "style.css" to make it looks better (yes, Samsung didn't in
 ActionMenu shows circular menu for circle devices and popup for rectangular.
 ![ActionMenu](/screenshots/actionMenu.png)
 #### Install
-- copy actionMenu-x.x.x.x.js into your project
-- copy utils-x.x.x.x.js into your project
-- add links to you html: 
+1. copy actionMenu-x.x.x.x.js into your project
+1. copy utils-x.x.x.x.js into your project
+1. add links to you html: 
 ```
 <head> 
   <script type="text/javascript" src="js/utils-x.x.x.x.js"></script>
@@ -36,8 +36,8 @@ ActionMenu shows circular menu for circle devices and popup for rectangular.
 ```
 var actionMenu = new ActionMenu('actionMenuPageName', 'actionMenuName', itemsList);
 ```
-actionMenuPageName - page name, which menu will create to draw itsels
-actionMenuName - name of menu component
+actionMenuPageName - page name, which menu will create to draw itsels<br>
+actionMenuName - name of menu component<br>
 itemsList - array of items in following format:
 
 #### Create menu items
@@ -45,23 +45,23 @@ itemsList - array of items in following format:
 [{name : 'unique name of menu item', title : 'display name', image : 'path to icon', onclick : function(){ alert('this will be fired on click')}]
 ```
 #### Work with items
-- Get menu items:
-```actionMenu.menuItems```. Array of menu items
-```actionMenu.getMenuItemByName```. Find menu item by name or undefined
+Get menu items:
+- `actionMenu.menuItems` Array of menu items
+- `actionMenu.getMenuItemByName`. Find menu item by name or undefined
 
-- Change items visibility:
-```actionMenu.showMenuItem('itemName');```
-```actionMenu.hideMenuItem('menuName');```
+Change items visibility:
+- `actionMenu.showMenuItem('itemName');`
+- `actionMenu.hideMenuItem('menuName');`
 
 #### Work with menu
-- Check menu is opened:
-```actionMenu.isOpened```. Returns true or false
+- Check menu is opened:<br>
+`actionMenu.isOpened`.<br> Returns true or false
 
-- Open menu:
-```actionMenu.show();```
+- Open menu:<br>
+`actionMenu.show();`
 
-- Close menu:
-```actionMenu.close(function(){ alert('Fires when menu is closed');});```
+- Close menu:<br>
+`actionMenu.close(function(){ alert('Fires when menu is closed');});`<br>
 Argument: function which fires when action menu is closed. Optional.
 
 #### Icons guide
@@ -91,8 +91,8 @@ When you open menu from page 'A', and menu item opens input (from this project),
 Patch for Tizen circle-helper allows to force bezel rotation for element. Anyway not working with virtual-list
 
 ##### Install
-- copy `circle-helper-x.x.x.x.js` into your project
-- add link to main html file
+1. copy `circle-helper-x.x.x.x.js` into your project
+1. add link to main html file
 ```
 <head>
 <script type="text/javascript" src="js/circle-helper-x.x.x.x.js"></script>
@@ -103,16 +103,22 @@ Patch for Tizen circle-helper allows to force bezel rotation for element. Anyway
 Two global methods:
 
 - Force create scroller
-``createScroller(e)``
-e - object with field target contains dom element
+`createScroller(e)`<br>
+e - object with field target contains dom element<br>
 Example:
-``createScroller({target : document.getElementById('mainPage')})``
+```
+createScroller({target : document.getElementById('mainPage')})
+```
 
 - Add page to ignore list avoid create scroller
-``addScrollerIgnorePage(id)``
-id - page name without #
-Example: 
-``addScrollerIgnorePage('mainPage')``
+```
+addScrollerIgnorePage(id)
+```
+id - page name without #<br>
+Example:<br>
+```
+addScrollerIgnorePage('mainPage')
+```
 
 ### CircleProgress
 Small wrapper around progress bar
@@ -129,8 +135,8 @@ Tiny wrapper around system toast
 ![ToastMessage](/screenshots/toastMessage.png)
 
 #### Install
-- copy `toastMessage-x.x.x.js` into your project
-- add link to main html file:
+1. copy `toastMessage-x.x.x.js` into your project
+1. add link to main html file:
 ```
 <head>
   <script type="text/javascript" src="js/toastMessage-x.x.x.js"></script>
@@ -138,21 +144,27 @@ Tiny wrapper around system toast
 ```
 
 #### Create intanse
-``var toastMessage = new ToastMessage('popupToast', 'popupToastContent');``
-popupToast - unique name of toast element.
-popupToastContent - unique name of toast content element.
-
+```
+var toastMessage = new ToastMessage('popupToast', 'popupToastContent');
+```
+popupToast - unique name of toast element<br>
+popupToastContent - unique name of toast content element<br>
+<br>
 Elements are added to document automatically.
 
-3. Use
+#### Use
 - Show:
-``toastMessage.show('MESSAGE TEXT', 100)``
-Arguments:
-  - text which will be displayed
-  - delay before toast shows. Optional
+```
+toastMessage.show('MESSAGE TEXT', 100)
+```
+Arguments:<br>
+text which will be displayed<br>
+delay before toast shows. Optional<br>
 
 - Close:
-``toastMessage.close()``
+```
+toastMessage.close()
+```
 Also toastMessage will be closed after 2000ms automatically
 
 ### VirtualList
@@ -217,98 +229,154 @@ Wrapper around samsung accessory protocol. Android part codes I will add later. 
 ### Utils
 #### Date time methods:
 Date extensions:
-``toDateInputValue``
+```
+toDateInputValue
+```
 Date for filling date input box
 
-``toDisplayDateTime``
+```
+toDisplayDateTime
+```
 Date and time for display without year. Returns dd.mm hh:MM with leading zero
 
-``toDisplayTime``
+```
+toDisplayTime
+```
 Time for display without seconds. Returns hh:mm with leading zero
 
-``toDisplayDate``
+```
+toDisplayDate
+```
 Date for display without year. Returns dd.mm with leading zero
 
-``toYYYYMMDD``
+```
+toYYYYMMDD
+```
 Returns date in YYYY-MM-DD format
 
-``toYYYYMMDDTHHMM``
+```
+toYYYYMMDDTHHMM
+```
 Returns date in YYYY-MM-DDThh:mm format
 
-``toYYYYMMDDTHHMMSS``
+```
+toYYYYMMDDTHHMMSS
+```
 Returns date in YYYY-MM-DDThh:mm:ss format
 
 TZDate extensions:
-``toDisplayTime``
+```
+toDisplayTime
+```
 Returns date in hh:mm with leading zero
 
-``toDisplayDate``
+```
+toDisplayDate
+```
 Returns date in dd.mm with leading zero
 
-``toYYYYMMDD``
+```
+toYYYYMMDD
+```
 Returns date in YYYY-MM-DD format
 
-``toYYYYMMDDTHHMM``
+```
+toYYYYMMDDTHHMM
+```
 Returns date in YYYY-MM-DDThh:mm format
 
-``toYYYYMMDDTHHMMSS``
+```
+toYYYYMMDDTHHMMSS
+```
 Returns date in YYYY-MM-DDThh:mm:ss format
 
-``toDisplayDateTime``
+```
+toDisplayDateTime
+```
 Returns date in format DD.MM hh:mm with leading zero.
 
 #### Other methods:
 Try parse int from string
-``Utils.tryParseInt(str, defaultValue)``
+```
+Utils.tryParseInt(str, defaultValue)
+```
 str - string to parse
 defaultValue - returns defaultValue, when string cannot be parsed
 
 Get file name without extension from path
-``Utils.getFileNameWithoutExtension(fileName)``
+```
+Utils.getFileNameWithoutExtension(fileName)
+```
 
 Get file name with extension from path
-``Utils.getFileName(fileName)``
+```
+Utils.getFileName(fileName)
+```
 
 Get file extension from path
-``Utils.getFileExtension(fname)``
+```
+Utils.getFileExtension(fname)
+```
 
 Generate random UUID
-``Utils.generateUUID``
+```
+Utils.generateUUID
+```
 
 Append html to div where cursor is
-``Utils.appendHtmlAtCaret(html, selectPastedContent)``
+```
+Utils.appendHtmlAtCaret(html, selectPastedContent)
+``
 html - html should be appended
 selectPastedContent - if set to true, new content will be selected
 
 Get random integer between min and max
-``Utils.getRandomInt(min, max)``
+```
+Utils.getRandomInt(min, max)
+```
 
 Get gear version from model. Method not updated since GearS3 because no need and hard to find models codenames list
-``Utils.getGearVersion(model)``
+```
+Utils.getGearVersion(model)
+```
 Returns enum GearModel.
 
 Check if GearS+. Method is absolete, better check tau.support.shape.circle
-``Utils.isNewGear(model)``
+```
+Utils.isNewGear(model)
+```
 
 Get active page name
-``Utils.getActivePage``
+```
+Utils.getActivePage
+```
 Returns currently active page name without #
 
 Convert bytes to size (kb,mb etc) in English locale
-``Utils.bytesToSize(bytes)``
+```
+Utils.bytesToSize(bytes)
+```
 
 Check if object is string
-``Utils.isString(object)``
+```
+Utils.isString(object)
+```
 
 Dynamic sort array with property set
-``Utils.dynamicSort(property)``
+```
+Utils.dynamicSort(property)
+```
 Example:
-`var People = [ {Name: "Name", Surname: "Surname"}, {Name:"AAA", Surname:"ZZZ"}, {Name: "Name", Surname: "AAA"} ]; People.sort(dynamicSort("Name")); 
+```
+var People = [ {Name: "Name", Surname: "Surname"}, {Name:"AAA", Surname:"ZZZ"}, {Name: "Name", Surname: "AAA"} ]; People.sort(dynamicSort("Name")); 
 People.sort(dynamicSort("Surname"));
-People.sort(dynamicSort("-Surname"));`
+People.sort(dynamicSort("-Surname"));
+```
 
 Dynamic sort multiple properties
-``Utils.dynamcSortMultiple``
+```
+Utils.dynamcSortMultiple
+```
 Example:
 ```
 var array = [{name: 'A', date: 11}, {name: 'B', date: 12}];
@@ -316,18 +384,26 @@ array.sort(Utils.dynamicSortMultiple('date', '-name'))
 ```
 
 String extension - starts with string:
-``startsWith(str)``
+```
+startsWith(str)
+```
 Returns true or false
 
 String to boolean
-``Utils.stringToBoolean(val, defaultVal)``
+```
+Utils.stringToBoolean(val, defaultVal)
+```
 Converts string to boolean or returns defaultValue
 
 Get mime of file name
-``Utils.getMime(fileName)``
+```
+Utils.getMime(fileName)
+```
 
 Get hash code
-``Utils.hashCode(string)``
+```
+Utils.hashCode(string)
+```
 
 
 ### GearHttp
