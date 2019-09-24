@@ -64,6 +64,9 @@ Network utilization module. It sends web requests through XMLHttpRequest for dev
 
 ### Input
 Draws input window and handles input from all watch generation. For Gear 2.0 it requires TypeGear app, for Gear S it draws rectangular window, for circle devices other shape :)
+
+![Input](/screenshots/input.png)
+
 #### [More on wiki](https://github.com/RumataEstorish/TizenWearableWebCommon/wiki/Input)
 
 ### Bonus
