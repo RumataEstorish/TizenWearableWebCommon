@@ -68,7 +68,7 @@ Argument: function which fires when action menu is closed. Optional.
 The best option to create icon is to create 32x32 icon and make empty space around to make it 48x48. System will crop icon, but it would be visible good.
 
 ### NOTE!
-#### Always add check if menu isOpened to `tizenhwkey.back` processing event like this:
+- Always add check if menu isOpened to `tizenhwkey.back` processing event like this:
 ```
 document.addEventListener('tizenhwkey', function(e){
   if (e.keyName === 'back'){
@@ -80,11 +80,11 @@ document.addEventListener('tizenhwkey', function(e){
   }
 }
 ```
-#### Use `lib\tau'wearable\theme\default\tau.circle-patch-0.0.0.1.min.css` from this project instead of system `tau.circle.min.css` to avoid display bug.
+- Use `lib\tau'wearable\theme\default\tau.circle-patch-0.0.0.1.min.css` from this project instead of system `tau.circle.min.css` to avoid display bug.
 
-#### Init menu on window.load event because it adds markup in code.
+- Init menu on window.load event because it adds markup in code.
 
-Known bugs:
+#### Known bugs:
 When you open menu from page 'A', and menu item opens input (from this project), page 'A' would receive 'pagehide' and then 'pageshow' event when input opens.
 
 ### Circle-helper
