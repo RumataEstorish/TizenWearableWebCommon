@@ -340,7 +340,7 @@ Input.prototype.open = function(text, placeholder, mode, ontext, oncancel, onerr
 				$("#inputCircleAreaOneLine").hide();
 				$("#inputCircleArea").show();
 				$("#inputCircleArea").putCursorAtEnd();
-				$('#inputCircleArea').one('pageshow', function(){
+				$('#inputCirclePage').one('pageshow', function(){
 					$("#inputCircleArea").focus();
 				});
 				

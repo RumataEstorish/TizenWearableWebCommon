@@ -17,7 +17,7 @@ function showToastMessage() {
 function showInput() {
 	var input = new Input(model);
 
-	input.open('', 'Please, input text', KeyboardModes.SINGLE_LINE, function(txt) {
+	input.open('', 'Input text', KeyboardModes.SINGLE_LINE, function(txt) {
 		alert('Input text: ' + txt);
 		tau.changePage('#main');
 	}, function() {
@@ -36,7 +36,7 @@ function showInput() {
 function showMultilineInput(){
 	var input = new Input(model);
 
-	input.open('', 'Please, input text', KeyboardModes.NORMAL, function(txt) {
+	input.open('', 'Input text', KeyboardModes.NORMAL, function(txt) {
 		alert('Input text: ' + txt);
 		tau.changePage('#main');
 	}, function() {
