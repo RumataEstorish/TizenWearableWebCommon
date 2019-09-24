@@ -22,26 +22,38 @@ Don't forget to copy "style.css" to make it looks better (yes, Samsung didn't in
 ### ActionMenu
 ActionMenu shows circular menu for circle devices and popup for rectangular.
 ![ActionMenu](/screenshots/actionMenu.png)
-
-Creation: 
+1. Install
+- copy actionMenu-x.x.x.x.js into your project
+- copy utils-x.x.x.x.js into your project
+- add links to you html: 
+```
+<head> 
+  <script type="text/javascript" src="js/utils-x.x.x.x.js"></script>
+  <script type="text/javascript" src="js/actionMenu-x.x.x.x.js"></script> 
+</head>
+```
+2. Create instance
 ```
 var actionMenu = new ActionMenu('actionMenuPageName', 'actionMenuName', itemsList);
 ```
 actionMenuPageName - page name, which menu will create to draw itsels
 actionMenuName - name of menu component
 itemsList - array of items in following format:
+
+3. Create menu items
 ```
 [{name : 'unique name of menu item', title : 'display name', image : 'path to icon', onclick : function(){ alert('this will be fired on click')}]
 ```
+4. Work with items
 Get menu items:
 `actionMenu.menuItems`. Array of menu items
 `actionMenu.getMenuItemByName`. Find menu item by name or undefined
 
-
-Menu items visibility:
+Change items visibility:
 `actionMenu.showMenuItem('itemName');`
 `actionMenu.hideMenuItem('menuName');`
 
+5. Work with menu
 Check menu is opened:
 `actionMenu.isOpened`. Returns true or false
 
@@ -52,7 +64,7 @@ Close menu:
 `actionMenu.close(function(){ alert('Fires when menu is closed');});`
 Argument: function which fires when action menu is closed. Optional.
 
-Icons guide:
+6. Icons guide
 The best option to create icon is to create 32x32 icon and make empty space around to make it 48x48. System will crop icon, but it would be visible good.
 
 NOTE!
