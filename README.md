@@ -22,7 +22,7 @@ Don't forget to copy "style.css" to make it looks better (yes, Samsung didn't in
 ### ActionMenu
 ActionMenu shows circular menu for circle devices and popup for rectangular.
 ![ActionMenu](/screenshots/actionMenu.png)
-1. Install
+#### Install
 - copy actionMenu-x.x.x.x.js into your project
 - copy utils-x.x.x.x.js into your project
 - add links to you html: 
@@ -32,7 +32,7 @@ ActionMenu shows circular menu for circle devices and popup for rectangular.
   <script type="text/javascript" src="js/actionMenu-x.x.x.x.js"></script> 
 </head>
 ```
-2. Create instance
+#### Create instance
 ```
 var actionMenu = new ActionMenu('actionMenuPageName', 'actionMenuName', itemsList);
 ```
@@ -40,11 +40,11 @@ actionMenuPageName - page name, which menu will create to draw itsels
 actionMenuName - name of menu component
 itemsList - array of items in following format:
 
-3. Create menu items
+#### Create menu items
 ```
 [{name : 'unique name of menu item', title : 'display name', image : 'path to icon', onclick : function(){ alert('this will be fired on click')}]
 ```
-4. Work with items
+#### Work with items
 - Get menu items:
 `actionMenu.menuItems`. Array of menu items
 `actionMenu.getMenuItemByName`. Find menu item by name or undefined
@@ -53,7 +53,7 @@ itemsList - array of items in following format:
 `actionMenu.showMenuItem('itemName');`
 `actionMenu.hideMenuItem('menuName');`
 
-5. Work with menu
+#### Work with menu
 - Check menu is opened:
 `actionMenu.isOpened`. Returns true or false
 
@@ -67,8 +67,8 @@ Argument: function which fires when action menu is closed. Optional.
 6. Icons guide
 The best option to create icon is to create 32x32 icon and make empty space around to make it 48x48. System will crop icon, but it would be visible good.
 
-NOTE!
-1. Always add check if menu isOpened to `tizenhwkey.back` processing event like this:
+### NOTE!
+#### Always add check if menu isOpened to `tizenhwkey.back` processing event like this:
 ```
 document.addEventListener('tizenhwkey', function(e){
   if (e.keyName === 'back'){
@@ -80,9 +80,9 @@ document.addEventListener('tizenhwkey', function(e){
   }
 }
 ```
-2. Use `lib\tau'wearable\theme\default\tau.circle-patch-0.0.0.1.min.css` from this project instead of system `tau.circle.min.css` to avoid display bug.
+#### Use `lib\tau'wearable\theme\default\tau.circle-patch-0.0.0.1.min.css` from this project instead of system `tau.circle.min.css` to avoid display bug.
 
-3. Init menu on window.load event because it adds markup in code.
+#### Init menu on window.load event because it adds markup in code.
 
 Known bugs:
 When you open menu from page 'A', and menu item opens input (from this project), page 'A' would receive 'pagehide' and then 'pageshow' event when input opens.
@@ -90,7 +90,7 @@ When you open menu from page 'A', and menu item opens input (from this project),
 ### Circle-helper
 Patch for Tizen circle-helper allows to force bezel rotation for element. Anyway not working with virtual-list
 
-1. Install
+##### Install
 - copy `circle-helper-x.x.x.x.js` into your project
 - add link to main html file
 ```
@@ -99,7 +99,7 @@ Patch for Tizen circle-helper allows to force bezel rotation for element. Anyway
 </head>
 ```
 
-2. Use
+#### Use
 Two global methods:
 
 - Force create scroller
@@ -137,8 +137,8 @@ Tiny wrapper around system toast
 </head>
 ```
 
-2. Create intanse
-```var toastMessage = new ToastMessage('popupToast', 'popupToastContent');```
+#### Create intanse
+``var toastMessage = new ToastMessage('popupToast', 'popupToastContent');``
 popupToast - unique name of toast element.
 popupToastContent - unique name of toast content element.
 
@@ -146,15 +146,14 @@ Elements are added to document automatically.
 
 3. Use
 - Show:
-```toastMessage.show('MESSAGE TEXT', 100)```
+``toastMessage.show('MESSAGE TEXT', 100)``
 Arguments:
   - text which will be displayed
   - delay before toast shows. Optional
 
 - Close:
-```toastMessage.close()```
+``toastMessage.close()``
 Also toastMessage will be closed after 2000ms automatically
- 
 
 ### VirtualList
 Patched system virtual list allowing dynamic content f.e. when you refresh data. Highly unrecommended to use it, works really bad especially when list item size is not the same
@@ -162,7 +161,7 @@ Patched system virtual list allowing dynamic content f.e. when you refresh data.
 ### Log
 Tiny wrapper around console. Just like android log syntax.
 
-Global properties:
+#### Global properties:
 ```
 Log.DEBUG
 ```
@@ -176,7 +175,7 @@ Log.FORCE_ERROR_ALERT
 ```
 When set to true, error will be always alerted
 
-Methods:
+#### Methods:
 Debug
 ```
 Log.debug(d)
@@ -216,7 +215,7 @@ silent - if not set, alert on error
 Wrapper around samsung accessory protocol. Android part codes I will add later. Utilizes connection, reconnection, sending data etc
 
 ### Utils
-Date time methods:
+#### Date time methods:
 Date extensions:
 ``toDateInputValue``
 Date for filling date input box
@@ -258,7 +257,7 @@ Returns date in YYYY-MM-DDThh:mm:ss format
 ``toDisplayDateTime``
 Returns date in format DD.MM hh:mm with leading zero.
 
-Other methods:
+#### Other methods:
 Try parse int from string
 ``Utils.tryParseInt(str, defaultValue)``
 str - string to parse
