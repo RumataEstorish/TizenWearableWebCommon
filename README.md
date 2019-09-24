@@ -23,40 +23,12 @@ Don't forget to copy "style.css" to make it looks better (yes, Samsung didn't in
 ActionMenu shows circular menu for circle devices and popup for rectangular.
 ![ActionMenu](/screenshots/actionMenu.png)
 
-[More on wiki](https://github.com/RumataEstorish/TizenWearableWebCommon/wiki/ActionMenu)
+#### [More on wiki](https://github.com/RumataEstorish/TizenWearableWebCommon/wiki/ActionMenu)
 
 ### Circle-helper
 Patch for Tizen circle-helper allows to force bezel rotation for element. Anyway not working with virtual-list
 
-##### Install
-1. copy `circle-helper-x.x.x.x.js` into your project
-1. add link to main html file
-```
-<head>
-<script type="text/javascript" src="js/circle-helper-x.x.x.x.js"></script>
-</head>
-```
-
-#### Use
-Two global methods:
-
-- Force create scroller
-`createScroller(e)`<br>
-e - object with field target contains dom element<br>
-Example:
-```
-createScroller({target : document.getElementById('mainPage')})
-```
-
-- Add page to ignore list avoid create scroller
-```
-addScrollerIgnorePage(id)
-```
-id - page name without #<br>
-Example:<br>
-```
-addScrollerIgnorePage('mainPage')
-```
+#### [More on wiki](https://github.com/RumataEstorish/TizenWearableWebCommon/wiki/CircleHelper)
 
 ### CircleProgress
 Small wrapper around progress bar
@@ -79,56 +51,7 @@ Patched system virtual list allowing dynamic content f.e. when you refresh data.
 
 ### Log
 Tiny wrapper around console. Just like android log syntax.
-
-#### Global properties:
-```
-Log.DEBUG
-```
-When set to true, debug log will be written. If set to false, no debug log.
-```
-Log.ITEM
-```
-Set DOM element to write log into
-```
-Log.FORCE_ERROR_ALERT
-```
-When set to true, error will be always alerted
-
-#### Methods:
-Debug
-```
-Log.debug(d)
-Log.d(d)
-```
-Arguments:
-d - debug data
-
-Info
-```
-Log.info(i, al)
-Log.i(i, al)
-```
-Arguments:
-i - log data
-al - if set, alert on info
-
-Warn
-```
-Log.warn(w, al)
-Log.w(w, al)
-```
-Arguments:
-w - log data
-al - if set, alert on warn
-
-Error
-```
-Log.error(e, silent)
-Log.e(e, silent)
-```
-Arguments:
-e - log data
-silent - if not set, alert on error
+[More on wiki](https://github.com/RumataEstorish/TizenWearableWebCommon/wiki/Log)
 
 ### SAP
 Wrapper around samsung accessory protocol. Android part codes I will add later. Utilizes connection, reconnection, sending data etc
