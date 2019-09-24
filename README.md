@@ -45,22 +45,22 @@ itemsList - array of items in following format:
 [{name : 'unique name of menu item', title : 'display name', image : 'path to icon', onclick : function(){ alert('this will be fired on click')}]
 ```
 4. Work with items
-Get menu items:
+- Get menu items:
 `actionMenu.menuItems`. Array of menu items
 `actionMenu.getMenuItemByName`. Find menu item by name or undefined
 
-Change items visibility:
+- Change items visibility:
 `actionMenu.showMenuItem('itemName');`
 `actionMenu.hideMenuItem('menuName');`
 
 5. Work with menu
-Check menu is opened:
+- Check menu is opened:
 `actionMenu.isOpened`. Returns true or false
 
-Open menu:
+- Open menu:
 `actionMenu.show();`
 
-Close menu:
+- Close menu:
 `actionMenu.close(function(){ alert('Fires when menu is closed');});`
 Argument: function which fires when action menu is closed. Optional.
 
