@@ -46,22 +46,22 @@ itemsList - array of items in following format:
 ```
 #### Work with items
 - Get menu items:
-`actionMenu.menuItems`. Array of menu items
-`actionMenu.getMenuItemByName`. Find menu item by name or undefined
+```actionMenu.menuItems```. Array of menu items
+```actionMenu.getMenuItemByName```. Find menu item by name or undefined
 
 - Change items visibility:
-`actionMenu.showMenuItem('itemName');`
-`actionMenu.hideMenuItem('menuName');`
+```actionMenu.showMenuItem('itemName');```
+```actionMenu.hideMenuItem('menuName');```
 
 #### Work with menu
 - Check menu is opened:
-``actionMenu.isOpened``. Returns true or false
+```actionMenu.isOpened```. Returns true or false
 
 - Open menu:
-``actionMenu.show();``
+```actionMenu.show();```
 
 - Close menu:
-``actionMenu.close(function(){ alert('Fires when menu is closed');});``
+```actionMenu.close(function(){ alert('Fires when menu is closed');});```
 Argument: function which fires when action menu is closed. Optional.
 
 #### Icons guide
