@@ -134,37 +134,46 @@ function Input(model) {
 				alert(e);
 			}
 		});
-
-		document.addEventListener('tizenhwkey', function(e) {
+		
+		
+		var handleBack = function(e){
 			if (e.keyName === "back") {
 				if (Input.isInputPage()) {
 					self.cancel();
 				}
 			}
-		});
+		};
+		
 
 		$("#confirmButton").off("click");
 		$("#confirmFooter").off("click");
 		$("#confirmCircleButton").off("click");
 		$("#confirmCircleButton").show();
 		
-		var processInputEnter = function(evt){
-			if (self.mode === KeyboardModes.SINGLE_LINE){
-				if (evt.which === 13){
-					self.getText();
-					
-					$('#inputCircleArea').off('keypress');
-					$('#inputCircleAreaOneLine').off('keypress');
-					$("#inputSquareAreaOneLine").off('keypress');
-					$("#inputSquareArea").off('keypress');
-				}
-			}			
-		};
+		$('#inputSquarePage').on('pageshow', function(){
+			document.addEventListener('tizenhwkey', handleBack);	
+		});
 		
-		$('#inputCircleArea').keypress(processInputEnter);
-		$('#inputCircleAreaOneLine').keypress(processInputEnter);
-		$("#inputSquareAreaOneLine").keypress(processInputEnter);
-		$("#inputSquareArea").keypress(processInputEnter);
+		$('#inputCirclePage').on('pageshow', function(){
+			document.addEventListener('tizenhwkey', handleBack);
+		});
+		
+		$('#inputSquarePage').on('pagebeforehide', function(){
+			$('#inputCircleArea').off('keypress');
+			$('#inputCircleAreaOneLine').off('keypress');
+			$("#inputSquareAreaOneLine").off('keypress');
+			$("#inputSquareArea").off('keypress');
+			document.removeEventListener('tizenhwkey', handleBack);
+		});
+		
+		$('#inputCirclePage').on('pagebeforehide', function(){
+			$('#inputCircleArea').off('keypress');
+			$('#inputCircleAreaOneLine').off('keypress');
+			$("#inputSquareAreaOneLine").off('keypress');
+			$("#inputSquareArea").off('keypress');
+			document.removeEventListener('tizenhwkey', handleBack);
+		});
+		
 	} catch (e) {
 		alert(e);
 	}
@@ -276,6 +285,21 @@ Input.prototype.open = function(text, placeholder, mode, ontext, oncancel, onerr
 		this.onerror = onerror;
 		this.oncancel = oncancel;
 
+		var processInputEnter = function(evt){
+			if (self.mode === KeyboardModes.SINGLE_LINE){
+				if (evt.which === 13){
+					self.getText();
+				}
+			}			
+		};
+		
+		
+		$('#inputCircleArea').keypress(processInputEnter);
+		$('#inputCircleAreaOneLine').keypress(processInputEnter);
+		$("#inputSquareAreaOneLine").keypress(processInputEnter);
+		$("#inputSquareArea").keypress(processInputEnter);
+				
+		
 		switch (model) {
 		case GearModel.GEAR_1:
 		case GearModel.GEAR_2:
