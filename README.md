@@ -128,7 +128,7 @@ Tiny wrapper around system toast
 
 ![ToastMessage](/screenshots/toastMessage.png)
 
-1. Install
+#### Install
 - copy `toastMessage-x.x.x.js` into your project
 - add link to main html file:
 ```
@@ -138,7 +138,7 @@ Tiny wrapper around system toast
 ```
 
 2. Create intanse
-`var toastMessage = new ToastMessage('popupToast', 'popupToastContent');`
+```var toastMessage = new ToastMessage('popupToast', 'popupToastContent');```
 popupToast - unique name of toast element.
 popupToastContent - unique name of toast content element.
 
@@ -146,13 +146,13 @@ Elements are added to document automatically.
 
 3. Use
 - Show:
-`toastMessage.show('MESSAGE TEXT', 100)`
+```toastMessage.show('MESSAGE TEXT', 100)```
 Arguments:
   - text which will be displayed
   - delay before toast shows. Optional
 
 - Close:
-`toastMessage.close()`
+```toastMessage.close()```
 Also toastMessage will be closed after 2000ms automatically
  
 
