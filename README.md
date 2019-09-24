@@ -4,9 +4,9 @@ Tizen Wearable Web application common components
 ## Introduction
 I've developed tizen apps since Gear 2.0. And now I want to share some of my code base, mostly common for my apps. If someone is still interested in Web apps coding (poor you), you can feel free to use this codes.
 
-At this moment codes are not documented and described. No samples. But I will change it soon.
+At this moment some codes are not documented and described and without samples. Please, be patient, or investigate them by youself.
 
-Please, don't be rude - I hate javascript and if you want to support very old devices, you have to stay old javascript.
+Don't be rude - I hate javascript and if you want to support very old devices, you have to stay old javascript.
 
 ### Compatibility
 All codes works from Gear 1 till Galaxy Watch Active, so main purpose is backward compatibility.
@@ -15,7 +15,6 @@ All codes works from Gear 1 till Galaxy Watch Active, so main purpose is backwar
 Project built with rather old tizen libs, but they work stable (v0.13.29, it's libs from Gear S2 or Tizen 3.0. I don't remember). Also jquery requires. jquery-3.3.1 is ok. Every component can use Utils library, so it's important to download and include it either. If some code don't use it, next update I can rely on it either.
 
 Don't forget to copy "style.css" to make it looks better (yes, Samsung didn't include all styles into their libraries)
-
 
 
 ## Valuable code
