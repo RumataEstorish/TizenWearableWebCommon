@@ -22,70 +22,8 @@ Don't forget to copy "style.css" to make it looks better (yes, Samsung didn't in
 ### ActionMenu
 ActionMenu shows circular menu for circle devices and popup for rectangular.
 ![ActionMenu](/screenshots/actionMenu.png)
-#### Install
-1. copy actionMenu-x.x.x.x.js into your project
-1. copy utils-x.x.x.x.js into your project
-1. add links to you html: 
-```
-<head> 
-  <script type="text/javascript" src="js/utils-x.x.x.x.js"></script>
-  <script type="text/javascript" src="js/actionMenu-x.x.x.x.js"></script> 
-</head>
-```
-#### Create instance
-```
-var actionMenu = new ActionMenu('actionMenuPageName', 'actionMenuName', itemsList);
-```
-actionMenuPageName - page name, which menu will create to draw itsels<br>
-actionMenuName - name of menu component<br>
-itemsList - array of items in following format:
 
-#### Create menu items
-```
-[{name : 'unique name of menu item', title : 'display name', image : 'path to icon', onclick : function(){ alert('this will be fired on click')}]
-```
-#### Work with items
-Get menu items:
-- `actionMenu.menuItems` Array of menu items
-- `actionMenu.getMenuItemByName`. Find menu item by name or undefined
-
-Change items visibility:
-- `actionMenu.showMenuItem('itemName');`
-- `actionMenu.hideMenuItem('menuName');`
-
-#### Work with menu
-- Check menu is opened:<br>
-`actionMenu.isOpened`.<br> Returns true or false
-
-- Open menu:<br>
-`actionMenu.show();`
-
-- Close menu:<br>
-`actionMenu.close(function(){ alert('Fires when menu is closed');});`<br>
-Argument: function which fires when action menu is closed. Optional.
-
-#### Icons guide
-The best option to create icon is to create 32x32 icon and make empty space around to make it 48x48. System will crop icon, but it would be visible good.
-
-### NOTE!
-- Always add check if menu isOpened to `tizenhwkey.back` processing event like this:
-```
-document.addEventListener('tizenhwkey', function(e){
-  if (e.keyName === 'back'){
-    if (actionMenu.isOpened === true){
-      actionMenu.close();
-      return;
-    }
-    //YOUR CODE
-  }
-}
-```
-- Use `lib\tau'wearable\theme\default\tau.circle-patch-0.0.0.1.min.css` from this project instead of system `tau.circle.min.css` to avoid display bug.
-
-- Init menu on window.load event because it adds markup in code.
-
-#### Known bugs:
-When you open menu from page 'A', and menu item opens input (from this project), page 'A' would receive 'pagehide' and then 'pageshow' event when input opens.
+[More on wiki](https://github.com/RumataEstorish/TizenWearableWebCommon/wiki/ActionMenu)
 
 ### Circle-helper
 Patch for Tizen circle-helper allows to force bezel rotation for element. Anyway not working with virtual-list
@@ -134,38 +72,7 @@ Tiny wrapper around system toast
 
 ![ToastMessage](/screenshots/toastMessage.png)
 
-#### Install
-1. copy `toastMessage-x.x.x.js` into your project
-1. add link to main html file:
-```
-<head>
-  <script type="text/javascript" src="js/toastMessage-x.x.x.js"></script>
-</head>
-```
-
-#### Create intanse
-```
-var toastMessage = new ToastMessage('popupToast', 'popupToastContent');
-```
-popupToast - unique name of toast element<br>
-popupToastContent - unique name of toast content element<br>
-<br>
-Elements are added to document automatically.
-
-#### Use
-- Show:
-```
-toastMessage.show('MESSAGE TEXT', 100)
-```
-Arguments:<br>
-text which will be displayed<br>
-delay before toast shows. Optional<br>
-
-- Close:
-```
-toastMessage.close()
-```
-Also toastMessage will be closed after 2000ms automatically
+[More on wiki](https://github.com/RumataEstorish/TizenWearableWebCommon/wiki/ToastMessage)
 
 ### VirtualList
 Patched system virtual list allowing dynamic content f.e. when you refresh data. Highly unrecommended to use it, works really bad especially when list item size is not the same
