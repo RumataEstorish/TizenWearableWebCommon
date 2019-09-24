@@ -55,16 +55,16 @@ itemsList - array of items in following format:
 
 #### Work with menu
 - Check menu is opened:
-`actionMenu.isOpened`. Returns true or false
+``actionMenu.isOpened``. Returns true or false
 
 - Open menu:
-`actionMenu.show();`
+``actionMenu.show();``
 
 - Close menu:
-`actionMenu.close(function(){ alert('Fires when menu is closed');});`
+``actionMenu.close(function(){ alert('Fires when menu is closed');});``
 Argument: function which fires when action menu is closed. Optional.
 
-6. Icons guide
+#### Icons guide
 The best option to create icon is to create 32x32 icon and make empty space around to make it 48x48. System will crop icon, but it would be visible good.
 
 ### NOTE!
