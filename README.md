@@ -44,21 +44,21 @@ Tiny wrapper around system toast
 
 ![ToastMessage](/screenshots/toastMessage.png)
 
-[More on wiki](https://github.com/RumataEstorish/TizenWearableWebCommon/wiki/ToastMessage)
+#### [More on wiki](https://github.com/RumataEstorish/TizenWearableWebCommon/wiki/ToastMessage)
 
 ### VirtualList
 Patched system virtual list allowing dynamic content f.e. when you refresh data. Highly unrecommended to use it, works really bad especially when list item size is not the same
 
 ### Log
-Tiny wrapper around console. Just like android log syntax.
-[More on wiki](https://github.com/RumataEstorish/TizenWearableWebCommon/wiki/Log)
+Tiny wrapper around console. Just like android log syntax
+#### [More on wiki](https://github.com/RumataEstorish/TizenWearableWebCommon/wiki/Log)
 
 ### SAP
 Wrapper around samsung accessory protocol. Android part codes I will add later. Utilizes connection, reconnection, sending data etc
 
 ### Utils
 Different methods, which can be helpful
-[More on wiki](https://github.com/RumataEstorish/TizenWearableWebCommon/wiki/Utils)
+#### [More on wiki](https://github.com/RumataEstorish/TizenWearableWebCommon/wiki/Utils)
 
 
 ### GearHttp
