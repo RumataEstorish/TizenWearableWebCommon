@@ -89,15 +89,26 @@ When you open menu from page 'A', and menu item opens input (from this project),
 
 ### Circle-helper
 Patch for Tizen circle-helper allows to force bezel rotation for element. Anyway not working with virtual-list
+
+1. Install
+- copy `circle-helper-x.x.x.x.js` into your project
+- add link to main html file
+```
+<head>
+<script type="text/javascript" src="js/circle-helper-x.x.x.x.js"></script>
+</head>
+```
+
+2. Use
 Two global methods:
 
-Force create scroller
+- Force create scroller
 ``createScroller(e)``
 e - object with field target contains dom element
 Example:
 ``createScroller({target : document.getElementById('mainPage')})``
 
-Add page to ignore list avoid create scroller
+- Add page to ignore list avoid create scroller
 ``addScrollerIgnorePage(id)``
 id - page name without #
 Example: 
@@ -117,21 +128,31 @@ Tiny wrapper around system toast
 
 ![ToastMessage](/screenshots/toastMessage.png)
 
-Create:
-``var toastMessage = new ToastMessage('popupToast', 'popupToastContent');``
+1. Install
+- copy `toastMessage-x.x.x.js` into your project
+- add link to main html file:
+```
+<head>
+  <script type="text/javascript" src="js/toastMessage-x.x.x.js"></script>
+</head>
+```
+
+2. Create intanse
+`var toastMessage = new ToastMessage('popupToast', 'popupToastContent');`
 popupToast - unique name of toast element.
 popupToastContent - unique name of toast content element.
 
 Elements are added to document automatically.
 
-Show:
-``toastMessage.show('MESSAGE TEXT', 100)``
+3. Use
+- Show:
+`toastMessage.show('MESSAGE TEXT', 100)`
 Arguments:
   - text which will be displayed
   - delay before toast shows. Optional
 
-Close:
-``toastMessage.close()``
+- Close:
+`toastMessage.close()`
 Also toastMessage will be closed after 2000ms automatically
  
 
