@@ -310,6 +310,7 @@ Input.prototype.open = function(text, placeholder, mode, ontext, oncancel, onerr
 			case KeyboardModes.NORMAL:
 				$("#inputSquareAreaOneLine").hide();
 				$("#inputSquareArea").show();
+				$("#inputSquareArea").putCursorAtEnd();
 				$('#inputSquarePage').one('pageshow', function(){
 					$("#inputSquareArea").focus();
 				});
