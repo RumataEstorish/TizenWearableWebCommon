@@ -2,6 +2,9 @@
 /*jslint laxbreak: true*/
 
 /*
+ * v 2.0.3.0 
+ * location support
+ * added peer not found connect error callback 
  * v 2.0.2.2
  * accept connection
  * v 2.0.2.1
@@ -58,6 +61,12 @@ SAP.OPEN_APP = 'OPEN_APP';
  */
 SAP.OPEN_LINK = 'OPEN_LINK';
 
+/**
+ * Get location from phone.
+ * @since v2.0.3.0
+ */
+SAP.GET_LOCATION = 'GET_LOCATION';
+
 /** ************System channels************* */
 /**
  * Channel for some service info
@@ -68,6 +77,12 @@ SAP.SERVICE_CHANNEL_ID = 98;
  * Channel for network requests through android phone
  */
 SAP.NETWORK_CHANNEL_ID = 99;
+
+
+/**
+ * Channel for location requests through android phone
+ */
+SAP.LOCATION_CHANNEL_ID = 97;
 
 /**
  * Reconnect timeout
@@ -81,7 +96,8 @@ SAP.RECONNECT_TIMEOUT = 5000;
  * @param 
  */
 function SAP(providerName, onReceive) {
-	var fileReceiveCallback = null, fileSendCallback = null, saSocket = null, peerAgent = null, deviceAttached = false, connectOnDeviceNotConnected = true, fileOrder = [], fileTransfer = null, receiveListeners = [], saAgent = null, _onreceive = onReceive, onnetreceive = null, onImageReceive = null;
+	var fileReceiveCallback = null, fileSendCallback = null, saSocket = null, peerAgent = null, deviceAttached = false, connectOnDeviceNotConnected = true, fileOrder = [], fileTransfer = null, receiveListeners = [], saAgent = null, _onreceive = onReceive, onnetreceive = null, onImageReceive = null,
+	onLocationReceive = null;
 
 	/**
 	 * Array of onReceive listeners. [function(channelId, data)]
@@ -195,6 +211,19 @@ function SAP(providerName, onReceive) {
 		},
 		set : function(val) {
 			onnetreceive = val;
+		}
+	});
+	
+	/**
+	 * Location receiver from phone.
+	 * Used internally
+	 */
+	Object.defineProperty(this, 'onLocationReceive', {
+		get: function(){
+			return onLocationReceive;
+		},
+		set: function(val){
+			onLocationReceive = val;
 		}
 	});
 
@@ -366,6 +395,48 @@ SAP.prototype.sendFile = function(path) {
 };
 
 /**
+ * Get location. If watch don't have navigator.geolocation, then request from phone.
+ * @returns promise and position object:
+{
+  	coords.latitude 	// The latitude as a decimal number (always returned)
+	coords.longitude 	// The longitude as a decimal number (always returned)
+	coords.accuracy 	// The accuracy of position (always returned)
+	coords.altitude 	// The altitude in meters above the mean sea level (returned if available)
+	coords.altitudeAccuracy 	// The altitude accuracy of position (returned if available)
+	coords.heading 	// The heading as degrees clockwise from North (returned if available)
+	coords.speed 	// The speed in meters per second (returned if available)
+	timestamp // The date/time of the response (returned if available)
+}
+ @since v2.0.3.0
+ @param force aquire location from phone
+ */
+SAP.prototype.getLocation = function(forceAcquireFromPhone){
+	var d = $.Deferred();
+	
+	if (navigator.geolocation && !forceAcquireFromPhone){
+		navigator.geolocation.getCurrentPosition(function(position){
+			d.resolve(position);
+		}, function(err){
+			d.reject(err);
+		});
+	}
+	else{
+		this.onLocationReceive = function(channelId, data){
+			var position = JSON.parse(data);
+			if (position.coords){
+				d.resolve(position);
+			}
+			else{
+				d.reject(position);
+			}			
+		}; 
+		this.sendData(SAP.LOCATION_CHANNEL_ID, SAP.GET_LOCATION);
+	}
+	
+	return d.promise();
+};
+
+/**
  * Connect to phone
  * @returns promise. Resolved when connected, rejected when cannot connect
  */
@@ -384,6 +455,10 @@ SAP.prototype.connect = function() {
 			x(channelId, data);
 		});
 
+		if (self.onLocationReceive && channelId === SAP.LOCATION_CHANNEL_ID){
+			self.onLocationReceive(channelId, data);
+		}
+		
 		if (self.onnetreceive && channelId === SAP.NETWORK_CHANNEL_ID) {
 			res = JSON.parse(data);
 			if (res.type === "IMAGE") {
@@ -399,6 +474,10 @@ SAP.prototype.connect = function() {
 
 		switch (err) {
 		case SAP.ERRORS.DUPLICATE_REQUEST:
+			break;
+		case SAP.ERRORS.PEER_NOT_FOUND:
+			Log.w(SAP.ERRORS.PEER_NOT_FOUND);
+			d.reject(SAP.ERRORS.PEER_NOT_FOUND);
 			break;
 		case SAP.ERRORS.INVALID_PEER_AGENT:
 			Log.w(SAP.ERRORS.INVALID_PEER_AGENT);
