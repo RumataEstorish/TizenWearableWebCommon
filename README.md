@@ -54,6 +54,7 @@ Tiny wrapper around console. Just like android log syntax
 
 ### SAP
 Wrapper around samsung accessory protocol. Android part codes I will add later. Utilizes connection, reconnection, sending data etc
+#### [More on wiki](https://github.com/RumataEstorish/TizenWearableWebCommon/wiki/SAP)
 
 ### Utils
 Different methods, which can be helpful
