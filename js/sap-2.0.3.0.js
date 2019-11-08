@@ -478,6 +478,10 @@ SAP.prototype.connect = function() {
 			Log.w(SAP.ERRORS.INVALID_PEER_AGENT);
 			d.reject(SAP.ERRORS.INVALID_PEER_AGENT);
 			break;
+		case SAP.ERRORS.PEER_NOT_FOUND:
+			Log.w(SAP.ERRORS.PEER_NOT_FOUND);
+			d.reject(SAP.ERRORS.PEER_NOT_FOUND);
+			break;
 		default:
 			if (err === SAP.ERRORS.DEVICE_NOT_CONNECTED && !self.connectOnDeviceNotConnected) {
 				Log.d('CONNECT ERROR: ' + SAP.ERRORS.DEVICE_NOT_CONNECTED);
@@ -488,7 +492,7 @@ SAP.prototype.connect = function() {
 				if (!self.isConnected) {
 					self.saAgent.findPeerAgents();
 				} else {
-					d.reject(SAP.ERRORS.PEER_NOT_FOUND);
+					d.resolve();
 				}
 			}, SAP.RECONNECT_TIMEOUT);
 			break;
