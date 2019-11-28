@@ -1,9 +1,11 @@
 /*global Log, $*/
 /*jslint laxbreak: true*/
 
-/*
+/* v 2.0.3.1
+ * fixed acceptServiceConnectionRequest
  * v 2.0.3.0 
  * location support
+ * added peer not found connect error callback 
  * v 2.0.2.2
  * accept connection
  * v 2.0.2.1
@@ -474,13 +476,13 @@ SAP.prototype.connect = function() {
 		switch (err) {
 		case SAP.ERRORS.DUPLICATE_REQUEST:
 			break;
-		case SAP.ERRORS.INVALID_PEER_AGENT:
-			Log.w(SAP.ERRORS.INVALID_PEER_AGENT);
-			d.reject(SAP.ERRORS.INVALID_PEER_AGENT);
-			break;
 		case SAP.ERRORS.PEER_NOT_FOUND:
 			Log.w(SAP.ERRORS.PEER_NOT_FOUND);
 			d.reject(SAP.ERRORS.PEER_NOT_FOUND);
+			break;
+		case SAP.ERRORS.INVALID_PEER_AGENT:
+			Log.w(SAP.ERRORS.INVALID_PEER_AGENT);
+			d.reject(SAP.ERRORS.INVALID_PEER_AGENT);
 			break;
 		default:
 			if (err === SAP.ERRORS.DEVICE_NOT_CONNECTED && !self.connectOnDeviceNotConnected) {
@@ -541,7 +543,7 @@ SAP.prototype.connect = function() {
 		},
 		onrequest : function(peerAgent) {
 			Log.d('AGENT CALLBACK: onrequest');
-            self.sAAgent.acceptServiceConnectionRequest(peerAgent);
+            self.saAgent.acceptServiceConnectionRequest(peerAgent);
         },
 		onerror : handleError
 	};
