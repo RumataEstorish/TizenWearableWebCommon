@@ -1,7 +1,10 @@
 /*global Log, $*/
 /*jslint laxbreak: true*/
 
-/* v 2.0.3.1
+/* 
+ * v 2.0.3.2
+ * added SAP.GET_LOCATION_CANCELLED constant
+ * v 2.0.3.1
  * fixed acceptServiceConnectionRequest
  * v 2.0.3.0 
  * location support
@@ -67,6 +70,12 @@ SAP.OPEN_LINK = 'OPEN_LINK';
  * @since v2.0.3.0
  */
 SAP.GET_LOCATION = 'GET_LOCATION';
+
+/**
+ * Get location cancelled from phone side
+ * @since v2.0.3.2
+ */
+SAP.GET_LOCATION_CANCELLED = 'GET_LOCATION_CANCELLED';
 
 /** ************System channels************* */
 /**
