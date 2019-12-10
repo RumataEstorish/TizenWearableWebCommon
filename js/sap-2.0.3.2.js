@@ -106,7 +106,7 @@ SAP.RECONNECT_TIMEOUT = 5000;
  * @param 
  */
 function SAP(providerName, onReceive) {
-	var fileReceiveCallback = null, fileSendCallback = null, saSocket = null, peerAgent = null, deviceAttached = false, connectOnDeviceNotConnected = true, fileOrder = [], fileTransfer = null, receiveListeners = [], saAgent = null, _onreceive = onReceive, onnetreceive = null, onImageReceive = null,
+	var fileReceiveCallback = null, fileSendCallback = null, saSocket = null, peerAgent = null, deviceAttached = false, connectOnDeviceNotConnected = false, fileOrder = [], fileTransfer = null, receiveListeners = [], saAgent = null, _onreceive = onReceive, onnetreceive = null, onImageReceive = null,
 	onLocationReceive = null;
 
 	/**
