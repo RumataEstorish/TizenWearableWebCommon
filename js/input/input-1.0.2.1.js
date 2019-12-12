@@ -21,12 +21,32 @@
  *            Gear model. If no model, then Gear S2 by default
  */
 
-Input.INPUT_FIELDS = '<div id="inputSquarePage" class="ui-page"><link rel="stylesheet" href="js/input/inputStyleSquare.css"><div id="inputSquareContent" class="ui-content input-content">'
-		+ '<textarea id="inputSquareArea" class="input-area"></textarea><input type="text" id="inputSquareAreaOneLine" class="input-area" />'
-		+ '<button id="confirmButton" class="confirm-button"></button></div><footer class="ui-footer ui-bottom-button ui-fixed" id="confirmFooter">' + '<button class="ui-btn ui-btn-icon-only confirm-button-footer"></button></footer>	</div>'
-		+ '<div id="inputCirclePage" class="ui-page"> <link rel="stylesheet" media="all and (-tizen-geometric-shape: circle)" href="js/input/inputStyleCircle.css">'
-		+ '<div class="ui-content"> <div id="inputContentCircle" class="input-content"> <textarea id="inputCircleArea" class="input-area"></textarea>'
-		+ '<input type="text" id="inputCircleAreaOneLine" class="input-area" /><button id="confirmCircleButton" class="confirm-button"></button></div></div></div>';
+
+Input.SQUARE_STYLE = '<link rel="stylesheet" href="js/input/inputStyleSquare.css">';
+Input.CIRCLE_STYLE = '<link rel="stylesheet" media="all and (-tizen-geometric-shape: circle)" href="js/input/inputStyleCircle.css">';
+
+Input.SQUARE_INPUT_FIELD = 
+	'<div id="inputSquarePage" class="ui-page">' + 
+		'<div id="inputSquareContent" class="ui-content input-content">' + 
+			'<textarea id="inputSquareArea" class="input-area"></textarea>' +
+			'<input type="text" id="inputSquareAreaOneLine" class="input-area" />' +
+			'<button id="confirmButton" class="confirm-button"></button>' + 
+		'</div>' +
+		'<footer class="ui-footer ui-bottom-button ui-fixed" id="confirmFooter">' + 
+			'<button class="ui-btn ui-btn-icon-only confirm-button-footer"></button>' +
+		'</footer>' +
+	'</div>';
+
+Input.CIRCLE_INPUT_FIELD =
+	'<div id="inputCirclePage" class="ui-page">' + 
+		'<div class="ui-content">' + 
+			'<div id="inputContentCircle" class="input-content">' + 
+				'<textarea id="inputCircleArea" class="input-area"></textarea>' + 
+				'<input type="text" id="inputCircleAreaOneLine" class="input-area" />' + 
+				'<button id="confirmCircleButton" class="confirm-button"></button>' + 
+			'</div>' +
+		'</div>' +
+	'</div>';
 
 
 /**
@@ -40,10 +60,24 @@ function Input(model) {
 
 	try {
 		
-		if (!$('#inputSquarePage').length){
-			$('body').append(Input.INPUT_FIELDS);
+		switch(model){
+		case GearModel.GEAR_1:
+		case GearModel.GEAR_2:
+			break;
+		case GearModel.GEAR_S:
+			if (!$('#inputSquarePage').length){
+				$('head').append(Input.SQUARE_STYLE);
+				$('body').append(Input.SQUARE_INPUT_FIELD);
+			}
+			break;
+			default:
+				if (!$('#inputCirclePage').length){
+					$('head').append(Input.CIRCLE_STYLE);
+					$('body').append(Input.CIRCLE_INPUT_FIELD);
+					
+				}
 		}
-		
+				
 		var self = this, height = window.innerHeight, mode = KeyboardModes.SINGLE_LINE;
 
 		this.oncancel = null;
