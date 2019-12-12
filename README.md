@@ -62,6 +62,7 @@ Different methods, which can be helpful
 
 ### GearHttp
 Network utilization module. It sends web requests through XMLHttpRequest for devices newer then Gear 2.0, for Gear 2.0 it passthrough requests through Android phone. You can always force traffic through Android via flag (can be useful when ssl sertificates don't work with particular watch model). It also needs Android part of code I'll share later
+#### [More on wiki](https://github.com/RumataEstorish/TizenWearableWebCommon/wiki/SAP#internet-handle-with-gearhttp)
 
 ### Input
 Draws input window and handles input from all watch generation. For Gear 2.0 it requires TypeGear app, for Gear S it draws rectangular window, for circle devices other shape :)
