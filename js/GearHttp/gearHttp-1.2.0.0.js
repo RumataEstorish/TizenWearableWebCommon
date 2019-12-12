@@ -1,6 +1,8 @@
 /*global AndroidHttpRequest*/
 
 /**
+ * v1.1.3.1
+ * fixed offline
  * v1.1.3.0
  * added address and type property for comparation
  * v1.1.2.1
@@ -14,18 +16,30 @@
  * added check online and if not online, it will wait for online to send again
  */
 
+
+GearHttp.OFFLINE = 'OFFLINE';
+
 /**
- * Нужно настроить а) доступ к системной информации б) канал для обмена с
- * андроидом в) подождать секунду, чтобы получилась модель часов
+ * Gear model
+ */
+GearHttp.model = null;
+
+/**
+ * Abstract network request layer. Sends network requests via XmlHTTPRequest when Gear S+ otherwise through android phone
+ * @param sap - SAP to communicate with phone
+ * @param forcePhone - force communucation through phone any way
  */
 function GearHttp(sap, forcePhone) {
 
 	var self = this, lastOnline = false, onreadystatechange = null, request = null, onlinechangelistener = null, listenerId = null, _type = null, _address = null;
 
-	// Протокол обмена с устройстом
-	this.sap = sap;
-
-	// Получение модели девайса для выбора способа коммуникации
+	Object.defineProperty(this, 'sap', {
+		get: function(){
+			return sap;
+		}
+	});
+	
+	// Retrieving device model to detect communication way
 	try {
 		if (!GearHttp.model) {
 			tizen.systeminfo.getPropertyValue("BUILD", function(res) {
@@ -40,19 +54,17 @@ function GearHttp(sap, forcePhone) {
 			case "SM-R380":
 			case "SM-R381":
 			case "SM-V700":
-				// Для часов Gear 1 - Gear 2/neo способо доступа к интернету
-				// через
-				// андроид
+				// For Gear 1 - Gear 2/neo net through Android
 				request = new AndroidHttpRequest(self.sap);
 				break;
 			default:
-				// Для Gear S+ доступ к интернету через JavaScript
+				// For Gear S+ net through XmlHttpRequest
 				request = new XMLHttpRequest();
 				break;
 			}
 		}
 	} catch (e) {
-		// В случае с эмулятором доступ через JavaScript
+		// In case of emulator through javascript
 		request = new XMLHttpRequest();
 	} finally {
 		if (onreadystatechange) {
@@ -89,7 +101,7 @@ function GearHttp(sap, forcePhone) {
 	});
 
 	/**
-	 * Функция, получающая состояние запроса
+	 * Request state change func
 	 */
 	Object.defineProperty(this, 'onreadystatechange', {
 		get : function() {
@@ -104,7 +116,7 @@ function GearHttp(sap, forcePhone) {
 	});
 
 	/**
-	 * Объект запроса
+	 * Request itself
 	 */
 	Object.defineProperty(this, 'request', {
 		get : function() {
@@ -114,12 +126,9 @@ function GearHttp(sap, forcePhone) {
 
 	
 	/**
-	 * Создание запроса
-	 * 
-	 * @param type -
-	 *            тип запроса
-	 * @param address -
-	 *            адрес запроса
+	 * Request creation
+	 * @param type - request type
+	 * @param address - request address
 	 */
 	Object.defineProperty(this, 'open', {
 		get : function(){
@@ -131,12 +140,18 @@ function GearHttp(sap, forcePhone) {
 		}
 	});
 	
+	/**
+	 * Request type
+	 */
 	Object.defineProperty(this, 'type', {
 		get : function(){
 			return _type;
 		}
 	});
 	
+	/**
+	 * Request address
+	 */
 	Object.defineProperty(this, 'address', {
 		get : function(){
 			return _address;
@@ -144,21 +159,13 @@ function GearHttp(sap, forcePhone) {
 	});
 }
 
-GearHttp.OFFLINE = "OFFLINE";
 
-/**
- * Модель часов
- */
-GearHttp.model = null;
 
 
 /**
- * Проверка, что есть подключение к сети
- * 
- * @param online -
- *            в сети
- * @param notonline -
- *            не в сети
+ * Network connection check
+ * @param online - online callback
+ * @param offline - offline callback
  */
 GearHttp.isOnline = function(online, offline) {
 	if (!online && !offline) {
@@ -167,7 +174,7 @@ GearHttp.isOnline = function(online, offline) {
 	try {
 		tizen.systeminfo.getPropertyValue("NETWORK", function(res) {
 			switch (res.networkType) {
-			case "NONE":
+			case 'NONE':
 				if (offline) {
 					offline();
 				}
@@ -186,51 +193,26 @@ GearHttp.isOnline = function(online, offline) {
 };
 
 /**
- * Отправка запроса
- * 
- * @param args -
- *            аргументы запроса
+ * Send request
+ * @param args - POST reqeust args
  */
 GearHttp.prototype.send = function(args) {
-	var listenerId = null, self = this, online = function() {
-		if (self.request instanceof XMLHttpRequest && args) {
-			self.request.send(args);
-		} else {
-			self.request.send(args);
-		}
-	}, offline = function() {
-		if (self.sap.ontoastmessage) {
-			self.sap.ontoastmessage(GearHttp.OFFLINE);
-		}
-		listenerId = tizen.systeminfo.addPropertyValueChangeListener("NETWORK", function() {
-			if (listenerId) {
-				tizen.systeminfo.removePropertyValueChangeListener(listenerId);
-				listenerId = null;
-			}
-			online();
-		});
-	};
-	GearHttp.isOnline(online, offline);
+	this.request.send(args);
 };
 
 /**
- * Установка заголовков запроса
- * 
- * @param name -
- *            название заголовка
- * @param val -
- *            значение заголовка
+ * Set request header
+ * @param name - header name
+ * @param val - header value
  */
 GearHttp.prototype.setRequestHeader = function(name, val) {
 	this.request.setRequestHeader(name, val);
 };
 
 /**
- * Получение изображения из интернета. Если через js запрос, то возвращает
- * обратно адрес. Если через андроид, то картинку строкой Base64
- * 
- * @param address -
- *            адрес картинки
+ * Get image. If js request, returns address back. If android then base64 image string
+ * @param address - image address
+ * @deprecated not working obviously
  */
 GearHttp.prototype.getImage = function(address) {
 	if (!this.onreadystatechange) {

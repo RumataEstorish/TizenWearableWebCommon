@@ -1,44 +1,70 @@
 /*global RequestHeader*/
 
 /**
- * Данные для передачи на андроид для запроса
+ * Android http request data
  */
-function AndroidRequestData(){
-	var address = "", type = "", args = "", headers = [];
-		
-	this.__defineGetter__("address", function(){
-		return address;
+function AndroidRequestData() {
+	var address = '', type = '', args = '', headers = [];
+
+	Object.defineProperty(this, 'address', {
+		get : function() {
+			return address;
+		},
+		set : function(val) {
+			address = val;
+		}
 	});
-	
-	this.__defineSetter__("address", function(val){
-		address = val;
+
+	Object.defineProperty(this, 'type', {
+		get : function() {
+			return type;
+		},
+		set : function(val) {
+			type = val;
+		}
 	});
-	
-	this.__defineGetter__("type", function(){
-		return type;
+
+	Object.defineProperty(this, 'args', {
+		get : function() {
+			return args;
+		},
+		set : function(val) {
+			args = val;
+		}
 	});
-	this.__defineSetter__("type", function(val){
-		type = val;
-	});
-	
-	this.__defineGetter__("args", function(){
-		return args;
-	});
-	this.__defineSetter__("args", function(val){
-		args = val;
-	});
-	
-	this.__defineGetter__("headers", function(){
-		return headers;
+
+	Object.defineProperty(this, 'headers', {
+		get : function() {
+			return headers;
+		},
+		set : function(val) {
+			headers = val;
+		}
 	});
 }
 
 /**
- * Установка заголовков запроса
- * @param name - название
- * @param value - значение
+ * Set request heder
+ * 
+ * @param name -
+ *            name
+ * @param value -
+ *            value
  */
-AndroidRequestData.prototype.setRequestHeader = function(name, value){
+AndroidRequestData.prototype.setRequestHeader = function(name, value) {
 	this.headers.push(new RequestHeader(name, value));
 };
 
+AndroidRequestData.prototype.serialize = function() {
+	return JSON.stringify({
+		address : this.address,
+		type : this.type,
+		args : this.args,
+		headers : this.headers.map(function(h) {
+			return {
+				name : h.name,
+				value : h.value
+			};
+		})
+	});
+};

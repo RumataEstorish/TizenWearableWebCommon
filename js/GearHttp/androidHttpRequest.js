@@ -1,78 +1,103 @@
-/*global AndroidRequestData*/
+/*global AndroidRequestData, SAP*/
+
 /**
- * Класс для выполнения HTTP запросов через андроид
- * 
- * @param sap -
- *            класс для коммуникации с андроид
+ * Request type - image
+ */
+AndroidHttpRequest.IMAGE_TYPE = "IMAGE";
+
+/**
+ * Execute http requests through android
+ * @param sap - communication class
  */
 function AndroidHttpRequest(sap) {
 
-	var onreadystatechange = null;
+	var onreadystatechange = null, status = 0, readyState = 0, image = null, requestAddress = null, request = new AndroidRequestData(), responseText = null, sapPreviousConnectOnNotConnected = sap.connectOnDeviceNotConnected, 
+	
+	onreceive = function(channelId, data){
+		//Skip useless info
+		if (channelId !== SAP.NETWORK_CHANNEL_ID) {
+			return;
+		}
 
-	this.sap = sap;
-	this.status = 0;
-	this.readyState = 0;
-	this.image = null;
-	this.requestAddress = null;
+		var res = JSON.parse(data);
 
-	this.request = new AndroidRequestData();
-	this.responseText = null;
+		image = res.filePath;
+		status = res.status;
+		readyState = res.readyState;
+		responseText = res.responseText;
+		requestAddress = res.requestAddress;
+		onreadystatechange();
+		sap.connectOnDeviceNotConnected = sapPreviousConnectOnNotConnected;
+	};
 
-	this.__defineGetter__("onreadystatechange", function() {
-		return onreadystatechange;
+	Object.defineProperty(this, 'sap', {
+		get: function(){
+			return sap;
+		}
 	});
-	this.__defineSetter__("onreadystatechange", function(val) {
-		onreadystatechange = val;
+	
+	Object.defineProperty(this, 'image', {
+		get : function(){
+			return image;
+		}
 	});
+	
+	Object.defineProperty(this, 'status', {
+		get: function(){
+			return status;
+		}
+	});
+	
+	Object.defineProperty(this, 'readyState', {
+		get: function(){
+			return readyState;
+		}
+	});
+	
+	Object.defineProperty(this, 'requestAddress', {
+		get: function(){
+			return requestAddress;
+		}
+	});
+	
+	Object.defineProperty(this, 'request', {
+		get: function(){
+			return request;
+		},
+		set: function(val){
+			request = val;
+		}
+	});
+	
+	Object.defineProperty(this, 'responseText', {
+		get: function(){
+			return responseText;
+		}
+	});
+	
+	Object.defineProperty(this, 'onreadystatechange', {
+		get: function(){
+			return onreadystatechange;
+		},
+		set: function(val){
+			onreadystatechange = val;
+		}
+	});
+	
+	sap.connectOnDeviceNotConnected = true;
+	sap.onnetreceive = onreceive;
+	/* sap.imageReceiveArray.push(function(j, data){
+		if (data.requestAddress === request.address){
+			sap.imageReceiveArray.splice(j, 1);
+			onreceive(SAP.NETWORK_CHANNEL_ID, JSON.stringify(data));
+		}
+	});*/ 
 }
 
 /**
- * Канал для отправки сетевых запросов
- */
-AndroidHttpRequest.NETWORK_CHANNEL_ID = 99;
-
-/**
- * Тип запроса - рисунок
- */
-AndroidHttpRequest.IMAGE_TYPE = "IMAGE";
-/**
- * Тип запроса - открытие ссылки в браузере
- */
-AndroidHttpRequest.OPEN_LINK = "OPEN_LINK";
-
-/**
- * Функция для получения ответа от телфона
- * 
- * @param channelId -
- *            канал получения данных
- * @param data -
- *            данные, которые пришли с устройства
- */
-AndroidHttpRequest.prototype.onreceive = function(channelId, data) {
-
-	//Пропускаем информацию не по адресу
-	if (channelId !== AndroidHttpRequest.NETWORK_CHANNEL_ID) {
-		return;
-	}
-
-	var res = JSON.parse(data);
-
-	this.image = res.filePath;
-	this.status = res.status;
-	this.readyState = res.readyState;
-	this.responseText = res.responseText;
-	this.requestAddress = res.requestAddress;
-	this.onreadystatechange();
-
-};
-
-/**
- * Открытие запроса. Необходим для совместимости с JavaScript запросом
- * 
- * @param type -
- *            тип запроса
- * @param address -
- *            адрес запроса
+ * Open request. Requires for javascript XMLHttpRequest compatibility.
+ * @param type - request type (POST, GET...)
+ * @param address - request address
  */
 AndroidHttpRequest.prototype.open = function(type, address) {
 	this.request = new AndroidRequestData();
@@ -81,61 +106,30 @@ AndroidHttpRequest.prototype.open = function(type, address) {
 };
 
 /**
- * Отправка данных
- * 
- * @param args -
- *            аргументы (для POST - запроса)
+ * Send data. Returns promise.
+ * @param args - POST request args
  */
-AndroidHttpRequest.prototype.send = function(args) {
-
-	var self = this, send = function() {
-		self.sap.sendData(AndroidHttpRequest.NETWORK_CHANNEL_ID, JSON.stringify(self.request), send);
-	};
+AndroidHttpRequest.prototype.send = function(args) {	
 	this.request.args = args;
-	
-	this.sap.onnetreceive = function(channelId, data){
-		self.onreceive(channelId, data);
-	};
-	
-	send();
+	return this.sap.sendData(SAP.NETWORK_CHANNEL_ID, this.request.serialize());
 };
 
 /**
- * Установка заголовков запроса
+ * Set request header
  */
 AndroidHttpRequest.prototype.setRequestHeader = function(name, value) {
 	this.request.setRequestHeader(name, value);
 };
 
 /**
- * Запрос картинки у Android
- * 
- * @param address -
- *            адрес изображения
- * @param onimage -
- *            фукнция, возвращающая изображение base64
+ * Request image from Android
+ * @param address - image address
+ * @deprecated not working
  */
 AndroidHttpRequest.prototype.getImage = function(address) {
-
-	var self = this, send = function() {
-		self.sap.sendData(AndroidHttpRequest.NETWORK_CHANNEL_ID, JSON.stringify(self.request), send);
-	};
 	this.request = new AndroidRequestData();
 	this.request.address = address;
 	this.request.type = AndroidHttpRequest.IMAGE_TYPE;
-
-	this.sap.imageReceiveArray.push(function(j, data){
-		if (data.requestAddress === self.request.address){
-			self.sap.imageReceiveArray.splice(j, 1);
-			self.onreceive(AndroidHttpRequest.NETWORK_CHANNEL_ID, JSON.stringify(data));
-		}
-	});
-	/*this.sap.imageReceive = function(data){
-		self.onreceive(AndroidHttpRequest.NETWORK_CHANNEL_ID, );
-	};*/
-	/*this.sap.onnetreceive = function(channelId, data){
-		self.onreceive(channelId, data);
-	};*/
 	
-	send();
+	return this.sap.sendData(SAP.NETWORK_CHANNEL_ID, this.request.serialize());
 };
