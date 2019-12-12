@@ -56,13 +56,13 @@ Tiny wrapper around console. Just like android log syntax
 Wrapper around samsung accessory protocol. Android part codes I will add later. Utilizes connection, reconnection, sending data etc
 #### [More on wiki](https://github.com/RumataEstorish/TizenWearableWebCommon/wiki/SAP)
 
-### Utils
-Different methods, which can be helpful
-#### [More on wiki](https://github.com/RumataEstorish/TizenWearableWebCommon/wiki/Utils)
-
 ### GearHttp
 Network utilization module. It sends web requests through XMLHttpRequest for devices newer then Gear 2.0, for Gear 2.0 it passthrough requests through Android phone. You can always force traffic through Android via flag (can be useful when ssl sertificates don't work with particular watch model). It also needs Android part of code I'll share later
 #### [More on wiki](https://github.com/RumataEstorish/TizenWearableWebCommon/wiki/SAP#internet-handle-with-gearhttp)
+
+### Utils
+Different methods, which can be helpful
+#### [More on wiki](https://github.com/RumataEstorish/TizenWearableWebCommon/wiki/Utils)
 
 ### Input
 Draws input window and handles input from all watch generation. For Gear 2.0 it requires TypeGear app, for Gear S it draws rectangular window, for circle devices other shape :)
