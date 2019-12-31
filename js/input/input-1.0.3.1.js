@@ -2,6 +2,7 @@
 /*jslint laxbreak: true*/
 
 /**
+ * v1.0.3.1 watch active 2 input
  * v1.0.3.0 optimized input
  * v1.0.2.0 markup moved to code
  * v1.0.1.1 on resize inputField is set at beginning of method, check if inputField is empty on removeClass call
@@ -22,63 +23,45 @@
  *            Gear model. If no model, then Gear S2 by default
  */
 
-
 Input.SQUARE_STYLE = '<link rel="stylesheet" href="js/input/inputStyleSquare.css">';
 Input.CIRCLE_STYLE = '<link rel="stylesheet" media="all and (-tizen-geometric-shape: circle)" href="js/input/inputStyleCircle.css">';
 
-Input.SQUARE_INPUT_FIELD = 
-	'<div id="inputSquarePage" class="ui-page">' + 
-		'<div id="inputSquareContent" class="ui-content input-content">' + 
-			'<textarea id="inputSquareArea" class="input-area"></textarea>' +
-			'<input type="text" id="inputSquareAreaOneLine" class="input-area" />' +
-			'<button id="confirmButton" class="confirm-button"></button>' + 
-		'</div>' +
-		'<footer class="ui-footer ui-bottom-button ui-fixed" id="confirmFooter">' + 
-			'<button class="ui-btn ui-btn-icon-only confirm-button-footer"></button>' +
-		'</footer>' +
-	'</div>';
+Input.SQUARE_INPUT_FIELD = '<div id="inputSquarePage" class="ui-page">' + '<div id="inputSquareContent" class="ui-content input-content">' + '<textarea id="inputSquareArea" class="input-area"></textarea>'
+		+ '<input type="text" id="inputSquareAreaOneLine" class="input-area" />' + '<button id="confirmButton" class="confirm-button"></button>' + '</div>' + '<footer class="ui-footer ui-bottom-button ui-fixed" id="confirmFooter">'
+		+ '<button class="ui-btn ui-btn-icon-only confirm-button-footer"></button>' + '</footer>' + '</div>';
 
-Input.CIRCLE_INPUT_FIELD =
-	'<div id="inputCirclePage" class="ui-page">' + 
-		'<div class="ui-content">' + 
-			'<div id="inputContentCircle" class="input-content">' + 
-				'<textarea id="inputCircleArea" class="input-area"></textarea>' + 
-				'<input type="text" id="inputCircleAreaOneLine" class="input-area" />' + 
-				'<button id="confirmCircleButton" class="confirm-button"></button>' + 
-			'</div>' +
-		'</div>' +
-	'</div>';
-
+Input.CIRCLE_INPUT_FIELD = '<div id="inputCirclePage" class="ui-page">' + '<div class="ui-content">' + '<div id="inputContentCircle" class="input-content">' + '<textarea id="inputCircleArea" class="input-area"></textarea>'
+		+ '<input type="text" id="inputCircleAreaOneLine" class="input-area" />' + '<button id="confirmCircleButton" class="confirm-button"></button>' + '</div>' + '</div>' + '</div>';
 
 /**
  * Constructor of class Input
- * @param model - model of Gear. You can get it following way:
- * 	tizen.systeminfo.getPropertyValue('BUILD', function(res) {
-		model = res.model;
-	});
+ * 
+ * @param model -
+ *            model of Gear. You can get it following way:
+ *            tizen.systeminfo.getPropertyValue('BUILD', function(res) { model =
+ *            res.model; });
  */
 function Input(model) {
 
 	try {
-		
-		switch(Utils.getGearVersion(model)){
+
+		switch (Utils.getGearVersion(model)) {
 		case GearModel.GEAR_1:
 		case GearModel.GEAR_2:
 			break;
 		case GearModel.GEAR_S:
-			if (!$('#inputSquarePage').length){
+			if (!$('#inputSquarePage').length) {
 				$('head').append(Input.SQUARE_STYLE);
 				$('body').append(Input.SQUARE_INPUT_FIELD);
 			}
 			break;
-			default:
-				if (!$('#inputCirclePage').length){
-					$('head').append(Input.CIRCLE_STYLE);
-					$('body').append(Input.CIRCLE_INPUT_FIELD);
-					
-				}
+		default:
+			if (!$('#inputCirclePage').length) {
+				$('head').append(Input.CIRCLE_STYLE);
+				$('body').append(Input.CIRCLE_INPUT_FIELD);
+			}
 		}
-				
+
 		var self = this, height = window.innerHeight, mode = KeyboardModes.SINGLE_LINE;
 
 		this.oncancel = null;
@@ -169,46 +152,49 @@ function Input(model) {
 				alert(e);
 			}
 		});
-		
-		
-		var handleBack = function(e){
+
+		var handleBack = function(e) {
 			if (e.keyName === "back") {
 				if (Input.isInputPage()) {
 					self.cancel();
 				}
 			}
 		};
-		
 
 		$("#confirmButton").off("click");
 		$("#confirmFooter").off("click");
 		$("#confirmCircleButton").off("click");
 		$("#confirmCircleButton").show();
-		
-		$('#inputSquarePage').on('pageshow', function(){
-			document.addEventListener('tizenhwkey', handleBack);	
+
+		$('#inputContentCircle').off('click');
+		$('#inputCirclePage').off('pageshow');
+
+		$('#inputSquarePage').on('pageshow', function() {
+			document.addEventListener('tizenhwkey', handleBack);
 		});
-		
-		$('#inputCirclePage').on('pageshow', function(){
+
+		$('#inputCirclePage').on('pageshow', function() {
 			document.addEventListener('tizenhwkey', handleBack);
 		});
 		
-		$('#inputSquarePage').on('pagebeforehide', function(){
+		
+
+		$('#inputSquarePage').on('pagebeforehide', function() {
 			$('#inputCircleArea').off('keypress');
 			$('#inputCircleAreaOneLine').off('keypress');
 			$("#inputSquareAreaOneLine").off('keypress');
 			$("#inputSquareArea").off('keypress');
 			document.removeEventListener('tizenhwkey', handleBack);
 		});
-		
-		$('#inputCirclePage').on('pagebeforehide', function(){
+
+		$('#inputCirclePage').on('pagebeforehide', function() {
 			$('#inputCircleArea').off('keypress');
 			$('#inputCircleAreaOneLine').off('keypress');
 			$("#inputSquareAreaOneLine").off('keypress');
 			$("#inputSquareArea").off('keypress');
 			document.removeEventListener('tizenhwkey', handleBack);
 		});
-		
+
 	} catch (e) {
 		alert(e);
 	}
@@ -221,23 +207,20 @@ function Input(model) {
  * @returns $ object
  */
 Input.prototype.getInputField = function() {
-	try {
-		var page = Utils.getActivePage();
 
-		switch (this.mode) {
-		case KeyboardModes.NORMAL:
-			if (page === 'inputCirclePage') {
-				return $("#inputCircleArea");
-			}
-			return $("#inputSquareArea");
-		case KeyboardModes.SINGLE_LINE:
-			if (page === 'inputCirclePage') {
-				return $("#inputCircleAreaOneLine");
-			}
-			return $("#inputSquareAreaOneLine");
+	var page = Utils.getActivePage();
+
+	switch (this.mode) {
+	case KeyboardModes.NORMAL:
+		if (page === 'inputCirclePage') {
+			return $("#inputCircleArea");
 		}
-	} catch (e) {
-		alert(e);
+		return $("#inputSquareArea");
+	case KeyboardModes.SINGLE_LINE:
+		if (page === 'inputCirclePage') {
+			return $("#inputCircleAreaOneLine");
+		}
+		return $("#inputSquareAreaOneLine");
 	}
 };
 
@@ -266,7 +249,8 @@ Input.prototype.getText = function() {
 /**
  * Fires ontext event
  * 
- * @param t - text
+ * @param t -
+ *            text
  */
 Input.prototype.text = function(t) {
 	tau.back();
@@ -320,21 +304,48 @@ Input.prototype.open = function(text, placeholder, mode, ontext, oncancel, onerr
 		this.onerror = onerror;
 		this.oncancel = oncancel;
 
-		var processInputEnter = function(evt){
-			if (self.mode === KeyboardModes.SINGLE_LINE){
-				if (evt.which === 13){
+		var processInputEnter = function(evt) {
+
+			if (self.mode === KeyboardModes.SINGLE_LINE) {
+				if (evt.which === 13) {
 					self.getText();
+					return;
 				}
-			}			
+			}
+
+			switch (Utils.getGearVersion(self.model)) {
+			case GearModel.GEAR_WATCH_ACTIVE_2:
+
+				if (evt.which === 8) {
+					var text = self.getInputField().val();
+					if (text.length === 0) {
+						return;
+					}
+					self.getInputField().val(text.substring(0, text.length - 1));
+				} else {
+					self.getInputField().val(self.getInputField().val() + evt.key);
+				}
+
+				self.getInputField().putCursorAtEnd();
+			}
 		};
-		
-		
+
 		$('#inputCircleArea').keypress(processInputEnter);
 		$('#inputCircleAreaOneLine').keypress(processInputEnter);
 		$("#inputSquareAreaOneLine").keypress(processInputEnter);
 		$("#inputSquareArea").keypress(processInputEnter);
-				
-		
+
+		$('#inputContentCircle').on('click', function() {
+			switch (Utils.getGearVersion(self.model)) {
+			case GearModel.GEAR_WATCH_ACTIVE_2:
+				$('#inputCircleArea').focus();
+				setTimeout(function(){
+					self.getInputField().focus();
+				}, 1000);
+				break;
+			}
+		});
+
 		switch (model) {
 		case GearModel.GEAR_1:
 		case GearModel.GEAR_2:
@@ -346,7 +357,7 @@ Input.prototype.open = function(text, placeholder, mode, ontext, oncancel, onerr
 				$("#inputSquareAreaOneLine").hide();
 				$("#inputSquareArea").show();
 				$("#inputSquareArea").putCursorAtEnd();
-				$('#inputSquarePage').one('pageshow', function(){
+				$('#inputSquarePage').one('pageshow', function() {
 					$("#inputSquareArea").focus();
 				});
 				break;
@@ -354,7 +365,7 @@ Input.prototype.open = function(text, placeholder, mode, ontext, oncancel, onerr
 				$("#inputSquareAreaOneLine").show();
 				$("#inputSquareArea").hide();
 				$("#inputSquareAreaOneLine").putCursorAtEnd();
-				$('#inputSquarePage').one('pageshow', function(){
+				$('#inputSquarePage').one('pageshow', function() {
 					$("#inputSquareAreaOneLine").focus();
 				});
 				break;
@@ -376,16 +387,16 @@ Input.prototype.open = function(text, placeholder, mode, ontext, oncancel, onerr
 				$("#inputCircleAreaOneLine").hide();
 				$("#inputCircleArea").show();
 				$("#inputCircleArea").putCursorAtEnd();
-				$('#inputCirclePage').one('pageshow', function(){
+				$('#inputCirclePage').on('pageshow', function() {
 					$("#inputCircleArea").focus();
 				});
-				
+
 				break;
 			case KeyboardModes.SINGLE_LINE:
 				$("#inputCircleArea").hide();
 				$("#inputCircleAreaOneLine").show();
 				$("#inputCircleAreaOneLine").putCursorAtEnd();
-				$('#inputCirclePage').one('pageshow', function(){
+				$('#inputCirclePage').on('pageshow', function() {
 					$("#inputCircleAreaOneLine").focus();
 				});
 				break;
@@ -396,11 +407,9 @@ Input.prototype.open = function(text, placeholder, mode, ontext, oncancel, onerr
 			$("#confirmCircleButton").one("click", function() {
 				self.getText();
 			});
-			
-			
+
 			tau.changePage("inputCirclePage");
 
-			
 			break;
 		}
 	} catch (e) {

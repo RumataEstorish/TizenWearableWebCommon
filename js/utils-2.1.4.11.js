@@ -2,6 +2,11 @@
 /*jslint bitwise: true */
 
 /**
+ * v2.1.4.11 added gear watch active 2 models
+ * fixed putCursorAtEnd()
+ */
+
+/**
  * Date for filling date input box
  */
 Date.prototype.toDateInputValue = function() {
@@ -196,6 +201,7 @@ var GearModel = {
 	'GEAR_S3' : 4,
 	'GEAR_FIT2' : 5,
 	'GEAR_SPORT' : 6,
+	'GEAR_WATCH_ACTIVE_2' : 7,
 	properties : {
 		0 : {
 			name : "gear_1",
@@ -231,6 +237,11 @@ var GearModel = {
 			name : 'gear_sport',
 			value : 6,
 			code : 'gs'
+		},
+		7 : {
+			name : 'gear_watch_active_2',
+			value : 7,
+			code : 'ga2'
 		}
 	}
 };
@@ -251,30 +262,8 @@ $.fn.focusToEnd = function() {
 $.fn.putCursorAtEnd = function() {
 
 	return this.each(function() {
-
 		$(this).focus();
-
-		// If this function exists...
-		if (this.setSelectionRange) {
-			// ... then use it (Doesn't work in IE)
-
-			// Double the length because Opera is inconsistent about whether a carriage return is one character or two. Sigh.
-			var len = $(this).val().length * 2;
-
-			this.setSelectionRange(len, len);
-
-		} else {
-			// ... otherwise replace the contents with itself
-			// (Doesn't work in Google Chrome)
-
-			$(this).val($(this).val());
-
-		}
-
-		// Scroll to the bottom, in case we're in a tall textarea
-		// (Necessary for Firefox and Google Chrome)
-		this.scrollTop = 999999;
-
+		$(this).scrollLeft($(this)[0].scrollWidth);
 	});
 };
 
@@ -498,6 +487,9 @@ Utils.getGearVersion = function(model) {
 		return GearModel.GEAR_FIT2;
 	case "SM-R600":
 		return GearModel.GEAR_SPORT;
+	case "SM-R820":
+	case "SM-R830":
+		return GearModel.GEAR_WATCH_ACTIVE_2;
 	default:
 		return GearModel.GEAR_S3;
 	}
