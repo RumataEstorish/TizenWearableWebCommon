@@ -46,21 +46,21 @@ Input.CIRCLE_INPUT_FIELD = '<div id="inputGearPage" class="ui-page">' + '<div cl
 function Input(model) {
 
 	var gearModel = Utils.getGearVersion(model), self = this, height = window.innerHeight, mode = KeyboardModes.SINGLE_LINE, oncancel = null, ontext = null;
-	
+
 	Object.defineProperty(this, 'oncancel', {
-		get: function(){
+		get : function() {
 			return oncancel;
 		},
-		set: function(val){
+		set : function(val) {
 			oncancel = val;
 		}
 	});
-		
-	Object.defineProperty(this, 'ontext',{
-		get: function() {
+
+	Object.defineProperty(this, 'ontext', {
+		get : function() {
 			return ontext;
 		},
-		set: function(val){
+		set : function(val) {
 			ontext = val;
 		}
 	});
@@ -74,8 +74,13 @@ function Input(model) {
 
 	Object.defineProperty(this, "mode", {
 		get : function() {
-			if (gearModel === GearModel.GEAR_S) {
+			switch (gearModel) {
+			// Force single line for WatchActive 2 and Gear S due to Samsung's bugs
+			case GearModel.GEAR_WATCH_ACTIVE_2:
+			case GearModel.GEAR_S:
 				return KeyboardModes.SINGLE_LINE;
+			default:
+				return mode;
 			}
 			return mode;
 		},
@@ -319,13 +324,6 @@ Input.prototype.open = function(text, placeholder, mode, ontext, oncancel, onerr
 		$('#inputGearContent').css({
 			opacity : 0
 		});
-		// Force single line for Watch Active 2
-		this.mode = KeyboardModes.SINGLE_LINE;
-	}
-	
-	// Force single line for Gear S because of glitch
-	if (self.gearModel === GearModel.GEAR_S){
-		this.mode = KeyboardModes.SINGLE_LINE;
 	}
 
 	switch (self.gearModel) {
