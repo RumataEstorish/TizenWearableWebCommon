@@ -489,6 +489,8 @@ Utils.getGearVersion = function(model) {
 		return GearModel.GEAR_SPORT;
 	case "SM-R820":
 	case "SM-R830":
+	case "SM-R825":
+	case "SM-R835":
 		return GearModel.GEAR_WATCH_ACTIVE_2;
 	default:
 		return GearModel.GEAR_S3;
