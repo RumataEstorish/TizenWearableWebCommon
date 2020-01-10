@@ -76,7 +76,7 @@ function Input(model) {
 		get : function() {
 			switch (gearModel) {
 			// Force single line for WatchActive 2 and Gear S due to Samsung's bugs
-			case GearModel.GEAR_WATCH_ACTIVE_2:
+			// case GearModel.GEAR_WATCH_ACTIVE_2:
 			case GearModel.GEAR_S:
 				return KeyboardModes.SINGLE_LINE;
 			default:
@@ -169,22 +169,22 @@ function Input(model) {
 		}
 
 		if (window.innerHeight < self.windowStartHeight) {
-			if (self.gearModel === GearModel.GEAR_WATCH_ACTIVE_2) {
+			/*if (self.gearModel === GearModel.GEAR_WATCH_ACTIVE_2) {
 				$('#inputGearContent').css({
 					opacity : 1
 				});
-			}
+			}*/
 			inputField.addClass("input-area-active");
 
 		}
 		if (window.innerHeight >= self.windowStartHeight) {
 			if (inputField) {
-				if (self.gearModel === GearModel.GEAR_WATCH_ACTIVE_2) {
+				/*if (self.gearModel === GearModel.GEAR_WATCH_ACTIVE_2) {
 					$('#inputGearContent').css({
 						opacity : 0
 					});
 					self.cancel();
-				}
+				}*/
 				inputField.removeClass("input-area-active");
 			}
 		}
@@ -297,7 +297,7 @@ Input.prototype.open = function(text, placeholder, mode, ontext, oncancel, onerr
 		}
 
 		// Workaround for watch active 2
-		switch (self.gearModel) {
+		/*switch (self.gearModel) {
 		case GearModel.GEAR_WATCH_ACTIVE_2:
 			switch (evt.which) {
 			// Backspace
@@ -313,18 +313,18 @@ Input.prototype.open = function(text, placeholder, mode, ontext, oncancel, onerr
 				break;
 			}
 			self.inputField.putCursorAtEnd();
-		}
+		}*/
 	};
 
 	$('#inputGearArea').keypress(processInputEnter);
 	$('#inputGearAreaOneLine').keypress(processInputEnter);
 
 	// Workaround for Watch Active 2
-	if (self.gearModel === GearModel.GEAR_WATCH_ACTIVE_2) {
+	/*if (self.gearModel === GearModel.GEAR_WATCH_ACTIVE_2) {
 		$('#inputGearContent').css({
 			opacity : 0
 		});
-	}
+	}*/
 
 	switch (self.gearModel) {
 	case GearModel.GEAR_1:
