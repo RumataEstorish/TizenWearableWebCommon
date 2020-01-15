@@ -38,6 +38,8 @@ Different click events around item (probably list item). Supports click, click h
 ### SwipeList
 Tiny wrapper around system swipe list
 
+#### [More on wiki](https://github.com/RumataEstorish/TizenWearableWebCommon/wiki/SwipeList)
+
 ### ToastMessage
 Tiny wrapper around system toast
 
