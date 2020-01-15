@@ -2,6 +2,8 @@
 /*jslint laxbreak: true*/
 
 /* 
+ * v 2.0.3.3
+ * added SAP.LOCATION_ERROR_CODES constants
  * v 2.0.3.2
  * added SAP.GET_LOCATION_CANCELLED constant
  * v 2.0.3.1
@@ -76,6 +78,16 @@ SAP.GET_LOCATION = 'GET_LOCATION';
  * @since v2.0.3.2
  */
 SAP.GET_LOCATION_CANCELLED = 'GET_LOCATION_CANCELLED';
+
+/**
+ * Location error codes
+ * @since v2.0.3.3 
+ */
+SAP.LOCATION_ERROR_CODES = {
+	PERMISSION_DENIED : 1,
+	POSITION_UNAVAILABLE : 2,
+	TIMEOUT : 3
+};
 
 /** ************System channels************* */
 /**
