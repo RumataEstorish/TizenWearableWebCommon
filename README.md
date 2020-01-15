@@ -38,6 +38,9 @@ Different click events around item (probably list item). Supports click, click h
 ### SwipeList
 Tiny wrapper around system swipe list
 
+![SwipeList left](/screenshots/swipeListLeft.png)
+![SwipeList right](/screenshots/swipeListRight.png)
+
 #### [More on wiki](https://github.com/RumataEstorish/TizenWearableWebCommon/wiki/SwipeList)
 
 ### ToastMessage
