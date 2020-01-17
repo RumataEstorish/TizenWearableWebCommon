@@ -2,6 +2,10 @@
 /*jslint laxbreak: true*/
 
 /* 
+ * v 2.0.3.4
+ * fixed openLink
+ * deprecated openPhoneApp
+ * when PEER_DISCONNECTED socket status, close everything to allow reconnect
  * v 2.0.3.3
  * added SAP.LOCATION_ERROR_CODES constants
  * v 2.0.3.2
@@ -358,12 +362,14 @@ SAP.prototype.close = function() {
 
 /**
  * Send request to open host app
+ * @Deprecated not applied to Android 10 anymore
+ * @See https://developer.android.com/guide/components/activities/background-starts
  */
 SAP.prototype.openPhoneApp = function() {
 	var data = {
 		name : SAP.OPEN_APP
 	};
-	this.saSocket.sendData(SAP.SERVICE_CHANNEL_ID, JSON.stringify(data));
+	return this.sendData(SAP.SERVICE_CHANNEL_ID, JSON.stringify(data));
 };
 
 /**
@@ -375,7 +381,7 @@ SAP.prototype.openLinkOnPhone = function(url) {
 		name : SAP.OPEN_LINK,
 		value : url
 	};
-	this.saSocket.sendData(SAP.SERVICE_CHANNEL_ID, JSON.stringify(data));
+	return this.sendData(SAP.SERVICE_CHANNEL_ID, JSON.stringify(data));
 };
 
 /**
@@ -464,7 +470,7 @@ SAP.prototype.getLocation = function(forceAcquireFromPhone){
  */
 SAP.prototype.connect = function() {
 	var self = this, d = $.Deferred(),
-	
+		
 	onReceive = function(channelId, data){
 		var res = null;
 
@@ -554,6 +560,9 @@ SAP.prototype.connect = function() {
 
 			self.saSocket.setSocketStatusListener(function(reason) {
 				Log.d("SOCKET STATUS: " + reason);
+				if (reason === 'PEER_DISCONNECTED'){
+					self.close();
+				}
 				d.reject(SAP.ERRORS.SOCKET_CLOSED);
 			});
 			self.saSocket.setDataReceiveListener(function(channelId, data) {
@@ -575,7 +584,9 @@ SAP.prototype.connect = function() {
 	}
 
 	if (self.saAgent && !self.isConnected) {
+		self.saAgent.setServiceConnectionListener(agentCallback);
 		self.saAgent.setPeerAgentFindListener(peerAgentFindCallback);
+		self.fileTransfer = self.saAgent.getSAFileTransfer();
 		self.saAgent.findPeerAgents();
 		return d.promise();
 	}
