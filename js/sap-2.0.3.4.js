@@ -119,7 +119,6 @@ SAP.RECONNECT_TIMEOUT = 5000;
  * Constructor of SAP class
  * @param providerName - name of host app
  * @param onReceive - on receive from host callback (function(channelId, data))
- * @param 
  */
 function SAP(providerName, onReceive) {
 	var fileReceiveCallback = null, fileSendCallback = null, saSocket = null, peerAgent = null, deviceAttached = false, connectOnDeviceNotConnected = false, fileOrder = [], fileTransfer = null, receiveListeners = [], saAgent = null, _onreceive = onReceive, onnetreceive = null, onImageReceive = null,
@@ -333,8 +332,7 @@ SAP.prototype.close = function() {
 	if (SAP.tempFolder) {
 		try {
 			SAP.tempFolder.listFiles(function(files) {
-				var i = 0;
-				for (i = files.length - 1; i >= 0; i--) {
+				for (var i = files.length - 1; i >= 0; i--) {
 					try {
 						if (files[i].isDirectory) {
 							SAP.tempFolder.deleteDirectory(files[i].toURI(), true, function() {
