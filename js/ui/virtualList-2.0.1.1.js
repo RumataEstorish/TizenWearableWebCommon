@@ -1,4 +1,4 @@
-/*global $, tau, Log, Utils*/
+/*global $, tau, Utils*/
 /*jshint unused: false*/
 /*jslint laxbreak: true*/
 
@@ -36,7 +36,6 @@ function VirtualList(pageName, listName, dataLength, procFunc) {
 		});
 	},
 	create = function() {
-		Log.debug('vList create at: ' + Utils.getActivePage());
 		var list = $(self.listName);
 			list.empty();
 			
@@ -62,7 +61,6 @@ function VirtualList(pageName, listName, dataLength, procFunc) {
 		
 		self.page.off('pagebeforeshow', create);
 		self.page.off('pagehide', destroy);
-		Log.debug('vList destroy');
 		if (self.vList) {
 			try {
 				self.vList.setListItemUpdater(null);
