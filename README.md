@@ -38,6 +38,11 @@ Different click events around item (probably list item). Supports click, click h
 ### SwipeList
 Tiny wrapper around system swipe list
 
+![SwipeList left](/screenshots/swipeListLeft.png)
+![SwipeList right](/screenshots/swipeListRight.png)
+
+#### [More on wiki](https://github.com/RumataEstorish/TizenWearableWebCommon/wiki/SwipeList)
+
 ### ToastMessage
 Tiny wrapper around system toast
 
@@ -65,7 +70,7 @@ Different methods, which can be helpful
 #### [More on wiki](https://github.com/RumataEstorish/TizenWearableWebCommon/wiki/Utils)
 
 ### Input
-Draws input window and handles input from all watch generation. For Gear 2.0 it requires TypeGear app, for Gear S it draws rectangular window, for circle devices other shape :)
+Draws input window and handles input from all watch generation. For Gear 1,2 it requires TypeGear app, for Gear S it draws rectangular window, for circle devices other shape :)
 
 ![Input](/screenshots/input.png)
 

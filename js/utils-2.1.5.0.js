@@ -1,7 +1,10 @@
-/*global $, tau*/
+/*global $, tau, tizen*/
 /*jslint bitwise: true */
 
 /**
+ * v2.1.5.0
+ * lint fixes,
+ * added comparePath
  * v2.1.4.11 added gear watch active 2 models
  * fixed putCursorAtEnd()
  */
@@ -17,7 +20,7 @@ Date.prototype.toDateInputValue = function() {
 
 /**
  * Date and time for display without year
- * @returns dd.mm hh:MM, mm and MM with leading zero
+ * @returns string hh:MM, mm and MM with leading zero
  */
 Date.prototype.toDisplayDateTime = function() {
 	return this.toDisplayDate() + " " + this.toDisplayTime();
@@ -25,7 +28,7 @@ Date.prototype.toDisplayDateTime = function() {
 
 /**
  * Time for display without seconds
- * @returns time in hh:mm and minutes with leading zero
+ * @returns string in hh:mm and minutes with leading zero
  */
 Date.prototype.toDisplayTime = function() {
 	return this.getHours() + ":" + (this.getMinutes() < 10 ? "0" + this.getMinutes() : this.getMinutes());
@@ -33,16 +36,15 @@ Date.prototype.toDisplayTime = function() {
 
 /**
  * Date for display without year
- * @returns date in dd.mm and month with leading zero
+ * @returns string in dd.mm and month with leading zero
  */
 Date.prototype.toDisplayDate = function() {
-	"use strict";
 	return this.getDate() + "." + (this.getMonth() < 9 ? "0" + (this.getMonth() + 1) : this.getMonth() + 1);
 };
 
 /**
  * Date to string
- * @returns YYYY-MM-DD
+ * @returns string YYYY-MM-DD
  */
 Date.prototype.toYYYYMMDD = function(){
 	var month = (this.getMonth() + 1), date = this.getDate();
@@ -58,7 +60,7 @@ Date.prototype.toYYYYMMDD = function(){
 
 /**
  * Date to UTC. 
- * @returns YYYY-MM-DDTHH:MM
+ * @returns string YYYY-MM-DDTHH:MM
  */
 Date.prototype.toYYYYMMDDTHHMM = function(){
 	var minutes = this.getMinutes(), hours = this.getHours();
@@ -74,7 +76,7 @@ Date.prototype.toYYYYMMDDTHHMM = function(){
 
 /**
  * Date to UTC. 
- * @returns YYYY-MM-DDTHH:MM:SS
+ * @returns string YYYY-MM-DDTHH:MM:SS
  */
 Date.prototype.toYYYYMMDDTHHMMSS = function(){
 	var minutes = this.getMinutes(), hours = this.getHours(), seconds = this.getSeconds();
@@ -96,7 +98,7 @@ Date.prototype.toYYYYMMDDTHHMMSS = function(){
 
 /**
  * Time for display without seconds
- * @returns time in hh:mm and minutes with leading zero
+ * @returns string time in hh:mm and minutes with leading zero
  */
 tizen.TZDate.prototype.toDisplayTime = function(){
 	return this.getHours() + ":" + (this.getMinutes() < 10 ? "0" + this.getMinutes() : this.getMinutes());
@@ -104,7 +106,7 @@ tizen.TZDate.prototype.toDisplayTime = function(){
 
 /**
  * Date for display without year
- * @returns date in dd.mm and month with leading zero
+ * @returns string date in dd.mm and month with leading zero
  */
 tizen.TZDate.prototype.toDisplayDate = function() {
 	return this.getDate() + "." + (this.getMonth() < 9 ? "0" + (this.getMonth() + 1) : this.getMonth() + 1);
@@ -113,7 +115,7 @@ tizen.TZDate.prototype.toDisplayDate = function() {
 
 /**
  * Date to string.
- * @returns YYYY-MM-DD
+ * @returns string YYYY-MM-DD
  */
 tizen.TZDate.prototype.toYYYYMMDD = function(){
 	var month = (this.getMonth() + 1), date = this.getDate();
@@ -129,7 +131,7 @@ tizen.TZDate.prototype.toYYYYMMDD = function(){
 
 /**
  * Date to string. 
- * @returns YYYY-MM-DDThh:mm
+ * @returns string YYYY-MM-DDThh:mm
  */
 tizen.TZDate.prototype.toYYYYMMDDTHHMM = function(){
 	var minutes = this.getMinutes(), hours = this.getHours();
@@ -146,7 +148,7 @@ tizen.TZDate.prototype.toYYYYMMDDTHHMM = function(){
 
 /**
  * Date to string. 
- * @returns YYYY-MM-DDThh:mm:ss
+ * @returns string YYYY-MM-DDThh:mm:ss
  */
 tizen.TZDate.prototype.toYYYYMMDDTHHMMSS = function() {
 	var minutes = this.getMinutes(), hours = this.getHours(), seconds = this.getSeconds();
@@ -166,7 +168,7 @@ tizen.TZDate.prototype.toYYYYMMDDTHHMMSS = function() {
 
 /**
  * Date and time for display without year
- * @returns dd.mm hh:MM, mm and MM with leading zero
+ * @returns string dd.mm hh:MM, mm and MM with leading zero
  */
 tizen.TZDate.prototype.toDisplayDateTime = function() {
 	return this.toDisplayDate() + " " + this.toDisplayTime();
@@ -268,7 +270,6 @@ $.fn.putCursorAtEnd = function() {
 };
 
 function Utils() {
-	this.temp = null;
 }
 
 Utils.AUDIO_MIME = "audio/*";
@@ -280,7 +281,7 @@ Utils.TEXT_MIME = "text/*";
 
 /**
  * Get file name without extension from path
- * @param full file name with extension
+ * @param fileName full file name with extension
  * @returns file name without extension
  */
 Utils.getFileNameWithoutExtension = function(fileName) {
@@ -289,7 +290,7 @@ Utils.getFileNameWithoutExtension = function(fileName) {
 
 /**
  * Get file name with extension from path
- * @param full file name
+ * @param fileName full file name
  * @returns file name with extension
  */
 Utils.getFileName = function(fileName) {
@@ -298,8 +299,8 @@ Utils.getFileName = function(fileName) {
 
 /**
  * Get file extension
- * @param file name
- * @returns file extension
+ * @param fname file name
+ * @returns string file extension
  */
 Utils.getFileExtension = function(fname) {
 	return fname.substr((~-fname.lastIndexOf(".") >>> 0) + 2).toLowerCase();
@@ -376,15 +377,16 @@ Utils.createIndexScrollBar = function(indexPage, indexScrollBar, listName) {
 
 /**
  * Generate random UUID
- * @returns UUID
+ * @returns string UUID
  */
 Utils.generateUUID = function() {
-	var d = new Date().getTime(), uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+	var d = new Date().getTime();
+
+	return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
 		var r = (d + Math.random() * 16) % 16 | 0;
 		d = Math.floor(d / 16);
 		return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
 	});
-	return uuid;
 };
 
 /**
@@ -441,8 +443,8 @@ Utils.appendHtmlAtCaret = function(html, selectPastedContent) {
 
 /**
  * Gets random integer number between min and max
- * @param minimum value
- * @param maximum value
+ * @param min value
+ * @param max value
  * @returns random integer number
  */
 Utils.getRandomInt = function(min, max) {
@@ -451,7 +453,7 @@ Utils.getRandomInt = function(min, max) {
 
 /**
  * Get gear version
- * @param current gear model
+ * @param model of gear
  * @returns GearModel enum value
  */
 Utils.getGearVersion = function(model) {
@@ -499,8 +501,8 @@ Utils.getGearVersion = function(model) {
 
 /**
  * Check if GearS+
- * @param current model of Gear
- * @returns true if GearS+ models or false if older
+ * @param model of Gear
+ * @returns boolean true if GearS+ models or false if older
  */
 Utils.isNewGear = function(model) {
 	switch (Utils.getGearVersion(model)) {
@@ -525,7 +527,7 @@ Utils.getActivePage = function() {
 /**
  * Convert bytes to size
  * @param bytes to convert
- * @returns size + dimension
+ * @returns string size + dimension
  */
 Utils.bytesToSize = function(bytes) {
 	var k = 1000, sizes = [ 'Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB' ], i = 0;
@@ -538,8 +540,8 @@ Utils.bytesToSize = function(bytes) {
 
 /**
  * Check if object is string
- * @param object to check
- * @returns true if string, false if not
+ * @param o object to check
+ * @returns boolean if string, false if not
  */
 Utils.isString = function(o) {
 	return typeof o === "string" || (typeof o === "object" && o.constructor === String);
@@ -559,7 +561,7 @@ Utils.dynamicSort = function(property) {
 		property = property.substr(1);
 	}
 	return function(a, b) {
-		var result = null;
+		var result;
 		if (Utils.isString(a[property]) && Utils.isString(b[property])) {
 			result = (a[property].toLowerCase() < b[property].toLowerCase()) ? -1 : (a[property].toLowerCase() > b[property].toLowerCase()) ? 1 : 0;
 		} else {
@@ -598,20 +600,17 @@ Utils.dynamicSortMultiple = function() {
 /**
  * String startsWith extension
  * @param s - substring to test
- * @returns true when starts, false when not
+ * @returns boolean when starts, false when not
  */
 String.prototype.startsWith = function(s) {
-	if (this.indexOf(s) === 0) {
-		return true;
-	}
-	return false;
+	return this.indexOf(s) === 0;
 };
 
 /**
  * Converts string to boolean
  * @param val - string value to convert
  * @param defaultVal - default value when incorrect string. 
- * @returns - defaultVal if val not bool
+ * @returns boolean|object defaultVal if val not bool
  */
 Utils.stringToBoolean = function(val, defaultVal) {
     if (val === true || val === false){
@@ -708,9 +707,19 @@ Utils.getMime = function(fileName) {
 /**
  * Generate hashcode from string
  * @param s - source string
- * @returns hashcode
+ * @returns number hashcode
  */
 Utils.hashCode = function(s){
-	  return s.split("").reduce(function(a,b){a=((a<<5)-a)+b.charCodeAt(0);return a&a;},0);              
-	};
+  return s.split("").reduce(function(a,b){a=((a<<5)-a)+b.charCodeAt(0);return a&a;},0);              
+};
+	
+/**
+ * Compare paths regarding slash
+ * @param source - source path
+ * @param destin - destin path
+ * @returns boolean true if paths points same file, false if not
+ */
+Utils.comparePath = function(source, destin){
+	return source === destin || (source + '\'') === destin || (source + '/') === destin || (destin + '/') === source || (destin + '\'') === source;
+};
 	

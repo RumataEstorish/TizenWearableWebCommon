@@ -1,10 +1,14 @@
-/*global $, ActionMenu, ToastMessage, Input, KeyboardModes, tau*/
+/*global $, ActionMenu, ToastMessage, Input, KeyboardModes, tau, Utils, SwipeList, tizen*/
 /*jshint unused: false*/
 /*jslint laxbreak: true*/
 
 var actionMenu = null;
 var toastMessage = null;
 var model = null;
+
+function showSwipeList(){
+	tau.changePage('#swipeListPage');
+}
 
 function showActionMenu() {
 	actionMenu.show();
@@ -29,11 +33,11 @@ function showInput() {
 		} else {
 			alert(e);
 		}
-		
+
 	});
 }
 
-function showMultilineInput(){
+function showMultilineInput() {
 	var input = new Input(model);
 
 	input.open('', 'Input text', KeyboardModes.NORMAL, function(txt) {
@@ -48,7 +52,7 @@ function showMultilineInput(){
 		} else {
 			alert(e);
 		}
-		
+
 	});
 }
 
@@ -81,6 +85,11 @@ $(window).on('load', function() {
 
 	initActionMenu();
 	toastMessage = new ToastMessage('popupToast', 'popupToastContent');
+	new SwipeList('swipeListPage', function(evt) {
+		alert('Swipe left: ' + evt.target.id);
+	}, function(evt) {
+		alert('Swipe right: ' + evt.target.id);
+	});
 
 	tizen.systeminfo.getPropertyValue("BUILD", function(res) {
 		model = res.model;
@@ -96,17 +105,13 @@ $(window).on('load', function() {
 				return;
 			}
 
-			activePopup = document.querySelector(".ui-popup-active");
-			page = document.getElementsByClassName("ui-page-active")[0];
-			pageid = page ? page.id : "";
-
-			if (pageid === "main" && !activePopup) {
-				try {
-					tizen.application.getCurrentApplication().exit();
-				} catch (ignore) {
-				}
-			} else {
-				window.history.back();
+			switch (Utils.getActivePage()) {
+			case 'main':
+				tizen.application.getCurrentApplication().exit();
+				break;
+			case 'swipeListPage':
+				tau.changePage('#main');
+				break;
 			}
 		}
 	});

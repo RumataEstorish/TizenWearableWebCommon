@@ -1,25 +1,15 @@
 .ui-swipelist-left .ui-swipelist-icon {
-  /*
-	Icon and text need to set position or url and so on.
-	We thought that swipelist's content style need to be implemented by developer wanted.
-	*/
   -webkit-mask-image: url('../images/checkmark.png');
   -moz-mask-image:  url('../images/checkmark.png');
   -ms-mask-image:  url('../images/checkmark.png');
   -o-mask-image:  url('../images/checkmark.png');
-  /*mask-image:  url('../images/checkmark.png');*/
 }
 
 .ui-swipelist-right .ui-swipelist-icon {
-  /*
-	Icon and text need to set position or url and so on.
-	We thought that swipelist's content style need to be implemented by developer wanted.
-	*/
   -webkit-mask-image: url('../images/schedule.png');
   -moz-mask-image:  url('../images/schedule.png');
   -ms-mask-image:  url('../images/schedule.png');
   -o-mask-image:  url('../images/schedule.png');
-  /*mask-image:  url('../images/schedule.png');*/
 }
 .content-padding {
 	padding-top: 16px;

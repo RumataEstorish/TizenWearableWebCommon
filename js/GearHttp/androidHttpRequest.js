@@ -11,9 +11,10 @@ AndroidHttpRequest.IMAGE_TYPE = "IMAGE";
  */
 function AndroidHttpRequest(sap) {
 
-	var onreadystatechange = null, status = 0, readyState = 0, image = null, requestAddress = null, request = new AndroidRequestData(), responseText = null, sapPreviousConnectOnNotConnected = sap.connectOnDeviceNotConnected, 
+	var onreadystatechange = null, status = 0, readyState = 0, image = null, request = new AndroidRequestData(), responseText = null, sapPreviousConnectOnNotConnected = sap.connectOnDeviceNotConnected, 
 	
 	onreceive = function(channelId, data){
+				
 		//Skip useless info
 		if (channelId !== SAP.NETWORK_CHANNEL_ID) {
 			return;
@@ -25,7 +26,7 @@ function AndroidHttpRequest(sap) {
 		status = res.status;
 		readyState = res.readyState;
 		responseText = res.responseText;
-		requestAddress = res.requestAddress;
+		request.address = res.requestAddress;
 		onreadystatechange();
 		sap.connectOnDeviceNotConnected = sapPreviousConnectOnNotConnected;
 	};
@@ -54,9 +55,9 @@ function AndroidHttpRequest(sap) {
 		}
 	});
 	
-	Object.defineProperty(this, 'requestAddress', {
+	Object.defineProperty(this, 'address', {
 		get: function(){
-			return requestAddress;
+			return request.address;
 		}
 	});
 	
