@@ -1,7 +1,9 @@
 /*global Log, $*/
 /*jslint laxbreak: true*/
 
-/* 
+/*
+ * v 2.0.3.5
+ * ref from IntelliJ Idea warnings
  * v 2.0.3.4
  * fixed openLink
  * deprecated openPhoneApp
@@ -210,7 +212,7 @@ function SAP(providerName, onReceive) {
 	 */
 	Object.defineProperty(this, 'isConnected', {
 		get : function() {
-			return (this.peerAgent ? true : false) && (this.saSocket ? true : false);
+			return this.peerAgent && this.saSocket;
 		}
 	});
 
@@ -358,6 +360,7 @@ SAP.prototype.close = function() {
 
 };
 
+// noinspection JSUnusedGlobalSymbols
 /**
  * Send request to open host app
  * @Deprecated not applied to Android 10 anymore
@@ -370,6 +373,7 @@ SAP.prototype.openPhoneApp = function() {
 	return this.sendData(SAP.SERVICE_CHANNEL_ID, JSON.stringify(data));
 };
 
+// noinspection JSUnusedGlobalSymbols
 /**
  * Send request to open link on phone
  * @param url - url to open
@@ -423,7 +427,7 @@ SAP.prototype.sendFile = function(path) {
 /**
  * Get location. If watch don't have navigator.geolocation, then request from phone.
  * @returns promise and position object:
-{
+ {
   	coords.latitude 	// The latitude as a decimal number (always returned)
 	coords.longitude 	// The longitude as a decimal number (always returned)
 	coords.accuracy 	// The accuracy of position (always returned)
@@ -434,7 +438,7 @@ SAP.prototype.sendFile = function(path) {
 	timestamp // The date/time of the response (returned if available)
 }
  @since v2.0.3.0
- @param force aquire location from phone
+ * @param forceAcquireFromPhone force acquire from phone, not from watch
  */
 SAP.prototype.getLocation = function(forceAcquireFromPhone){
 	var d = $.Deferred();
@@ -456,7 +460,7 @@ SAP.prototype.getLocation = function(forceAcquireFromPhone){
 				d.reject(position);
 			}			
 		}; 
-		this.sendData(SAP.LOCATION_CHANNEL_ID, SAP.GET_LOCATION);
+		this.sendData(SAP.LOCATION_CHANNEL_ID, SAP.GET_LOCATION).then(function(){});
 	}
 	
 	return d.promise();
@@ -467,6 +471,7 @@ SAP.prototype.getLocation = function(forceAcquireFromPhone){
  * @returns promise. Resolved when connected, rejected when cannot connect
  */
 SAP.prototype.connect = function() {
+	// noinspection JSUnusedGlobalSymbols
 	var self = this, d = $.Deferred(),
 		
 	onReceive = function(channelId, data){
@@ -590,6 +595,7 @@ SAP.prototype.connect = function() {
 	}
 
 	try {
+		// noinspection JSUnresolvedVariable
 		webapis.sa.requestSAAgent(function(agents) {
 			if (!agents || agents.length === 0) {
 				d.reject(SAP.ERRORS.NO_AGENTS_FOUND);
@@ -624,10 +630,9 @@ SAP.prototype.connect = function() {
 
 			self.fileTransfer.setFileReceiveListener({
 				onreceive : function(id, fileName) {
+					Log.d('SAP.fileTransfer.onreceive: ' + id + ' => ' + fileName);
 
-					var i = 0;
-
-					for (i = 0; i < self.fileOrder.length; i++) {
+					for (var i = 0; i < self.fileOrder.length; i++) {
 						if (self.fileOrder[i].fileName === fileName) {
 							self.fileOrder[i].id = id;
 							self.fileOrder[i].filePath = SAP.tempFolder.toURI() + '/' + fileName;
@@ -642,8 +647,7 @@ SAP.prototype.connect = function() {
 
 				},
 				onprogress : function(id, progress) {
-					var i = 0;
-					for (i = 0; i < self.fileOrder.length; i++) {
+					for (var i = 0; i < self.fileOrder.length; i++) {
 						if (self.fileOrder[i].id === id) {
 							return;
 						}
@@ -653,8 +657,7 @@ SAP.prototype.connect = function() {
 					}
 				},
 				oncomplete : function(id, localPath) {
-					var i = 0;
-					for (i = 0; i < self.fileOrder.length; i++) {
+					for (var i = 0; i < self.fileOrder.length; i++) {
 						if (self.fileOrder[i].id === id) {
 							if (self.onImageReceive) {
 								self.onImageReceive(self.fileOrder[i]);
@@ -681,6 +684,7 @@ SAP.prototype.connect = function() {
 			d.reject(err);
 		});
 
+		// noinspection JSUnresolvedVariable
 		webapis.sa.setDeviceStatusListener(function(type, status) {
 			switch (status) {
 			case 'ATTACHED':

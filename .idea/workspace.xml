@@ -35,16 +35,41 @@
       <workItem from="1587587789347" duration="69000" />
       <workItem from="1587587888404" duration="147000" />
       <workItem from="1587588052722" duration="2000" />
+      <workItem from="1589810241083" duration="366000" />
     </task>
+    <task id="LOCAL-00001" summary="IJ files">
+      <created>1589810274147</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1589810274147</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="2" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="IJ files" />
+    <option name="LAST_COMMIT_MESSAGE" value="IJ files" />
+  </component>
   <component name="WindowStateProjectService">
+    <state x="2321" y="82" key="CommitChangelistDialog2" timestamp="1589810272659">
+      <screen x="1920" y="0" width="1680" height="1010" />
+    </state>
+    <state x="2321" y="82" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1680.1010@1920.0.1680.1010" timestamp="1589810272659" />
     <state x="2540" y="259" key="FileChooserDialogImpl" timestamp="1587587854080">
       <screen x="1920" y="0" width="1680" height="1010" />
     </state>
     <state x="2540" y="259" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1680.1010@1920.0.1680.1010" timestamp="1587587854080" />
+    <state x="2648" y="372" width="389" height="265" key="MultipleFileMergeDialog" timestamp="1589810287098">
+      <screen x="1920" y="0" width="1680" height="1010" />
+    </state>
+    <state x="2648" y="372" width="389" height="265" key="MultipleFileMergeDialog/0.0.1920.1040/1920.0.1680.1010@1920.0.1680.1010" timestamp="1589810287098" />
+    <state x="2569" y="418" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1589810291882">
+      <screen x="1920" y="0" width="1680" height="1010" />
+    </state>
+    <state x="2569" y="418" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040/1920.0.1680.1010@1920.0.1680.1010" timestamp="1589810291882" />
   </component>
 </project>
