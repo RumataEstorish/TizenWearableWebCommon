@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bfbdc1c4-cb00-49af-a2ea-77c16ffcfe13" name="Default Changelist" comment="" />
+    <list default="true" id="bfbdc1c4-cb00-49af-a2ea-77c16ffcfe13" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,7 +22,12 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/js" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Rumata\Projects\Gear\TizenWearableWebCommon\js" />
+    </key>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -35,7 +42,8 @@
       <workItem from="1587587789347" duration="69000" />
       <workItem from="1587587888404" duration="147000" />
       <workItem from="1587588052722" duration="2000" />
-      <workItem from="1589810241083" duration="366000" />
+      <workItem from="1589810241083" duration="619000" />
+      <workItem from="1591281938423" duration="28000" />
     </task>
     <task id="LOCAL-00001" summary="IJ files">
       <created>1589810274147</created>
@@ -44,7 +52,14 @@
       <option name="project" value="LOCAL" />
       <updated>1589810274147</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Ref SAP from IJ warnings">
+      <created>1589810779671</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1589810779671</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -52,13 +67,14 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="IJ files" />
-    <option name="LAST_COMMIT_MESSAGE" value="IJ files" />
+    <MESSAGE value="Ref SAP from IJ warnings" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ref SAP from IJ warnings" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="2321" y="82" key="CommitChangelistDialog2" timestamp="1589810272659">
+    <state x="2321" y="82" key="CommitChangelistDialog2" timestamp="1589810778847">
       <screen x="1920" y="0" width="1680" height="1010" />
     </state>
-    <state x="2321" y="82" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1680.1010@1920.0.1680.1010" timestamp="1589810272659" />
+    <state x="2321" y="82" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1680.1010@1920.0.1680.1010" timestamp="1589810778847" />
     <state x="2540" y="259" key="FileChooserDialogImpl" timestamp="1587587854080">
       <screen x="1920" y="0" width="1680" height="1010" />
     </state>
@@ -67,6 +83,10 @@
       <screen x="1920" y="0" width="1680" height="1010" />
     </state>
     <state x="2648" y="372" width="389" height="265" key="MultipleFileMergeDialog/0.0.1920.1040/1920.0.1680.1010@1920.0.1680.1010" timestamp="1589810287098" />
+    <state x="2352" y="237" key="Vcs.Push.Dialog.v2" timestamp="1589810807984">
+      <screen x="1920" y="0" width="1680" height="1010" />
+    </state>
+    <state x="2352" y="237" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1680.1010@1920.0.1680.1010" timestamp="1589810807984" />
     <state x="2569" y="418" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1589810291882">
       <screen x="1920" y="0" width="1680" height="1010" />
     </state>
