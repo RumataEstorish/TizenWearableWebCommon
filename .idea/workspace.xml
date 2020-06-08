@@ -44,6 +44,8 @@
       <workItem from="1587588052722" duration="2000" />
       <workItem from="1589810241083" duration="619000" />
       <workItem from="1591281938423" duration="28000" />
+      <workItem from="1591381513556" duration="219000" />
+      <workItem from="1591620670346" duration="57000" />
     </task>
     <task id="LOCAL-00001" summary="IJ files">
       <created>1589810274147</created>
@@ -59,7 +61,14 @@
       <option name="project" value="LOCAL" />
       <updated>1589810779671</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Input clean up">
+      <created>1591381547425</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1591381547425</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -68,13 +77,14 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="IJ files" />
     <MESSAGE value="Ref SAP from IJ warnings" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ref SAP from IJ warnings" />
+    <MESSAGE value="Input clean up" />
+    <option name="LAST_COMMIT_MESSAGE" value="Input clean up" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="2321" y="82" key="CommitChangelistDialog2" timestamp="1589810778847">
+    <state x="2321" y="82" key="CommitChangelistDialog2" timestamp="1591381546627">
       <screen x="1920" y="0" width="1680" height="1010" />
     </state>
-    <state x="2321" y="82" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1680.1010@1920.0.1680.1010" timestamp="1589810778847" />
+    <state x="2321" y="82" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1680.1010@1920.0.1680.1010" timestamp="1591381546627" />
     <state x="2540" y="259" key="FileChooserDialogImpl" timestamp="1587587854080">
       <screen x="1920" y="0" width="1680" height="1010" />
     </state>
@@ -83,10 +93,10 @@
       <screen x="1920" y="0" width="1680" height="1010" />
     </state>
     <state x="2648" y="372" width="389" height="265" key="MultipleFileMergeDialog/0.0.1920.1040/1920.0.1680.1010@1920.0.1680.1010" timestamp="1589810287098" />
-    <state x="2352" y="237" key="Vcs.Push.Dialog.v2" timestamp="1589810807984">
+    <state x="2352" y="237" key="Vcs.Push.Dialog.v2" timestamp="1591381549438">
       <screen x="1920" y="0" width="1680" height="1010" />
     </state>
-    <state x="2352" y="237" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1680.1010@1920.0.1680.1010" timestamp="1589810807984" />
+    <state x="2352" y="237" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1680.1010@1920.0.1680.1010" timestamp="1591381549438" />
     <state x="2569" y="418" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1589810291882">
       <screen x="1920" y="0" width="1680" height="1010" />
     </state>
