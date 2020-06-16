@@ -2,7 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bfbdc1c4-cb00-49af-a2ea-77c16ffcfe13" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/tau.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TizenWebCommon.iml" beforeDir="false" afterPath="$PROJECT_DIR$/TizenWebCommon.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/utils-2.1.5.0.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/utils-2.1.5.1.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webUnitTest/test.html" beforeDir="false" afterPath="$PROJECT_DIR$/webUnitTest/test.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -12,6 +18,12 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
+  </component>
   <component name="ProjectId" id="1aua9vCWYFxfeI4QySE25GEPFNq" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -20,9 +32,14 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/js" />
+    <property name="last_opened_file_path" value="$USER_HOME$/tizen-studio" />
+    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="Settings.JavaScript" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -46,6 +63,7 @@
       <workItem from="1591281938423" duration="28000" />
       <workItem from="1591381513556" duration="219000" />
       <workItem from="1591620670346" duration="57000" />
+      <workItem from="1592312949432" duration="117000" />
     </task>
     <task id="LOCAL-00001" summary="IJ files">
       <created>1589810274147</created>
@@ -81,25 +99,35 @@
     <option name="LAST_COMMIT_MESSAGE" value="Input clean up" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="761" y="275" key="#Project_Structure" timestamp="1592312979640">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="761" y="275" key="#Project_Structure/0.0.2560.1400/-3840.0.2560.1400@0.0.2560.1400" timestamp="1592312979640" />
     <state x="2321" y="82" key="CommitChangelistDialog2" timestamp="1591381546627">
       <screen x="1920" y="0" width="1680" height="1010" />
     </state>
     <state x="2321" y="82" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1680.1010@1920.0.1680.1010" timestamp="1591381546627" />
-    <state x="2540" y="259" key="FileChooserDialogImpl" timestamp="1587587854080">
-      <screen x="1920" y="0" width="1680" height="1010" />
+    <state x="945" y="359" key="FileChooserDialogImpl" timestamp="1592312998327">
+      <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="2540" y="259" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1680.1010@1920.0.1680.1010" timestamp="1587587854080" />
+    <state x="945" y="359" key="FileChooserDialogImpl/0.0.2560.1400/-3840.0.2560.1400@0.0.2560.1400" timestamp="1592312998327" />
     <state x="2648" y="372" width="389" height="265" key="MultipleFileMergeDialog" timestamp="1589810287098">
       <screen x="1920" y="0" width="1680" height="1010" />
     </state>
     <state x="2648" y="372" width="389" height="265" key="MultipleFileMergeDialog/0.0.1920.1040/1920.0.1680.1010@1920.0.1680.1010" timestamp="1589810287098" />
+    <state x="782" y="345" key="SettingsEditor" timestamp="1592313068679">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="782" y="345" key="SettingsEditor/0.0.2560.1400/-3840.0.2560.1400@0.0.2560.1400" timestamp="1592313068679" />
     <state x="2352" y="237" key="Vcs.Push.Dialog.v2" timestamp="1591381549438">
       <screen x="1920" y="0" width="1680" height="1010" />
     </state>
     <state x="2352" y="237" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1680.1010@1920.0.1680.1010" timestamp="1591381549438" />
-    <state x="2569" y="418" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1589810291882">
-      <screen x="1920" y="0" width="1680" height="1010" />
+    <state x="989" y="579" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1592312951180">
+      <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="2569" y="418" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040/1920.0.1680.1010@1920.0.1680.1010" timestamp="1589810291882" />
+    <state x="989" y="579" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.2560.1400/-3840.0.2560.1400@0.0.2560.1400" timestamp="1592312951180" />
   </component>
 </project>

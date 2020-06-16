@@ -2,6 +2,8 @@
 /*jslint bitwise: true */
 
 /**
+ * v2.1.5.1
+ * fixed parseInt
  * v2.1.5.0
  * lint fixes,
  * added comparePath
@@ -176,20 +178,28 @@ tizen.TZDate.prototype.toDisplayDateTime = function() {
 
 /**
  * Try to parse int
- * @param str. String to parse
- * @param defaultValue. Value should be returned if can't parse
+ *
+ * @param str.
+ *            String to parse
+ * @param defaultValue.
+ *            Value should be returned if can't parse
  * @returns int or defaultValue if cannot parse
  */
-Utils.tryParseInt = function(str,defaultValue) {
-    var retValue = defaultValue;
-    if(str !== null) {
-        if(str.length > 0) {
-            if (!isNaN(str)) {
-                retValue = parseInt(str);
-            }
-        }
-    }
-    return retValue;
+Utils.tryParseInt = function (str, defaultValue) {
+	var retValue = defaultValue;
+	if (str !== null) {
+		if (str.length > 0) {
+			if (!isNaN(str)) {
+				retValue = parseInt(str);
+				if (isNaN(retValue)) {
+					return defaultValue;
+				}
+			} else {
+				return str;
+			}
+		}
+	}
+	return retValue;
 };
 
 /**

@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="tau" type="javaScript">
+    <properties>
+      <sourceFilesUrls>
+        <item url="file://$USER_HOME$/tizen-studio" />
+        <item url="file://$USER_HOME$/tizen-studio-data" />
+      </sourceFilesUrls>
+    </properties>
+    <CLASSES>
+      <root url="file://$USER_HOME$/tizen-studio" />
+      <root url="file://$USER_HOME$/tizen-studio-data" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
