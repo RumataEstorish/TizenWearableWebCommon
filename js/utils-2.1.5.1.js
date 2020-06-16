@@ -187,16 +187,15 @@ tizen.TZDate.prototype.toDisplayDateTime = function() {
  */
 Utils.tryParseInt = function (str, defaultValue) {
 	var retValue = defaultValue;
-	if (str !== null) {
-		if (str.length > 0) {
-			if (!isNaN(str)) {
-				retValue = parseInt(str);
-				if (isNaN(retValue)) {
-					return defaultValue;
-				}
-			} else {
-				return str;
+	if (str) {
+		if (str.length && str.length > 0 && !isNaN(str)) {
+			retValue = parseInt(str, 0);
+			// noinspection JSCheckFunctionSignatures
+			if (isNaN(retValue)) {
+				return defaultValue;
 			}
+		} else {
+			return str;
 		}
 	}
 	return retValue;

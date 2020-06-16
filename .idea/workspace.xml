@@ -2,13 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bfbdc1c4-cb00-49af-a2ea-77c16ffcfe13" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/tau.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TizenWebCommon.iml" beforeDir="false" afterPath="$PROJECT_DIR$/TizenWebCommon.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/utils-2.1.5.0.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/utils-2.1.5.1.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webUnitTest/test.html" beforeDir="false" afterPath="$PROJECT_DIR$/webUnitTest/test.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/utils-2.1.5.1.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/utils-2.1.5.1.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +58,8 @@
       <workItem from="1591281938423" duration="28000" />
       <workItem from="1591381513556" duration="219000" />
       <workItem from="1591620670346" duration="57000" />
-      <workItem from="1592312949432" duration="117000" />
+      <workItem from="1592312949432" duration="174000" />
+      <workItem from="1592313534589" duration="131000" />
     </task>
     <task id="LOCAL-00001" summary="IJ files">
       <created>1589810274147</created>
@@ -86,7 +82,14 @@
       <option name="project" value="LOCAL" />
       <updated>1591381547425</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Fixed parseInt in utils">
+      <created>1592313106224</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1592313106224</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -96,17 +99,19 @@
     <MESSAGE value="IJ files" />
     <MESSAGE value="Ref SAP from IJ warnings" />
     <MESSAGE value="Input clean up" />
-    <option name="LAST_COMMIT_MESSAGE" value="Input clean up" />
+    <MESSAGE value="Fixed parseInt in utils" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed parseInt in utils" />
   </component>
   <component name="WindowStateProjectService">
     <state x="761" y="275" key="#Project_Structure" timestamp="1592312979640">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="761" y="275" key="#Project_Structure/0.0.2560.1400/-3840.0.2560.1400@0.0.2560.1400" timestamp="1592312979640" />
-    <state x="2321" y="82" key="CommitChangelistDialog2" timestamp="1591381546627">
-      <screen x="1920" y="0" width="1680" height="1010" />
+    <state x="611" y="114" key="CommitChangelistDialog2" timestamp="1592313105550">
+      <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="2321" y="82" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1680.1010@1920.0.1680.1010" timestamp="1591381546627" />
+    <state x="611" y="114" key="CommitChangelistDialog2/0.0.2560.1400/-3840.0.2560.1400@0.0.2560.1400" timestamp="1592313105550" />
     <state x="945" y="359" key="FileChooserDialogImpl" timestamp="1592312998327">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
@@ -120,10 +125,11 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="782" y="345" key="SettingsEditor/0.0.2560.1400/-3840.0.2560.1400@0.0.2560.1400" timestamp="1592313068679" />
-    <state x="2352" y="237" key="Vcs.Push.Dialog.v2" timestamp="1591381549438">
-      <screen x="1920" y="0" width="1680" height="1010" />
+    <state x="658" y="329" key="Vcs.Push.Dialog.v2" timestamp="1592313107964">
+      <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="2352" y="237" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1680.1010@1920.0.1680.1010" timestamp="1591381549438" />
+    <state x="658" y="329" key="Vcs.Push.Dialog.v2/0.0.2560.1400/-3840.0.2560.1400@0.0.2560.1400" timestamp="1592313107964" />
     <state x="989" y="579" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1592312951180">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
