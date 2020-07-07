@@ -37,7 +37,7 @@ Date.prototype.toDisplayDateTime = function() {
  */
 Date.prototype.toDisplayDateTimeYear = function(){
 	return this.toDisplayDateYear() + ' ' + this.toDisplayTime();
-}
+};
 
 /**
  * Time for display without seconds
@@ -75,12 +75,12 @@ Date.prototype.toYYYYMMDD = function(){
 	if (date < 10){
 		date = "0" + date;
 	}
-	
+
 	return this.getFullYear() + "-" + month + "-" + date;
 };
 
 /**
- * Date to UTC. 
+ * Date to UTC.
  * @returns string YYYY-MM-DDTHH:MM
  */
 Date.prototype.toYYYYMMDDTHHMM = function(){
@@ -91,28 +91,28 @@ Date.prototype.toYYYYMMDDTHHMM = function(){
 	if (hours < 10){
 		hours = "0" + hours;
 	}
-	
+
 	return this.toYYYYMMDD() + "T" + hours + ":" + minutes;
 };
 
 /**
- * Date to UTC. 
+ * Date to UTC.
  * @returns string YYYY-MM-DDTHH:MM:SS
  */
 Date.prototype.toYYYYMMDDTHHMMSS = function(){
 	var minutes = this.getMinutes(), hours = this.getHours(), seconds = this.getSeconds();
-	
+
 	if (seconds < 10){
 		seconds = '0' + seconds;
 	}
-	
+
 	if (minutes < 10){
 		minutes = '0' + minutes;
 	}
 	if (hours < 10){
 		hours = '0' + hours;
 	}
-	
+
 	return this.toYYYYMMDD() + 'T' + hours + ':' + minutes + ':' + seconds;
 };
 
@@ -122,7 +122,7 @@ Date.prototype.toYYYYMMDDTHHMMSS = function(){
  */
 tizen.TZDate.prototype.toDisplayDateTimeYear = function(){
 	return this.toDisplayDateYear() + ' ' + this.toDisplayTime();
-}
+};
 
 /**
  * Time for display without seconds
@@ -146,7 +146,7 @@ tizen.TZDate.prototype.toDisplayDate = function() {
  */
 tizen.TZDate.prototype.toDisplayDateYear = function(){
 	return this.toDisplayDate() + '.' + this.getFullYear();
-}
+};
 
 /**
  * Date to string.
@@ -160,29 +160,29 @@ tizen.TZDate.prototype.toYYYYMMDD = function(){
 	if (date < 10){
 		date = "0" + date;
 	}
-	
+
 	return this.getFullYear() + "-" + month + "-" + date;
 };
 
 /**
- * Date to string. 
+ * Date to string.
  * @returns string YYYY-MM-DDThh:mm
  */
 tizen.TZDate.prototype.toYYYYMMDDTHHMM = function(){
 	var minutes = this.getMinutes(), hours = this.getHours();
-	
+
 	if (hours < 10){
 		hours = "0" + hours;
 	}
 	if (minutes < 10){
 		minutes = "0" + minutes;
 	}
-	
+
 	return this.toYYYYMMDD() + "T" + hours + ":" + minutes;
 };
 
 /**
- * Date to string. 
+ * Date to string.
  * @returns string YYYY-MM-DDThh:mm:ss
  */
 tizen.TZDate.prototype.toYYYYMMDDTHHMMSS = function() {
@@ -361,9 +361,9 @@ Utils.createIndexScrollBar = function(indexPage, indexScrollBar, listName) {
 
 	page.addEventListener("pageshow", function() {
 		var indexScrollbarElement = document.getElementById(indexScrollBar), listDividers = listviewElement.getElementsByClassName("ui-listview-divider"), // list dividers
-		dividers = {}, // collection of list dividers
-		indices = [], // index list
-		divider, i, idx;
+			dividers = {}, // collection of list dividers
+			indices = [], // index list
+			divider, i, idx;
 
 		// For all list dividers,
 		for (i = 0; i < listDividers.length; i++) {
@@ -503,41 +503,41 @@ Utils.getGearVersion = function(model) {
 		return GearModel.GEAR_S2;
 	}
 	switch (model.toUpperCase()) {
-	case "SM-R380":
-	case "SM-R381":
-		return GearModel.GEAR_2;
-	case "SM-V700":
-		return GearModel.GEAR_1;
-	case "SM-R750":
-	case "SM-R750A":
-	case "SM-R750B":
-	case "SM-R750D":
-	case "SM-R750J":
-	case "SM-R750T":
-	case "SM-R750W":
-	case "SM-R750V":
-	case "SM-R750P":
-		return GearModel.GEAR_S;
-	case "SM-R720":
-	case "SM-R730":
-	case "SM-R732":
-	case "SM-R735":
-		return GearModel.GEAR_S2;
-	case "SM-R770":
-	case "SM-R760":
-	case "SM-R765":
-		return GearModel.GEAR_S3;
-	case "SM-R360":
-		return GearModel.GEAR_FIT2;
-	case "SM-R600":
-		return GearModel.GEAR_SPORT;
-	case "SM-R820":
-	case "SM-R830":
-	case "SM-R825":
-	case "SM-R835":
-		return GearModel.GEAR_WATCH_ACTIVE_2;
-	default:
-		return GearModel.GEAR_S3;
+		case "SM-R380":
+		case "SM-R381":
+			return GearModel.GEAR_2;
+		case "SM-V700":
+			return GearModel.GEAR_1;
+		case "SM-R750":
+		case "SM-R750A":
+		case "SM-R750B":
+		case "SM-R750D":
+		case "SM-R750J":
+		case "SM-R750T":
+		case "SM-R750W":
+		case "SM-R750V":
+		case "SM-R750P":
+			return GearModel.GEAR_S;
+		case "SM-R720":
+		case "SM-R730":
+		case "SM-R732":
+		case "SM-R735":
+			return GearModel.GEAR_S2;
+		case "SM-R770":
+		case "SM-R760":
+		case "SM-R765":
+			return GearModel.GEAR_S3;
+		case "SM-R360":
+			return GearModel.GEAR_FIT2;
+		case "SM-R600":
+			return GearModel.GEAR_SPORT;
+		case "SM-R820":
+		case "SM-R830":
+		case "SM-R825":
+		case "SM-R835":
+			return GearModel.GEAR_WATCH_ACTIVE_2;
+		default:
+			return GearModel.GEAR_S3;
 	}
 };
 
@@ -548,11 +548,11 @@ Utils.getGearVersion = function(model) {
  */
 Utils.isNewGear = function(model) {
 	switch (Utils.getGearVersion(model)) {
-	case GearModel.GEAR_1:
-	case GearModel.GEAR_2:
-		return false;
-	default:
-		return true;
+		case GearModel.GEAR_1:
+		case GearModel.GEAR_2:
+			return false;
+		default:
+			return true;
 	}
 };
 
@@ -591,7 +591,7 @@ Utils.isString = function(o) {
 
 /**
  * Dynamic sort array with property set
- * 
+ *
  * @param property
  * @returns sorted array
  * @example var People = [ {Name: "Name", Surname: "Surname"}, {Name:"AAA", Surname:"ZZZ"}, {Name: "Name", Surname: "AAA"} ]; People.sort(dynamicSort("Name")); People.sort(dynamicSort("Surname")); People.sort(dynamicSort("-Surname"));
@@ -651,98 +651,98 @@ String.prototype.startsWith = function(s) {
 /**
  * Converts string to boolean
  * @param val - string value to convert
- * @param defaultVal - default value when incorrect string. 
+ * @param defaultVal - default value when incorrect string.
  * @returns boolean|object defaultVal if val not bool
  */
 Utils.stringToBoolean = function(val, defaultVal) {
-    if (val === true || val === false){
-        return val;
-    }
-    if (val === "true") {
-        return true;
-    }
-    if (val === "false") {
-        return false;
-    }
-    return defaultVal;
+	if (val === true || val === false){
+		return val;
+	}
+	if (val === "true") {
+		return true;
+	}
+	if (val === "false") {
+		return false;
+	}
+	return defaultVal;
 };
 
 /**
  * Get mime of filename
- * @returns {String} 
- * image/asterisk for images, 
- * audio/asterisk for sounds, 
- * video/asterisk for movies, 
- * application/asterisk for documents, 
- * text/asterisk for text files, 
+ * @returns {String}
+ * image/asterisk for images,
+ * audio/asterisk for sounds,
+ * video/asterisk for movies,
+ * application/asterisk for documents,
+ * text/asterisk for text files,
  * asterisk/asterisk for others
  */
 Utils.getMime = function(fileName) {
 	var extension = Utils.getFileExtension(fileName);
 
 	switch (extension.toLowerCase()) {
-	case "png":
-	case "jpg":
-	case "jpeg":
-	case "tiff":
-	case "ico":
-	case "gif":
-	case "svg":
-	case "bmp":
-		return Utils.IMAGE_MIME;
-	case "avi":
-	case "mp4":
-	case "3gp":
-	case "mpeg":
-	case "flv":
-	case "quicktime":
-	case "wmv":
-	case "webm":
-	case "mov":
-	case "qt":
-		return Utils.VIDEO_MIME;
-	case "mp3":
-	case "ogg":
-	case "wav":
-	case "wma":
-	case "oga":
-		return Utils.AUDIO_MIME;
-	case "odt":
-	case "odp":
-	case "ods":
-	case "odg":
-	case "xlsx":
-	case "xlsm":
-	case "xlsb":
-	case "xltm":
-	case "xlam":
-	case "xls":
-	case "xla":
-	case "xlt":
-	case "xlm":
-	case "doc":
-	case "dot":
-	case "docx":
-	case "ppt":
-	case "pptx":
-	case "pptm":
-	case "potx":
-	case "potm":
-	case "ppam":
-	case "ppsx":
-	case "ppsm":
-	case "sldx":
-	case "sldm":
-	case "pdf":
-	case "fb2":
-	case "epub":
-	case "djvu":
-	case "rtf":
-		return Utils.DOCS_MIME;
-	case "txt":
-		return Utils.TEXT_MIME;
-	default:
-		return Utils.OTHER_MIME;
+		case "png":
+		case "jpg":
+		case "jpeg":
+		case "tiff":
+		case "ico":
+		case "gif":
+		case "svg":
+		case "bmp":
+			return Utils.IMAGE_MIME;
+		case "avi":
+		case "mp4":
+		case "3gp":
+		case "mpeg":
+		case "flv":
+		case "quicktime":
+		case "wmv":
+		case "webm":
+		case "mov":
+		case "qt":
+			return Utils.VIDEO_MIME;
+		case "mp3":
+		case "ogg":
+		case "wav":
+		case "wma":
+		case "oga":
+			return Utils.AUDIO_MIME;
+		case "odt":
+		case "odp":
+		case "ods":
+		case "odg":
+		case "xlsx":
+		case "xlsm":
+		case "xlsb":
+		case "xltm":
+		case "xlam":
+		case "xls":
+		case "xla":
+		case "xlt":
+		case "xlm":
+		case "doc":
+		case "dot":
+		case "docx":
+		case "ppt":
+		case "pptx":
+		case "pptm":
+		case "potx":
+		case "potm":
+		case "ppam":
+		case "ppsx":
+		case "ppsm":
+		case "sldx":
+		case "sldm":
+		case "pdf":
+		case "fb2":
+		case "epub":
+		case "djvu":
+		case "rtf":
+			return Utils.DOCS_MIME;
+		case "txt":
+			return Utils.TEXT_MIME;
+		default:
+			return Utils.OTHER_MIME;
 	}
 };
 
@@ -752,9 +752,9 @@ Utils.getMime = function(fileName) {
  * @returns number hashcode
  */
 Utils.hashCode = function(s){
-  return s.split("").reduce(function(a,b){a=((a<<5)-a)+b.charCodeAt(0);return a&a;},0);              
+	return s.split("").reduce(function(a,b){a=((a<<5)-a)+b.charCodeAt(0);return a&a;},0);
 };
-	
+
 /**
  * Compare paths regarding slash
  * @param source - source path

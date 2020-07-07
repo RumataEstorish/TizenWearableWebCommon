@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bfbdc1c4-cb00-49af-a2ea-77c16ffcfe13" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/utils-2.1.5.2.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/utils-2.1.5.2.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,6 +62,7 @@
       <workItem from="1592472137747" duration="715000" />
       <workItem from="1592572076249" duration="15000" />
       <workItem from="1593510746948" duration="46000" />
+      <workItem from="1594133981983" duration="182000" />
     </task>
     <task id="LOCAL-00001" summary="IJ files">
       <created>1589810274147</created>
@@ -91,7 +92,14 @@
       <option name="project" value="LOCAL" />
       <updated>1592408497450</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Added toDisplayDateYear and toDisplayDateTimeYear method">
+      <created>1594134047967</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1594134047967</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -102,17 +110,18 @@
     <MESSAGE value="Ref SAP from IJ warnings" />
     <MESSAGE value="Input clean up" />
     <MESSAGE value="Updated jquery" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated jquery" />
+    <MESSAGE value="Added toDisplayDateYear and toDisplayDateTimeYear method" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added toDisplayDateYear and toDisplayDateTimeYear method" />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="160" key="#Plugins" timestamp="1592572082657">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="160" key="#Plugins/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1592572082657" />
-    <state x="2321" y="82" key="CommitChangelistDialog2" timestamp="1592408496686">
+    <state x="2726" y="88" key="CommitChangelistDialog2" timestamp="1594134047162">
       <screen x="1920" y="0" width="1680" height="1010" />
     </state>
-    <state x="2321" y="82" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1680.1010@1920.0.1680.1010" timestamp="1592408496686" />
+    <state x="2726" y="88" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1680.1010@1920.0.1680.1010" timestamp="1594134047162" />
     <state x="2540" y="259" key="FileChooserDialogImpl" timestamp="1587587854080">
       <screen x="1920" y="0" width="1680" height="1010" />
     </state>
@@ -122,10 +131,10 @@
       <screen x="1920" y="0" width="1680" height="1010" />
     </state>
     <state x="2648" y="372" width="389" height="265" key="MultipleFileMergeDialog/0.0.1920.1040/1920.0.1680.1010@1920.0.1680.1010" timestamp="1589810287098" />
-    <state x="2352" y="237" key="Vcs.Push.Dialog.v2" timestamp="1592408498918">
+    <state x="2352" y="237" key="Vcs.Push.Dialog.v2" timestamp="1594134049299">
       <screen x="1920" y="0" width="1680" height="1010" />
     </state>
-    <state x="2352" y="237" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1680.1010@1920.0.1680.1010" timestamp="1592408498918" />
+    <state x="2352" y="237" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1680.1010@1920.0.1680.1010" timestamp="1594134049299" />
     <state x="2569" y="418" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1589810291882">
       <screen x="1920" y="0" width="1680" height="1010" />
     </state>
