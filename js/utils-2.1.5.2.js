@@ -2,6 +2,9 @@
 /*jslint bitwise: true */
 
 /**
+ * v2.1.5.2
+ * added toDisplayDateYear
+ * added toDisplayDateTimeYear
  * v2.1.5.1
  * fixed parseInt
  * v2.1.5.0
@@ -29,6 +32,14 @@ Date.prototype.toDisplayDateTime = function() {
 };
 
 /**
+ * Date and time for display with year
+ * @returns string dd.mm.yyyy hh:MM, mm and MM with leading zero
+ */
+Date.prototype.toDisplayDateTimeYear = function(){
+	return this.toDisplayDateYear() + ' ' + this.toDisplayTime();
+}
+
+/**
  * Time for display without seconds
  * @returns string in hh:mm and minutes with leading zero
  */
@@ -42,6 +53,14 @@ Date.prototype.toDisplayTime = function() {
  */
 Date.prototype.toDisplayDate = function() {
 	return this.getDate() + "." + (this.getMonth() < 9 ? "0" + (this.getMonth() + 1) : this.getMonth() + 1);
+};
+
+/**
+ * Date for display with year
+ * @returns string in dd.mm.yyyy and month with leading zero
+ */
+Date.prototype.toDisplayDateYear = function(){
+	return this.toDisplayDate() + '.' + this.getFullYear();
 };
 
 /**
@@ -97,6 +116,13 @@ Date.prototype.toYYYYMMDDTHHMMSS = function(){
 	return this.toYYYYMMDD() + 'T' + hours + ':' + minutes + ':' + seconds;
 };
 
+/**
+ * Date and time for display with year
+ * @returns string dd.mm.yyyy hh:MM, mm and MM with leading zero
+ */
+tizen.TZDate.prototype.toDisplayDateTimeYear = function(){
+	return this.toDisplayDateYear() + ' ' + this.toDisplayTime();
+}
 
 /**
  * Time for display without seconds
@@ -114,6 +140,13 @@ tizen.TZDate.prototype.toDisplayDate = function() {
 	return this.getDate() + "." + (this.getMonth() < 9 ? "0" + (this.getMonth() + 1) : this.getMonth() + 1);
 };
 
+/**
+ * Date for display with year
+ * @returns string in dd.mm.yyyy and month with leading zero
+ */
+tizen.TZDate.prototype.toDisplayDateYear = function(){
+	return this.toDisplayDate() + '.' + this.getFullYear();
+}
 
 /**
  * Date to string.
