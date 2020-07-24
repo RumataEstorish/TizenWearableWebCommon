@@ -2,6 +2,8 @@
 /*jslint bitwise: true */
 
 /**
+ * v2.1.5.3
+ * added date.parseWithTimeZone
  * v2.1.5.2
  * added toDisplayDateYear
  * added toDisplayDateTimeYear
@@ -13,6 +15,20 @@
  * v2.1.4.11 added gear watch active 2 models
  * fixed putCursorAtEnd()
  */
+
+/**
+ * Parse date and set it to current timezone without changing
+ * @param date
+ * @returns date in current timezone
+ */
+Date.parseWithTimeZone = function(date){
+	var d = new Date(date);
+	// noinspection JSCheckFunctionSignatures
+	var tzOffset = new Date().getTimezoneOffset();
+
+	// noinspection JSCheckFunctionSignatures
+	return new Date(d.getTime() - tzOffset * -60000);
+};
 
 /**
  * Date for filling date input box
@@ -114,6 +130,20 @@ Date.prototype.toYYYYMMDDTHHMMSS = function(){
 	}
 
 	return this.toYYYYMMDD() + 'T' + hours + ':' + minutes + ':' + seconds;
+};
+
+/**
+ * Parse date and set it to current timezone without changing
+ * @param date string
+ * @returns tizen date in current timezone
+ */
+tizen.TZDate.parseWithTimeZone = function(date){
+	var d = new Date(date);
+	// noinspection JSCheckFunctionSignatures
+	var tzOffset = new Date().getTimezoneOffset();
+
+	// noinspection JSCheckFunctionSignatures
+	return new tizen.TZDate(new Date(d.getTime() - tzOffset * -60000));
 };
 
 /**
