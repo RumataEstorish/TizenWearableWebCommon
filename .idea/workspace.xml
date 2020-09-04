@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bfbdc1c4-cb00-49af-a2ea-77c16ffcfe13" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/js/utils-2.1.5.2.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/utils-2.1.5.2.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,7 +29,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/js" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -37,10 +37,12 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Rumata\Projects\Gear\TizenWearableWebCommon" />
       <recent name="C:\Users\Rumata\Projects\Gear\TizenWearableWebCommon\js" />
       <recent name="C:\Users\Rumata\Projects\Gear\TizenWearableWebCommon\js\GearHttp" />
     </key>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -63,6 +65,7 @@
       <workItem from="1592572076249" duration="15000" />
       <workItem from="1593510746948" duration="46000" />
       <workItem from="1594133981983" duration="182000" />
+      <workItem from="1599221547706" duration="1255000" />
     </task>
     <task id="LOCAL-00001" summary="IJ files">
       <created>1589810274147</created>
@@ -99,11 +102,18 @@
       <option name="project" value="LOCAL" />
       <updated>1594134047967</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Added setMenuItemVisibility for action menu">
+      <created>1598923257373</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1598923257373</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="2" />
+    <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="IJ files" />
@@ -111,33 +121,28 @@
     <MESSAGE value="Input clean up" />
     <MESSAGE value="Updated jquery" />
     <MESSAGE value="Added toDisplayDateYear and toDisplayDateTimeYear method" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added toDisplayDateYear and toDisplayDateTimeYear method" />
+    <MESSAGE value="Added setMenuItemVisibility for action menu" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added setMenuItemVisibility for action menu" />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="160" key="#Plugins" timestamp="1592572082657">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="160" key="#Plugins/0.0.1920.1040/1920.0.1680.1010@0.0.1920.1040" timestamp="1592572082657" />
-    <state x="2726" y="88" key="CommitChangelistDialog2" timestamp="1594134047162">
-      <screen x="1920" y="0" width="1680" height="1010" />
+    <state x="144" y="0" key="CommitChangelistDialog2" timestamp="1598923256550">
+      <screen x="0" y="0" width="1024" height="600" />
     </state>
+    <state x="144" y="0" key="CommitChangelistDialog2/0.0.1024.600@0.0.1024.600" timestamp="1598923256550" />
     <state x="2726" y="88" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1680.1010@1920.0.1680.1010" timestamp="1594134047162" />
-    <state x="2540" y="259" key="FileChooserDialogImpl" timestamp="1587587854080">
-      <screen x="1920" y="0" width="1680" height="1010" />
-    </state>
-    <state x="2540" y="259" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1680.1010@1920.0.1680.1010" timestamp="1587587854080" />
     <state x="945" y="359" key="FileChooserDialogImpl/0.0.2560.1400/-3840.0.2560.1400@0.0.2560.1400" timestamp="1592312998327" />
-    <state x="2648" y="372" width="389" height="265" key="MultipleFileMergeDialog" timestamp="1589810287098">
-      <screen x="1920" y="0" width="1680" height="1010" />
+    <state x="212" y="67" key="Vcs.Push.Dialog.v2" timestamp="1598923795199">
+      <screen x="0" y="0" width="1024" height="600" />
     </state>
-    <state x="2648" y="372" width="389" height="265" key="MultipleFileMergeDialog/0.0.1920.1040/1920.0.1680.1010@1920.0.1680.1010" timestamp="1589810287098" />
-    <state x="2352" y="237" key="Vcs.Push.Dialog.v2" timestamp="1594134049299">
-      <screen x="1920" y="0" width="1680" height="1010" />
-    </state>
+    <state x="212" y="67" key="Vcs.Push.Dialog.v2/0.0.1024.600@0.0.1024.600" timestamp="1598923795199" />
     <state x="2352" y="237" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1680.1010@1920.0.1680.1010" timestamp="1594134049299" />
-    <state x="2569" y="418" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1589810291882">
-      <screen x="1920" y="0" width="1680" height="1010" />
+    <state x="332" y="215" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1599221551272">
+      <screen x="0" y="0" width="1024" height="600" />
     </state>
-    <state x="2569" y="418" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040/1920.0.1680.1010@1920.0.1680.1010" timestamp="1589810291882" />
+    <state x="332" y="215" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1024.600@0.0.1024.600" timestamp="1599221551272" />
   </component>
 </project>
