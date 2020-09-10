@@ -2,8 +2,9 @@
 /*jshint loopfunc: true */
 
 /**
- * 
  * REQUIRES: Utils, JQuery v2.0.0+
+ * 2.1.0.6
+ * added setMenuItemVisibility
  * 2.1.0.4
  * commented code. Some cleanup
  * 2.1.0.3
@@ -168,6 +169,15 @@ ActionMenu.prototype.getMenuItemByName = function(itemName) {
 		if (this.menuItems[i].name === itemName) {
 			return this.menuItems[i];
 		}
+	}
+};
+
+ActionMenu.prototype.setMenuItemVisibility = function (itemName, isVisible){
+	if (isVisible === true){
+		this.showMenuItem(itemName);
+	}
+	else {
+		this.hideMenuItem(itemName);
 	}
 };
 

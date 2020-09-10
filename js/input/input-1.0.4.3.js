@@ -2,9 +2,11 @@
 /*jslint laxbreak: true*/
 
 /**
+ * v1.0.4.3
+ * fixed bug when open keyboard in multiline mode: input field focus wasn't gained
  * v1.0.4.2
  * IJ ref, code cleanup
- * v1.0.4.0
+ * v1.0.4.0 
  * watch active 2 input
  * optimized codes
  * v1.0.3.0 optimized input
@@ -22,7 +24,7 @@
 /**
  * Input wrapper. Shows input field depending on Gear model and preferred
  * settings
- *
+ * 
  * @param model -
  *            Gear model. If no model, then Gear S2 by default
  */
@@ -31,15 +33,15 @@ Input.SQUARE_STYLE = '<link rel="stylesheet" href="/js/input/inputStyleSquare.cs
 Input.CIRCLE_STYLE = '<link rel="stylesheet" media="all and (-tizen-geometric-shape: circle)" href="/js/input/inputStyleCircle.css">';
 
 Input.SQUARE_INPUT_FIELD = '<div id="inputGearPage" class="ui-page">' + '<div id="inputGearContent" class="ui-content input-content">' + '<textarea id="inputGearArea" class="input-area"></textarea>'
-	+ '<input type="text" id="inputGearAreaOneLine" class="input-area" />' + '<button id="confirmGearButton" class="confirm-button"></button>' + '</div>' + '<footer class="ui-footer ui-bottom-button ui-fixed" id="confirmGearFooter">'
-	+ '<button class="ui-btn ui-btn-icon-only confirm-button-footer"></button>' + '</footer>' + '</div>';
+		+ '<input type="text" id="inputGearAreaOneLine" class="input-area" />' + '<button id="confirmGearButton" class="confirm-button"></button>' + '</div>' + '<footer class="ui-footer ui-bottom-button ui-fixed" id="confirmGearFooter">'
+		+ '<button class="ui-btn ui-btn-icon-only confirm-button-footer"></button>' + '</footer>' + '</div>';
 
 Input.CIRCLE_INPUT_FIELD = '<div id="inputGearPage" class="ui-page">' + '<div class="ui-content">' + '<div id="inputGearContent" class="input-content">' + '<textarea id="inputGearArea" class="input-area"></textarea>'
-	+ '<input type="text" id="inputGearAreaOneLine" class="input-area" />' + '<button id="confirmGearButton" class="confirm-button"></button>' + '</div>' + '</div>' + '</div>';
+		+ '<input type="text" id="inputGearAreaOneLine" class="input-area" />' + '<button id="confirmGearButton" class="confirm-button"></button>' + '</div>' + '</div>' + '</div>';
 
 /**
  * Constructor of class Input
- *
+ * 
  * @param model -
  *            model of Gear. You can get it following way:
  *            tizen.systeminfo.getPropertyValue('BUILD', function(res) { model =
@@ -78,12 +80,12 @@ function Input(model) {
 	Object.defineProperty(this, "mode", {
 		get : function() {
 			switch (gearModel) {
-				// Force single line for WatchActive 2 and Gear S due to Samsung's bugs
-				// case GearModel.GEAR_WATCH_ACTIVE_2:
-				case GearModel.GEAR_S:
-					return KeyboardModes.SINGLE_LINE;
-				default:
-					return mode;
+			// Force single line for WatchActive 2 and Gear S due to Samsung's bugs
+			// case GearModel.GEAR_WATCH_ACTIVE_2:
+			case GearModel.GEAR_S:
+				return KeyboardModes.SINGLE_LINE;
+			default:
+				return mode;
 			}
 		},
 		set : function(val) {
@@ -98,10 +100,10 @@ function Input(model) {
 	Object.defineProperty(this, 'inputField', {
 		get : function() {
 			switch (this.mode) {
-				case KeyboardModes.NORMAL:
-					return $('#inputGearArea');
-				default:
-					return $('#inputGearAreaOneLine');
+			case KeyboardModes.NORMAL:
+				return $('#inputGearArea');
+			default:
+				return $('#inputGearAreaOneLine');
 			}
 		}
 	});
@@ -127,51 +129,51 @@ function Input(model) {
 	// noinspection JSJQueryEfficiency
 	var inputGearPage = $('#inputGearPage');
 	switch (self.gearModel) {
-		case GearModel.GEAR_1:
-		case GearModel.GEAR_2:
-			break;
-		case GearModel.GEAR_S:
-			if (!inputGearPage.length) {
-				$('head').append(Input.SQUARE_STYLE);
-				$('body').append(Input.SQUARE_INPUT_FIELD);
-				inputGearPage = $('#inputGearPage');
-			}
-			break;
-		default:
-			if (!inputGearPage.length) {
-				$('head').append(Input.CIRCLE_STYLE);
-				$('body').append(Input.CIRCLE_INPUT_FIELD);
-				inputGearPage = $('#inputGearPage');
-			}
+	case GearModel.GEAR_1:
+	case GearModel.GEAR_2:
+		break;
+	case GearModel.GEAR_S:
+		if (!inputGearPage.length) {
+			$('head').append(Input.SQUARE_STYLE);
+			$('body').append(Input.SQUARE_INPUT_FIELD);
+			inputGearPage = $('#inputGearPage');
+		}
+		break;
+	default:
+		if (!inputGearPage.length) {
+			$('head').append(Input.CIRCLE_STYLE);
+			$('body').append(Input.CIRCLE_INPUT_FIELD);
+			inputGearPage = $('#inputGearPage');
+		}
 	}
 
 	var windowOnResize = function() {
 		var placeholder = "", inputField = self.inputField;
 
 		switch (self.gearModel) {
-			case GearModel.GEAR_S:
-				if (window.innerHeight < self.windowStartHeight) {
-					$("#confirmGearButton").show();
-					$("#confirmGearFooter").hide();
-				}
-				if (window.innerHeight >= self.windowStartHeight) {
-					$("#confirmGearButton").hide();
-					$("#confirmGearFooter").show();
-				}
-				break;
-			default:
-				if (window.innerHeight < self.windowStartHeight) {
-					placeholder = inputField.prop("placeholder");
-					inputField.prop("placeholder", "");
-					$("#confirmGearButton").hide();
-					$("#inputGearContent").addClass("input-content-active");
-				}
-				if (window.innerHeight >= self.windowStartHeight) {
-					$("#confirmGearButton").show();
-					inputField.prop("placeholder", placeholder);
-					$("#inputGearContent").removeClass("input-content-active");
-				}
-				break;
+		case GearModel.GEAR_S:
+			if (window.innerHeight < self.windowStartHeight) {
+				$("#confirmGearButton").show();
+				$("#confirmGearFooter").hide();
+			}
+			if (window.innerHeight >= self.windowStartHeight) {
+				$("#confirmGearButton").hide();
+				$("#confirmGearFooter").show();
+			}
+			break;
+		default:
+			if (window.innerHeight < self.windowStartHeight) {
+				placeholder = inputField.prop("placeholder");
+				inputField.prop("placeholder", "");
+				$("#confirmGearButton").hide();
+				$("#inputGearContent").addClass("input-content-active");
+			}
+			if (window.innerHeight >= self.windowStartHeight) {
+				$("#confirmGearButton").show();
+				inputField.prop("placeholder", placeholder);
+				$("#inputGearContent").removeClass("input-content-active");
+			}
+			break;
 		}
 
 		if (window.innerHeight < self.windowStartHeight) {
@@ -229,7 +231,7 @@ function Input(model) {
 
 /**
  * Checks if active page belongs to input pages
- *
+ * 
  * @returns {Boolean} true is input page
  */
 Input.isInputPage = function() {
@@ -238,7 +240,7 @@ Input.isInputPage = function() {
 
 /**
  * Getting text from input field. Also fires ontext event
- *
+ * 
  * @returns text string
  */
 Input.prototype.getText = function() {
@@ -251,7 +253,7 @@ Input.prototype.getText = function() {
 
 /**
  * Fires ontext event
- *
+ * 
  * @param t -
  *            text
  */
@@ -274,7 +276,7 @@ Input.prototype.cancel = function() {
 
 /**
  * Open input window
- *
+ * 
  * @param text -
  *            text to be set in input field. Can be empty.
  * @param placeholder -
@@ -294,6 +296,7 @@ Input.prototype.open = function(text, placeholder, mode, ontext, oncancel, onerr
 	var inputGearAreaOneLine = $('#inputGearAreaOneLine');
 	var inputGearArea = $("#inputGearArea");
 	var inputArea = $(".input-area");
+	var inputGearPage = $('#inputGearPage');
 
 	this.mode = mode;
 	this.ontext = ontext;
@@ -315,40 +318,40 @@ Input.prototype.open = function(text, placeholder, mode, ontext, oncancel, onerr
 
 
 	switch (self.gearModel) {
-		case GearModel.GEAR_1:
-		case GearModel.GEAR_2:
-			pickText(text, KeyboardModes.SINGLE_LINE, ontext, onerror, oncancel);
-			return;
-		default:
-			switch (this.mode) {
-				case KeyboardModes.NORMAL:
-					inputGearAreaOneLine.hide();
-					inputGearArea.show();
-					inputGearArea.putCursorAtEnd();
-					inputGearArea.one('pageshow', function() {
-						inputGearArea.trigger('focus');
-					});
-					break;
-				case KeyboardModes.SINGLE_LINE:
-					inputGearAreaOneLine.show();
-					inputGearArea.hide();
-					inputGearAreaOneLine.putCursorAtEnd();
-					$('#inputGearPage').one('pageshow', function() {
-						$("#inputGearAreaOneLine").trigger('focus');
-					});
-					break;
-			}
-			inputArea.prop("placeholder", placeholder);
-			inputArea.val(text);
-
-			$("#confirmGearButton").one("click", function() {
-				self.getText();
+	case GearModel.GEAR_1:
+	case GearModel.GEAR_2:
+		pickText(text, KeyboardModes.SINGLE_LINE, ontext, onerror, oncancel);
+		return;
+	default:
+		switch (this.mode) {
+		case KeyboardModes.NORMAL:
+			inputGearAreaOneLine.hide();
+			inputGearArea.show();
+			inputGearArea.putCursorAtEnd();
+			inputGearPage.one('pageshow', function() {
+				inputGearArea.trigger('focus');
 			});
-			$("#confirmGearFooter").one("click", function() {
-				self.getText();
-			});
-
-			tau.changePage("inputGearPage");
 			break;
+		case KeyboardModes.SINGLE_LINE:
+			inputGearAreaOneLine.show();
+			inputGearArea.hide();
+			inputGearAreaOneLine.putCursorAtEnd();
+			inputGearPage.one('pageshow', function() {
+				inputGearAreaOneLine.trigger('focus');
+			});
+			break;
+		}
+		inputArea.prop("placeholder", placeholder);
+		inputArea.val(text);
+
+		$("#confirmGearButton").one("click", function() {
+			self.getText();
+		});
+		$("#confirmGearFooter").one("click", function() {
+			self.getText();
+		});
+
+		tau.changePage("inputGearPage");
+		break;
 	}
 };
