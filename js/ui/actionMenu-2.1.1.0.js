@@ -2,6 +2,8 @@
 /*jshint loopfunc: true */
 
 /**
+ * 2.1.1.0
+ * Support for tau 1.2.4
  * REQUIRES: Utils, JQuery v2.0.0+
  * 2.1.0.6
  * added setMenuItemVisibility
@@ -29,7 +31,7 @@ ActionMenu.POPUP_ICON_STYLE = '.popup-icon::before {position: absolute; content:
 /**
  * Internal.
  */
-ActionMenu.addStyle = function(style) {
+ActionMenu.addStyle = function (style) {
 	var st = document.createElement('style');
 	st.innerHTML = style;
 	$('head').append(st);
@@ -37,9 +39,15 @@ ActionMenu.addStyle = function(style) {
 
 /**
  * Constructor of ActionMenu class
- * @param page - name of page where menu created. Better to use unique
- * @param menuName - name of menu element inside page
- * @param menuItems - array of menu items following class: { name : Unique name of menu item to manipulate it, icon : path to icon, onclick : function link when click event, title : display name of menu item}
+ *
+ * @param page -
+ *            name of page where menu created. Better to use unique
+ * @param menuName -
+ *            name of menu element inside page
+ * @param menuItems -
+ *            array of menu items following class: { name : Unique name of menu
+ *            item to manipulate it, icon : path to icon, onclick : function
+ *            link when click event, title : display name of menu item}
  */
 function ActionMenu(page, menuName, menuItems) {
 	var i = 0, _page = page[0] === "#" ? page : "#" + page, _menuName = menuName[0] === "#" ? menuName : "#" + menuName, prevPage = null, opened = false, clickBound = elementClick.bind(null), selectorElement = null;
@@ -72,7 +80,7 @@ function ActionMenu(page, menuName, menuItems) {
 	 * List of menu items
 	 */
 	Object.defineProperty(this, "menuItems", {
-		get : function() {
+		get: function () {
 			return menuItems;
 		}
 	});
@@ -81,7 +89,7 @@ function ActionMenu(page, menuName, menuItems) {
 	 * Popup object
 	 */
 	Object.defineProperty(this, "popup", {
-		get : function() {
+		get: function () {
 			return _menuName;
 		}
 	});
@@ -90,10 +98,10 @@ function ActionMenu(page, menuName, menuItems) {
 	 * Check if menu is visible for user
 	 */
 	Object.defineProperty(this, "isOpened", {
-		get : function() {
+		get: function () {
 			return opened;
 		},
-		set : function(val) {
+		set: function (val) {
 			opened = val;
 		}
 	});
@@ -102,7 +110,7 @@ function ActionMenu(page, menuName, menuItems) {
 	 * Menu's page
 	 */
 	Object.defineProperty(this, "page", {
-		get : function() {
+		get: function () {
 			return _page;
 		}
 	});
@@ -111,10 +119,10 @@ function ActionMenu(page, menuName, menuItems) {
 	 * Menu's name
 	 */
 	Object.defineProperty(this, "menuName", {
-		get : function() {
+		get: function () {
 			return _menuName;
 		},
-		set : function(val) {
+		set: function (val) {
 			_menuName = val;
 		}
 	});
@@ -123,10 +131,10 @@ function ActionMenu(page, menuName, menuItems) {
 	 * Internal. Previous page where menu should open after it's closed
 	 */
 	Object.defineProperty(this, "prevPage", {
-		get : function() {
+		get: function () {
 			return prevPage;
 		},
-		set : function(val) {
+		set: function (val) {
 			prevPage = val;
 		}
 	});
@@ -135,7 +143,7 @@ function ActionMenu(page, menuName, menuItems) {
 	 * Internal.
 	 */
 	Object.defineProperty(this, "clickBound", {
-		get : function() {
+		get: function () {
 			return clickBound;
 		}
 	});
@@ -144,10 +152,10 @@ function ActionMenu(page, menuName, menuItems) {
 	 * Internal
 	 */
 	Object.defineProperty(this, "selectorElement", {
-		get : function() {
+		get: function () {
 			return selectorElement;
 		},
-		set : function(val) {
+		set: function (val) {
 			selectorElement = val;
 		}
 	});
@@ -155,10 +163,11 @@ function ActionMenu(page, menuName, menuItems) {
 
 /**
  * Get menu item by name
+ *
  * @param itemName
  * @returns menu item
  */
-ActionMenu.prototype.getMenuItemByName = function(itemName) {
+ActionMenu.prototype.getMenuItemByName = function (itemName) {
 	var i = 0;
 
 	if (!itemName) {
@@ -172,20 +181,20 @@ ActionMenu.prototype.getMenuItemByName = function(itemName) {
 	}
 };
 
-ActionMenu.prototype.setMenuItemVisibility = function (itemName, isVisible){
-	if (isVisible === true){
+ActionMenu.prototype.setMenuItemVisibility = function (itemName, isVisible) {
+	if (isVisible === true) {
 		this.showMenuItem(itemName);
-	}
-	else {
+	} else {
 		this.hideMenuItem(itemName);
 	}
 };
 
 /**
  * Hide menu item from user
+ *
  * @param itemName
  */
-ActionMenu.prototype.hideMenuItem = function(itemName) {
+ActionMenu.prototype.hideMenuItem = function (itemName) {
 	var menuItem = null;
 	if (!itemName) {
 		return;
@@ -194,9 +203,11 @@ ActionMenu.prototype.hideMenuItem = function(itemName) {
 	if (!menuItem) {
 		return;
 	}
+	// noinspection JSUnresolvedVariable
+	var mi = $('#' + menuItem.name);
 	menuItem.isHidden = true;
-	if ($("#" + menuItem.name).length) {
-		menuItem.jContent = $("#" + menuItem.name);
+	if (mi.length) {
+		menuItem.jContent = mi;
 		if (tau.support.shape.circle) {
 			menuItem.jContent.remove();
 		} else {
@@ -207,9 +218,10 @@ ActionMenu.prototype.hideMenuItem = function(itemName) {
 
 /**
  * Show menu item to user
+ *
  * @param itemName
  */
-ActionMenu.prototype.showMenuItem = function(itemName) {
+ActionMenu.prototype.showMenuItem = function (itemName) {
 	var menuItem = null, popup = null, id = -1, menuItemInsert = null, self = this;
 	if (!itemName) {
 		return;
@@ -231,6 +243,7 @@ ActionMenu.prototype.showMenuItem = function(itemName) {
 	popup = $(this.menuName + " .popup-icon");
 	if (popup.length) {
 		for (var i = 0; i < this.menuItems.length; i++) {
+			// noinspection JSUnresolvedVariable
 			if (this.menuItems[i].id < menuItem.id && id < menuItem.id && !this.menuItems[i].jConent) {
 				id = this.menuItems[i].id;
 				menuItemInsert = this.menuItems[i];
@@ -241,15 +254,15 @@ ActionMenu.prototype.showMenuItem = function(itemName) {
 		} else {
 			$("#" + menuItemInsert.name).after(menuItem.jContent);
 		}
-		menuItem.jContent.on('click', function() {
-			self.close(function() {
+		menuItem.jContent.on('click', function () {
+			self.close(function () {
 				menuItem.onclick();
 			});
 		});
 	} else {
 		$(this.menuName + " #selector").append(menuItem.jContent);
-		menuItem.jContent.on('click', function() {
-			self.close(function() {
+		menuItem.jContent.on('click', function () {
+			self.close(function () {
 				menuItem.onclick();
 			});
 		});
@@ -269,15 +282,14 @@ function elementClick(event) {
 	activeItem.trigger('click');
 }
 
-
 /**
  * Show menu to user
  */
-ActionMenu.prototype.show = function() {
-	var self = this, touchStart = false, openPopup = function() {
+ActionMenu.prototype.show = function () {
+	var self = this, touchStart = false, openPopup = function () {
 
 		try {
-			$(self.popup).one("popuphide", function() {
+			$(self.popup).one("popuphide", function () {
 				if (self.isOpened === true) {
 					self.close();
 				}
@@ -286,7 +298,7 @@ ActionMenu.prototype.show = function() {
 		} catch (e) {
 			alert(e);
 		}
-	}, createMenu = function(){
+	}, createMenu = function () {
 		var res = "", i = 0;
 
 		if (!$(self.page).length) {
@@ -295,7 +307,7 @@ ActionMenu.prototype.show = function() {
 
 		if (tau.support.shape.circle) {
 			if (!$(self.page + " " + self.menuName.substring(1)).length) {
-				res = '<div id="' + self.menuName.substring(1) + '" class="ui-popup"><div id="selector" class="ui-selector">';
+				res = '<div id="' + self.menuName.substring(1) + '" class="ui-popup" data-overlay="false"><div id="selector" class="ui-selector">';
 
 				for (i = 0; i < self.menuItems.length; i++) {
 					if (self.menuItems[i].isHidden) {
@@ -318,44 +330,44 @@ ActionMenu.prototype.show = function() {
 		}
 		$(self.page).append(res);
 		for (i = 0; i < self.menuItems.length; i++) {
-			(function(i){
-				$("#" + self.menuItems[i].name).on("click", function() {
-					self.close(function() {
+			(function (i) {
+				$("#" + self.menuItems[i].name).on("click", function () {
+					self.close(function () {
 						self.menuItems[i].onclick();
 					});
-				});	
+				});
 			})(i);
-			
+
 		}
 	};
-	
+
 	createMenu();
 
 	if (tau.support.shape.circle) {
 		this.selectorElement = $(this.menuName + " #selector");
 		this.selector = tau.widget.Selector(this.selectorElement[0], {
-			itemRadius : window.innerHeight / 2 * 0.8
+			itemRadius: window.innerHeight / 2 * 0.8
 		});
 
 		if (!this.selector) {
 			return;
 		}
 
-		this.selectorElement.on('touchstart', function(){
+		this.selectorElement.on('touchstart', function () {
 			touchStart = true;
 		});
-				
-		this.selectorElement.on("click", function(event) {
-			if (touchStart === false){
+
+		this.selectorElement.on("click", function (event) {
+			if (touchStart === false) {
 				return;
 			}
 			if (!event || !event.target || !event.target.classList.contains('ui-selector-indicator')) {
 				return;
 			}
 			touchStart = false;
-			
+
 			var activeItem = $(event.target).parent().find(".ui-item-active").eq(0);
-			self.close(function() {
+			self.close(function () {
 				self.getMenuItemByName(activeItem.prop('id')).onclick();
 			});
 		});
@@ -365,13 +377,13 @@ ActionMenu.prototype.show = function() {
 
 	this.prevPage = Utils.getActivePage();
 	if ("#" + Utils.getActivePage() !== this.page) {
-		$(this.page).one("pageshow", function() {
+		$(this.page).one("pageshow", function () {
 			openPopup();
 		});
 
 		tau.changePage(this.page, {
-			transition : 'pop',
-			referse : false
+			transition: 'pop',
+			referse: false
 		});
 	} else {
 		openPopup();
@@ -381,9 +393,11 @@ ActionMenu.prototype.show = function() {
 
 /**
  * Close menu and return to page where it was openned
- * @param onclosed - callback fired when menu closed
+ *
+ * @param onclosed -
+ *            callback fired when menu closed
  */
-ActionMenu.prototype.close = function(onclosed) {
+ActionMenu.prototype.close = function (onclosed) {
 	var self = this;
 
 	if (!this.isOpened) {
@@ -398,23 +412,32 @@ ActionMenu.prototype.close = function(onclosed) {
 		this.selector.destroy();
 	}
 
-		tau.closePopup(this.popup);
-		
+
+	$(self.page).one('pagehide', function () {
+		if (self.prevPage !== self.page) {
+			tau.changePage("#" + self.prevPage, {
+				'transition': 'none'
+			});
+		}
+		if (onclosed) {
+			onclosed();
+		}
+	});
+
+	$(this.popup).one('popupbeforehide',function (){
 		$(self.page + " " + self.menuName).remove();
 		$(self.page + ' .ui-popup-overlay').remove();
-
-		
 		if (self.prevPage !== self.page) {
-			if (onclosed){
-				$(this.page).one('pagehide', function(){
-					onclosed();
-				});
-			}
-			tau.changePage("#" + self.prevPage, {'transition' : 'none'});
+			tau.changePage("#" + self.prevPage, {
+				'transition': 'none'
+			});
 		}
 		else{
-			if (onclosed){
-				onclosed();
-			}
+			tau.back();
 		}
+	});
+	tau.closePopup(this.popup);
+
+
+
 };
