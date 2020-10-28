@@ -2,6 +2,8 @@
 /*jshint loopfunc: true */
 
 /**
+ * 2.1.1.1
+ * fixed setMenuItemVisibility now checks isVisible by !
  * 2.1.1.0
  * Support for tau 1.2.4
  * REQUIRES: Utils, JQuery v2.0.0+
@@ -182,7 +184,7 @@ ActionMenu.prototype.getMenuItemByName = function (itemName) {
 };
 
 ActionMenu.prototype.setMenuItemVisibility = function (itemName, isVisible) {
-	if (isVisible === true) {
+	if (isVisible) {
 		this.showMenuItem(itemName);
 	} else {
 		this.hideMenuItem(itemName);
