@@ -2,6 +2,8 @@
 /*jslint laxbreak: true*/
 
 /*
+ * v 2.0.3.6
+ * Fatal errors notification changed from alert to log.
  * v 2.0.3.5
  * ref from IntelliJ Idea warnings
  * v 2.0.3.4
@@ -351,10 +353,10 @@ SAP.prototype.close = function() {
 
 				}
 			}, function(e) {
-				alert(e);
+				Log.e(e);
 			});
 		} catch (e) {
-			alert(e);
+			Log.e(e);
 		}
 	}
 
@@ -701,7 +703,7 @@ SAP.prototype.connect = function() {
 	} catch (e) {
 		if (!(e instanceof ReferenceError)) {
 			d.reject(e);
-			alert(e);
+			Log.e(e);
 		}
 	}
 	return d.promise();
