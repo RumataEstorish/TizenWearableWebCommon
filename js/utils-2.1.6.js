@@ -2,6 +2,10 @@
 /*jslint bitwise: true */
 
 /**
+ * v2.1.6
+ * changed getDisplayTime methods to use ap when system is set to
+ * added isHour12 method
+ * added getHoursConsiderAp method
  * v2.1.5.3
  * added date.parseWithTimeZone
  * v2.1.5.2
@@ -40,6 +44,26 @@ Date.prototype.toDateInputValue = function() {
 };
 
 /**
+ * Return hours consider AP
+ * @returns 0 when hour 24, 12 when hour ap
+ */
+Date.prototype.getHoursConsiderAp = function(){
+	if (this.isHour12() === false){
+		return this.getHours();
+	}
+	var hours = this.getHours() % 12;
+	return hours ? hours : 12;
+};
+
+/**
+ * Check if 12 hour format
+ * @returns return true if 12 hour, false if 24
+ */
+Date.prototype.isHour12 = function(){
+	return tizen.time.getTimeFormat().indexOf('ap') > -1;
+};
+
+/**
  * Date and time for display without year
  * @returns string hh:MM, mm and MM with leading zero
  */
@@ -60,7 +84,11 @@ Date.prototype.toDisplayDateTimeYear = function(){
  * @returns string in hh:mm and minutes with leading zero
  */
 Date.prototype.toDisplayTime = function() {
-	return this.getHours() + ":" + (this.getMinutes() < 10 ? "0" + this.getMinutes() : this.getMinutes());
+	var ap = '';
+	if (this.isHour12() === true){
+		ap = this.getHours() >= 12 ? ' pm' : ' am';
+	}
+	return this.getHoursConsiderAp() + ":" + (this.getMinutes() < 10 ? "0" + this.getMinutes() : this.getMinutes()) + ap;
 };
 
 /**
@@ -133,6 +161,26 @@ Date.prototype.toYYYYMMDDTHHMMSS = function(){
 };
 
 /**
+ * Return hours consider AP
+ * @returns 0 when hour 24, 12 when hour ap
+ */
+tizen.TZDate.prototype.getHoursConsiderAp = function(){
+	if (this.isHour12() === false){
+		return this.getHours();
+	}
+	var hours = this.getHours() % 12;
+	return hours ? hours : 12;
+};
+
+/**
+ * Check if 12 hour format
+ * @returns return true if 12 hour, false if 24
+ */
+tizen.TZDate.prototype.isHour12 = function(){
+	return tizen.time.getTimeFormat().indexOf('ap') > -1;
+};
+
+/**
  * Parse date and set it to current timezone without changing
  * @param date string
  * @returns tizen date in current timezone
@@ -159,7 +207,11 @@ tizen.TZDate.prototype.toDisplayDateTimeYear = function(){
  * @returns string time in hh:mm and minutes with leading zero
  */
 tizen.TZDate.prototype.toDisplayTime = function(){
-	return this.getHours() + ":" + (this.getMinutes() < 10 ? "0" + this.getMinutes() : this.getMinutes());
+	var ap = '';
+	if (this.isHour12() === true){
+		ap = this.getHours() >= 12 ? ' pm' : ' am';
+	}
+	return this.getHours() + ":" + (this.getMinutes() < 10 ? "0" + this.getMinutes() : this.getMinutes()) + ap;
 };
 
 /**
