@@ -86,7 +86,7 @@ Date.prototype.toDisplayDateTimeYear = function(){
 Date.prototype.toDisplayTime = function() {
 	var ap = '';
 	if (this.isHour12() === true){
-		ap = this.getHours() >= 12 ? ' pm' : ' am';
+		ap = this.getHours() >= 12 ? ' PM' : ' AM';
 	}
 	return this.getHoursConsiderAp() + ":" + (this.getMinutes() < 10 ? "0" + this.getMinutes() : this.getMinutes()) + ap;
 };
