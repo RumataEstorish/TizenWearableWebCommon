@@ -17,35 +17,43 @@ ToastMessage.CLOSE_DELAY = 2000;
  * @param popupContent - popup content element name on page. Should be unique.
  */
 function ToastMessage(popupName, popupContent) {
-	var isOpened = false, self = this, pName = popupName[0] === '#'? popupName.slice(1) : popupName, pContent = popupContent[0] === '#' ? popupContent.slice(1) : popupContent;
+	var self = this;
+	var pName = popupName[0] === '#'? popupName.slice(1) : popupName;
+	var pContent = popupContent[0] === '#' ? popupContent.slice(1) : popupContent;
 
-	Object.defineProperty(this, "isOpened", {
-		get : function() {
-			return isOpened;
+	this._isOpened = false;
+
+	Object.defineProperties(this, {
+		'isOpened' : {
+			get: function(){
+				return self._isOpened;
+			}
 		},
-		set : function(val) {
-			isOpened = val;
+		'popupName': {
+			get: function(){
+				return pName;
+			}
+		},
+		'popupContent': {
+			get: function(){
+				return pContent;
+			}
 		}
 	});
 
-	Object.defineProperty(this, "popupName", {
-		get : function() {
-			return pName;
-		}
-	});
-
-	Object.defineProperty(this, "popupContent", {
-		get : function() {
-			return pContent;
-		}
-	});
-	
 	$(this.popupName).on("popuphide", function() {
-		self.isOpened = false;
+		self._isOpened = false;
 	});
 	
 	
-	$('body').append('<div id="' + pName + '" class="ui-popup ui-popup-toast"><div id="'+ pContent +'" class="ui-popup-content"	style="overflow-y: no-scroll;"></div></div>');
+	$('body').append('<div class="ui-page" id="' + pName + '">' +
+		'<div class="ui-content">' +
+		'<div class="ui-popup ui-popup-toast toast-text-only">' +
+		'<div id="'+ pContent +'" class="ui-popup-content">' +
+		'</div>' +
+		'</div>' +
+		'</div>' +
+		'</div>');
 }
 
 /**
@@ -55,6 +63,13 @@ function ToastMessage(popupName, popupContent) {
  */
 ToastMessage.prototype.show = function(txt, delay) {
 	var self = this;
+	var open = function(){
+		tau.changePage('#' + self.popupName);
+		$('#' + self.popupName).one('pageshow', function() {
+			tau.openPopup('#' + self.popupName + '.ui-popup');
+			self._isOpened = true;
+		});
+	}
 	if (!txt || txt === "") {
 		return;
 	}
@@ -64,20 +79,16 @@ ToastMessage.prototype.show = function(txt, delay) {
 	});
 	
 	setTimeout(function(){
-		tau.closePopup('#' + self.popupName);
-		self.isOpened = false;
+		tau.closePopup('#' + self.popupName + '.ui-popup');
+		self._isOpened = false;
 	}, ToastMessage.CLOSE_DELAY);
 	
 	$('#' + this.popupContent).html(txt);
-	if (this.isOpened !== true) {
+	if (this._isOpened !== true) {
 		if (delay) {
-			setTimeout(function() {
-				tau.openPopup('#' + self.popupName);
-				self.isOpened = true;
-			}, delay);
+			setTimeout(open, delay);
 		} else {
-			tau.openPopup('#' + this.popupName);
-			this.isOpened = true;
+			open();
 		}
 	}
 };
@@ -86,7 +97,7 @@ ToastMessage.prototype.show = function(txt, delay) {
  * Close popup
  */
 ToastMessage.prototype.close = function() {
-	if (this.isOpened === true) {
+	if (this._isOpened === true) {
 		tau.closePopup(this.popupName);
 	}
 };
