@@ -1,6 +1,8 @@
 /*global $, tau*/
 
 /*
+ * v1.2.0
+ * tau 1.2.4 support
  * v1.1.1
  * close delay increased to 2 sec
  * fixed not showing
@@ -19,7 +21,10 @@ ToastMessage.CLOSE_DELAY = 2000;
 function ToastMessage(popupName, popupContent) {
 	var self = this;
 	var pName = popupName[0] === '#'? popupName.slice(1) : popupName;
+	var pPageName = '#' + pName;
 	var pContent = popupContent[0] === '#' ? popupContent.slice(1) : popupContent;
+	this._prevPage = $('.ui-page-active').prop('id');
+
 
 	this._isOpened = false;
 
@@ -27,6 +32,11 @@ function ToastMessage(popupName, popupContent) {
 		'isOpened' : {
 			get: function(){
 				return self._isOpened;
+			}
+		},
+		'popupPageName' : {
+			get: function(){
+				return pPageName;
 			}
 		},
 		'popupName': {
@@ -41,20 +51,26 @@ function ToastMessage(popupName, popupContent) {
 		}
 	});
 
+	
+
+
+	pName = pName + ' popup';
 	$(this.popupName).on("popuphide", function() {
 		self._isOpened = false;
 	});
-	
-	
-	$('body').append('<div class="ui-page" id="' + pName + '">' +
+
+}
+
+ToastMessage.prototype._addPopup = function(){
+	$('body').append('<div class="ui-page" id="' + this.popupPageName.slice(1) + '">' +
 		'<div class="ui-content">' +
-		'<div class="ui-popup ui-popup-toast toast-text-only">' +
-		'<div id="'+ pContent +'" class="ui-popup-content">' +
+		'<div id="' + this.popupName + '" class="ui-popup ui-popup-toast toast-text-only">' +
+		'<div id="'+ this.popupContent +'" class="ui-popup-content">' +
 		'</div>' +
 		'</div>' +
 		'</div>' +
 		'</div>');
-}
+};
 
 /**
  * Show toast popup
@@ -64,9 +80,9 @@ function ToastMessage(popupName, popupContent) {
 ToastMessage.prototype.show = function(txt, delay) {
 	var self = this;
 	var open = function(){
-		tau.changePage('#' + self.popupName);
-		$('#' + self.popupName).one('pageshow', function() {
-			tau.openPopup('#' + self.popupName + '.ui-popup');
+		tau.changePage(self.popupPageName);
+		$(self.popupPageName).one('pageshow', function() {
+			tau.openPopup(self.popupName);
 			self._isOpened = true;
 		});
 	}
@@ -74,13 +90,14 @@ ToastMessage.prototype.show = function(txt, delay) {
 		return;
 	}
 
-	$(this.popupName).on("click", function(){
-		tau.closePopup('#' + self.popupName);
+	this._addPopup();
+
+	$(this.popupPageName).on("click", function(){
+		self.close();
 	});
 	
 	setTimeout(function(){
-		tau.closePopup('#' + self.popupName + '.ui-popup');
-		self._isOpened = false;
+		self.close();
 	}, ToastMessage.CLOSE_DELAY);
 	
 	$('#' + this.popupContent).html(txt);
@@ -99,5 +116,8 @@ ToastMessage.prototype.show = function(txt, delay) {
 ToastMessage.prototype.close = function() {
 	if (this._isOpened === true) {
 		tau.closePopup(this.popupName);
+		tau.changePage('#' + this._prevPage);
+		$(this.popupPageName).remove();
+		this._isOpened = false;
 	}
 };
