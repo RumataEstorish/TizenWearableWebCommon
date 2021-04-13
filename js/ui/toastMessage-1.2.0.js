@@ -80,7 +80,7 @@ ToastMessage.prototype._addPopup = function(){
 ToastMessage.prototype.show = function(txt, delay) {
 	var self = this;
 	var open = function(){
-		tau.changePage(self.popupPageName);
+		tau.changePage(self.popupPageName, {transition: 'pop'});
 		$(self.popupPageName).one('pageshow', function() {
 			tau.openPopup(self.popupName);
 			self._isOpened = true;
@@ -116,7 +116,7 @@ ToastMessage.prototype.show = function(txt, delay) {
 ToastMessage.prototype.close = function() {
 	if (this._isOpened === true) {
 		tau.closePopup(this.popupName);
-		tau.changePage('#' + this._prevPage);
+		tau.changePage('#' + this._prevPage, {transition: 'pop'});
 		$(this.popupPageName).remove();
 		this._isOpened = false;
 	}
