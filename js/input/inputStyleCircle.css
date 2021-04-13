@@ -50,23 +50,23 @@ textarea.input-area {
 	border: none;
 	resize: none;
 	word-break: break-all;
-	word-wrap: break-word;	
+	word-wrap: break-word;
 	text-align: left;
 }
 
 .input-area-active {
 	background: rgba(0, 0, 0, 0);
-	border-radius: 0px;
+	border-radius: 0;
 	width: 55%;
-	top: 30px;
-	left: 80px;
+	top: 50px;
+	left: 40px;
 	padding-right: 80px;
 	position: absolute;
 	overflow: hidden;
 }
 
 input[type="text"].input-area-active {
-	padding: 0px;
+	padding: 20px;
 	word-wrap: normal;
 	word-break: normal;
 }
