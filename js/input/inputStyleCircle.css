@@ -6,14 +6,11 @@
 	border: none;
 	width: 36px;
 	height: 90px;
-	background: rgba(0, 0, 0, 0);
-	background-image: url(tick.png);
-	background-repeat: no-repeat;
-	background-position: bottom;
+	background: rgba(0, 0, 0, 0) url(tick.png) no-repeat bottom;
 }
 
 .input-content {
-	background: rgb(112, 112, 112);
+	background: rgba(250,250,250,.15);
 	border: none;
 	border-radius: 25px;
 	width: 80%;
@@ -21,29 +18,25 @@
 	margin: auto;
 }
 
-#inputGearContent{
-	margin-top: 3.5rem;
-}
 
-.input-content-active {
-	background: rgba(0, 0, 0, 0);
-}
 
 input[type="text"].input-area {
-	width: 78%;
+	background: rgba(0,0,0,0);
+	width: 87%;
+	height: 50%;
 	padding: 10px 10px 55px 10px;
 	overflow: visible;
 }
 
 textarea.input-area {
-	height: 3.6em;
-	width: 78%;
+	height: 50%;
+	width: 87%;
 	padding: 10px 10px 55px 10px;
 }
 
 .input-area {
 	position: relative;
-	background: rgb(112, 112, 112);
+	background: rgba(0,0,0,0);
 	color: white;
 	width: 100%;
 	border-radius: 25px;
@@ -54,8 +47,11 @@ textarea.input-area {
 	text-align: left;
 }
 
+#inputGearPage{
+	overflow-y: hidden;
+}
+
 .input-area-active {
-	background: rgba(0, 0, 0, 0);
 	border-radius: 0;
 	width: 55%;
 	top: 50px;
@@ -67,11 +63,14 @@ textarea.input-area {
 
 input[type="text"].input-area-active {
 	padding: 20px;
+	width: 78%;
+	height: 50%;
 	word-wrap: normal;
 	word-break: normal;
+	background: rgba(250,250,250,.15);
 }
 
 textarea.input-area-active {
-	height: 1.12em;
+	height: 50%;
 	padding: 10px;
 }
