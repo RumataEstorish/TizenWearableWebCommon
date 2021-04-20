@@ -2,6 +2,7 @@
 /*jslint laxbreak: true*/
 
 /**
+ * v1.1.0 support for tau 1.2.4
  * v1.0.4.3
  * fixed bug when open keyboard in multiline mode: input field focus wasn't gained
  * v1.0.4.2
@@ -16,7 +17,7 @@
  * Set mode to SINGLE_LINE forever for GearS due to keyboard bug
  * Changed properties signatures to Object.defineProperty
  * In open method use of mode property of class instead of argument
- * On window resise when closing keyboard, removes input-area-active class
+ * On window resize when closing keyboard, removes input-area-active class
  * v1.0.0
  * Initial release
  */

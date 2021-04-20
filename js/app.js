@@ -39,7 +39,7 @@ function showInput() {
 }
 
 function addListItem(){
-	list.addItem('<li><a href="#">Item2<span>test</span></li>', 5);
+	list.addItem($('<li><a href="#">Item2<span>test</span></li>'), 5);
 }
 
 function showMultilineInput() {
@@ -88,7 +88,7 @@ function initActionMenu() {
 
 $(window).on('load', function() {
 
-	list = tau.widget.Listview($('#main ul')[0]);
+	list = new List($('#main ul'));
 
 	initActionMenu();
 	toastMessage = new ToastMessage('popupToast', 'popupToastContent');
