@@ -1,4 +1,4 @@
-/*global jQuery*/
+/*global jQuery, tau*/
 
 function List(jList) {
     var tList = null;
@@ -35,7 +35,7 @@ List.prototype.addItem = function (item, position) {
 
 List.prototype.add = function (item, position) {
     if (item instanceof jQuery) {
-        this.tauList.addItem(item.html(), position);
+        this.tauList.addItem(item.prop('outerHTML'), position);
     } else {
         this.tauList.addItem(item, position);
     }
@@ -65,4 +65,4 @@ List.prototype.clear = function () {
 
 List.prototype.empty = function () {
     this.clear();
-}
+};

@@ -1,4 +1,4 @@
-/*global $, ActionMenu, ToastMessage, Input, KeyboardModes, tau, Utils, SwipeList, tizen*/
+/*global $, ActionMenu, ToastMessage, List, Input, KeyboardModes, tau, Utils, SwipeList, tizen*/
 /*jshint unused: false*/
 /*jslint laxbreak: true*/
 
@@ -39,7 +39,7 @@ function showInput() {
 }
 
 function addListItem(){
-	list.addItem($('<li><a href="#">Item2<span>test</span></li>'), 5);
+	list.addItem($('<li class="li-has-multiline"><a href="#">Item2<span class="ui-li-sub-text">test</span></li>'), 5);
 }
 
 function showMultilineInput() {
@@ -103,8 +103,6 @@ $(window).on('load', function() {
 	});
 
 	window.addEventListener("tizenhwkey", function(ev) {
-		var activePopup = null, page = null, pageid = "";
-
 		if (ev.keyName === "back") {
 
 			if (actionMenu.isOpened) {
