@@ -39,7 +39,7 @@ function showInput() {
 }
 
 function addListItem(){
-	list.addItem($('<li class="li-has-multiline"><a href="#">Item2<span class="ui-li-sub-text">test</span></li>'), 5);
+	list.addItem($('<li class="li-has-multiline"><a href="#">Item2<span class="ui-li-sub-text">test</span></li>'));
 }
 
 function showMultilineInput() {

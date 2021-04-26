@@ -1,4 +1,4 @@
-/*global jQuery, tau*/
+/*global $, jQuery, tau*/
 
 function List(jList) {
     var tList = null;
@@ -35,9 +35,10 @@ List.prototype.addItem = function (item, position) {
 
 List.prototype.add = function (item, position) {
     if (item instanceof jQuery) {
-        this.tauList.addItem(item.prop('outerHTML'), position);
+        var html = item.html();
+        this.tauList.addItem(html, position, $(item.prop('outerHTML').replace(html, '')).get(0));
     } else {
-        this.tauList.addItem(item, position);
+        throw 'Only jquery element supported';
     }
     this._count++;
 };
