@@ -30,9 +30,6 @@ Patch for Tizen circle-helper allows to force bezel rotation for element. Anyway
 
 #### [More on wiki](https://github.com/RumataEstorish/TizenWearableWebCommon/wiki/CircleHelper)
 
-### CircleProgress
-Small wrapper around progress bar
-
 ### ContextMenu
 Add support for tap and hold feature for object.
 
