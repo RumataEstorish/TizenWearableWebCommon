@@ -332,15 +332,15 @@ li.static::before {
 /* ------------------------------------------------------------------------------ */
 /* -------------------------Action Icon------------------------------- */
 
- .li-action-icon-button.li-action-delete {
+.li-action-icon-button.li-action-delete {
 	background-image: url(../contents/list/images/tw_list_delete_holo_dark.png);
 }
 
- .li-action-icon-button.li-action-setting {
+.li-action-icon-button.li-action-setting {
 	background-image: url(../contents/list/images/tw_list_setting_holo_dark.png);
 }
 
- .li-action-icon-button.li-action-add {
+.li-action-icon-button.li-action-add {
 	background-image: url(../contents/list/images/tw_list_add_holo_dark.png);
 }
 

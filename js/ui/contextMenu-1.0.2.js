@@ -1,5 +1,6 @@
 /*global $*/
 /**
+ * @todo Fix working with lists
  * v1.0.2.0
  * Code cleanup
  * v1.0.1.1

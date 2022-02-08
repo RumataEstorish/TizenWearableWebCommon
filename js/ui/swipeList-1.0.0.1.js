@@ -3,6 +3,7 @@
 /*jslint laxbreak: true*/
 
 /**
+ * @Deprecated not working in tau v1.2.9. Breaks paradigm
  * SwipeList constructor
  * @param pageName - name of page where swipe list is placed
  * @param leftSwipe - function called when swipe left performed

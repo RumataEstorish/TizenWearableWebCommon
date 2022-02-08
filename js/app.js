@@ -1,4 +1,4 @@
-/*global $, ActionMenu, ToastMessage, Input, KeyboardModes, tau, Utils, SwipeList, tizen*/
+/*global $, ActionMenu, ToastMessage, Input, KeyboardModes, tau, Utils, SwipeList, tizen, ContextMenu*/
 /*jshint unused: false*/
 /*jslint laxbreak: true*/
 
