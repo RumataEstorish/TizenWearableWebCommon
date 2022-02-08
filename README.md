@@ -35,6 +35,8 @@ Small wrapper around progress bar
 ### ContextMenu
 Add support for tap and hold feature for object.
 
+#### [More on wiki](https://github.com/RumataEstorish/TizenWearableWebCommon/wiki/ContextMenu)
+
 ### SwipeList
 Tiny wrapper around system swipe list
 
