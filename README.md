@@ -50,9 +50,6 @@ Tiny wrapper around system toast
 
 #### [More on wiki](https://github.com/RumataEstorish/TizenWearableWebCommon/wiki/ToastMessage)
 
-### VirtualList
-Patched system virtual list allowing dynamic content f.e. when you refresh data. Highly unrecommended to use it, works really bad especially when list item size is not the same
-
 ### Log
 Tiny wrapper around console. Just like android log syntax
 #### [More on wiki](https://github.com/RumataEstorish/TizenWearableWebCommon/wiki/Log)
