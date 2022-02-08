@@ -3,6 +3,7 @@
 /*jslint laxbreak: true*/
 
 /**
+ * @deprecated not working properly in tau v0.13.29
  * VirtualList wrapper
  * 
  * @param pageName -
@@ -70,7 +71,7 @@ function VirtualList(pageName, listName, dataLength, procFunc) {
 			self.vList = null;
 		}
 		$(document).off('rotarydetent', scroll);
-		var l = '', ll = $(self.listName);
+		var l, ll = $(self.listName);
 		ll.removeClass('ui-virtual-list-container');
 		ll.removeClass('ui-snap-listview');
 		ll.remove();
@@ -98,7 +99,7 @@ function VirtualList(pageName, listName, dataLength, procFunc) {
 	Object.defineProperty(this, 'page', {
 		get : function() {
 			return page;
-		},
+		}
 	});
 
 	Object.defineProperty(this, "list", {
