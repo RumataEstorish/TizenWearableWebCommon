@@ -83,7 +83,7 @@ ToastMessage.prototype.show = function (txt, delay) {
             tau.openPopup(self.popupName);
             self._isOpened = true;
         });
-    }
+    };
     if (!txt || txt === "") {
         return;
     }
