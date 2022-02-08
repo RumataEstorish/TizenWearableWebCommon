@@ -1,18 +1,21 @@
 /*global tau, $*/
 
+/**
+ * @deprecated not ready for production
+ */
 function CircleProgress(pageName, progressBarName, resultName, max) {
 	var self = this, progressBar = $(progressBarName)[0], page = $(pageName)[0], progressBarWidget = null, result = $(resultName);
 
 	Object.defineProperty(this, "result", {
 		get : function() {
 			return result;
-		},
+		}
 	});
 
 	Object.defineProperty(this, "progressBarWidget", {
 		get : function() {
 			return progressBarWidget;
-		},
+		}
 	});
 
 	Object.defineProperty(this, "max", {
@@ -39,10 +42,6 @@ function CircleProgress(pageName, progressBarName, resultName, max) {
 			progressBarWidget = null;
 		}
 	});
-
-	/*if (max > 2) {
-		tau.changePage(pageName);
-	}*/
 }
 
 CircleProgress.prototype.progress = function(val, max) {

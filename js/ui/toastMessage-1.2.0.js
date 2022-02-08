@@ -19,57 +19,55 @@ ToastMessage.CLOSE_DELAY = 2000;
  * @param popupContent - popup content element name on page. Should be unique.
  */
 function ToastMessage(popupName, popupContent) {
-	var self = this;
-	var pName = popupName[0] === '#'? popupName.slice(1) : popupName;
-	var pPageName = '#' + pName;
-	var pContent = popupContent[0] === '#' ? popupContent.slice(1) : popupContent;
-	this._prevPage = $('.ui-page-active').prop('id');
+    var self = this;
+    var pName = popupName[0] === '#' ? popupName.slice(1) : popupName;
+    var pPageName = '#' + pName;
+    var pContent = popupContent[0] === '#' ? popupContent.slice(1) : popupContent;
+    this._prevPage = $('.ui-page-active').prop('id');
 
 
-	this._isOpened = false;
+    this._isOpened = false;
 
-	Object.defineProperties(this, {
-		'isOpened' : {
-			get: function(){
-				return self._isOpened;
-			}
-		},
-		'popupPageName' : {
-			get: function(){
-				return pPageName;
-			}
-		},
-		'popupName': {
-			get: function(){
-				return pName;
-			}
-		},
-		'popupContent': {
-			get: function(){
-				return pContent;
-			}
-		}
-	});
-
-	
+    Object.defineProperties(this, {
+        'isOpened': {
+            get: function () {
+                return self._isOpened;
+            }
+        },
+        'popupPageName': {
+            get: function () {
+                return pPageName;
+            }
+        },
+        'popupName': {
+            get: function () {
+                return pName;
+            }
+        },
+        'popupContent': {
+            get: function () {
+                return pContent;
+            }
+        }
+    });
 
 
-	pName = pName + ' popup';
-	$(this.popupName).on("popuphide", function() {
-		self._isOpened = false;
-	});
+    pName = pName + ' popup';
+    $(this.popupName).on("popuphide", function () {
+        self._isOpened = false;
+    });
 
 }
 
-ToastMessage.prototype._addPopup = function(){
-	$('body').append('<div class="ui-page" id="' + this.popupPageName.slice(1) + '">' +
-		'<div class="ui-content">' +
-		'<div id="' + this.popupName + '" class="ui-popup ui-popup-toast toast-text-only">' +
-		'<div id="'+ this.popupContent +'" class="ui-popup-content">' +
-		'</div>' +
-		'</div>' +
-		'</div>' +
-		'</div>');
+ToastMessage.prototype._addPopup = function () {
+    $('body').append('<div class="ui-page" id="' + this.popupPageName.slice(1) + '">' +
+        '<div class="ui-content">' +
+        '<div id="' + this.popupName + '" class="ui-popup ui-popup-toast toast-text-only">' +
+        '<div id="' + this.popupContent + '" class="ui-popup-content">' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '</div>');
 };
 
 /**
@@ -77,47 +75,47 @@ ToastMessage.prototype._addPopup = function(){
  * @param txt - text to show
  * @param delay - open toast delay
  */
-ToastMessage.prototype.show = function(txt, delay) {
-	var self = this;
-	var open = function(){
-		tau.changePage(self.popupPageName, {transition: 'pop'});
-		$(self.popupPageName).one('pageshow', function() {
-			tau.openPopup(self.popupName);
-			self._isOpened = true;
-		});
-	};
-	if (!txt || txt === "") {
-		return;
-	}
+ToastMessage.prototype.show = function (txt, delay) {
+    var self = this;
+    var open = function () {
+        tau.changePage(self.popupPageName, {transition: 'pop'});
+        $(self.popupPageName).one('pageshow', function () {
+            tau.openPopup(self.popupName);
+            self._isOpened = true;
+        });
+    };
+    if (!txt || txt === "") {
+        return;
+    }
 
-	this._addPopup();
+    this._addPopup();
 
-	$(this.popupPageName).on("click", function(){
-		self.close();
-	});
-	
-	setTimeout(function(){
-		self.close();
-	}, ToastMessage.CLOSE_DELAY);
-	
-	$('#' + this.popupContent).html(txt);
-	if (this._isOpened !== true) {
-		if (delay) {
-			setTimeout(open, delay);
-		} else {
-			open();
-		}
-	}
+    $(this.popupPageName).on("click", function () {
+        self.close();
+    });
+
+    setTimeout(function () {
+        self.close();
+    }, ToastMessage.CLOSE_DELAY);
+
+    $('#' + this.popupContent).html(txt);
+    if (this._isOpened !== true) {
+        if (delay) {
+            setTimeout(open, delay);
+        } else {
+            open();
+        }
+    }
 };
 
 /**
  * Close popup
  */
-ToastMessage.prototype.close = function() {
-	if (this._isOpened === true) {
-		tau.closePopup(this.popupName);
-		tau.changePage('#' + this._prevPage, {transition: 'pop'});
-		$(this.popupPageName).remove();
-		this._isOpened = false;
-	}
+ToastMessage.prototype.close = function () {
+    if (this._isOpened === true) {
+        tau.closePopup(this.popupName);
+        tau.changePage('#' + this._prevPage, {transition: 'pop'});
+        $(this.popupPageName).remove();
+        this._isOpened = false;
+    }
 };

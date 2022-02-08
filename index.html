@@ -6,28 +6,24 @@
 
     <link rel="stylesheet" href="lib/tau/wearable/theme/default/tau.min.css">
     <link rel="stylesheet" media="all and (-tizen-geometric-shape: circle)"
-          href="lib/tau/wearable/theme/default/tau.circle.min.css">
+          href="lib/tau/wearable/theme/default/tau.circle-patch-0.0.0.1.min.css">
 
     <link rel="stylesheet" href="css/style.css">
-    <link href="css/style.circle.css" media="all and (-tizen-geometric-shape: circle)" rel="stylesheet"/>
 
-    <script type="text/javascript" src="js/ui/circle-helper.js"></script>
-    <script src="lib/tau/wearable/js/tau.js"></script>
+    <script src="lib/tau/wearable/js/tau.min.js"></script>
+
     <script type="text/javascript" src="js/jquery-3.6.0.min.js"></script>
-
-
-    <script type="text/javascript" src="js/utils-2.1.6.js"></script>
+    <script type="text/javascript" src="js/utils-2.1.7.js"></script>
 
     <script type="text/javascript" src="js/ui/actionMenu-2.1.1.1.js"></script>
+    <script type="text/javascript" src="js/ui/contextMenu-1.0.2.js"></script>
     <script type="text/javascript" src="js/ui/toastMessage-1.2.0.js"></script>
     <script type="text/javascript" src="js/ui/swipeList-1.0.0.1.js"></script>
     <script type="text/javascript" src="js/input/typeGear-1.0.0.js"></script>
 
-    <script type="text/javascript" src="js/input/input-1.1.0.js"></script>
-    <script type="text/javascript" src="js/ui/list-1.0.0.js"></script>
-
+    <script type="text/javascript" src="js/input/input-1.0.4.3.js"></script>
+    <script type="text/javascript" src="js/ui/circle-helper-1.0.0.3.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
-
 
 </head>
 <body>
@@ -42,7 +38,12 @@
             <li onclick='showInput()'>Show single line input</li>
             <li onclick='showMultilineInput()'>Show multi line input</li>
             <li onclick='showSwipeList()'>Show swipe list</li>
-            <li onclick='addListItem()'>Add list item</li>
+            <li id="contextMenuLi" class="li-has-multiline">
+                <label>
+                    Tap or hold for
+                    <span class="li-text-sub ui-li-sub-text">context menu</span>
+                </label>
+            </li>
         </ul>
     </div>
 </div>
