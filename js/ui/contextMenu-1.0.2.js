@@ -7,6 +7,9 @@
  * v1.0.1
  * fixed processing events futhermore
  */
+
+ContextMenu.HOLD_DELAY = 1000;
+
 function ContextMenu(object, onclick, ontaphold) {
 
     var self = this;
@@ -44,8 +47,8 @@ function ContextMenu(object, onclick, ontaphold) {
                 return onclick;
             }
         },
-        'onclickhold' : {
-            get : function () {
+        'onclickhold': {
+            get: function () {
                 return ontaphold;
             }
         }
@@ -85,7 +88,7 @@ ContextMenu.prototype.touchStart = function (sender) {
                 // noinspection JSValidateTypes
                 self.onclickhold(sender);
             }
-        }, 1000);
+        }, ContextMenu.HOLD_DELAY);
     }
 };
 
