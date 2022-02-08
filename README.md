@@ -33,7 +33,7 @@ Patch for Tizen circle-helper allows to force bezel rotation for element. Anyway
 Small wrapper around progress bar
 
 ### ContextMenu
-Different click events around item (probably list item). Supports click, click hold, long tap.
+Add support for tap and hold feature for object.
 
 ### SwipeList
 Tiny wrapper around system swipe list
