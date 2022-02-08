@@ -30,9 +30,6 @@ Patch for Tizen circle-helper allows to force bezel rotation for element. Anyway
 
 #### [More on wiki](https://github.com/RumataEstorish/TizenWearableWebCommon/wiki/CircleHelper)
 
-### CircleProgress
-Small wrapper around progress bar
-
 ### ContextMenu
 Add support for tap and hold feature for object.
 
@@ -52,9 +49,6 @@ Tiny wrapper around system toast
 ![ToastMessage](/screenshots/toastMessage.png)
 
 #### [More on wiki](https://github.com/RumataEstorish/TizenWearableWebCommon/wiki/ToastMessage)
-
-### VirtualList
-Patched system virtual list allowing dynamic content f.e. when you refresh data. Highly unrecommended to use it, works really bad especially when list item size is not the same
 
 ### Log
 Tiny wrapper around console. Just like android log syntax
