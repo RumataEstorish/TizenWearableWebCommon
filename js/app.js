@@ -5,10 +5,7 @@
 var actionMenu = null;
 var toastMessage = null;
 var model = null;
-
-function showSwipeList() {
-    tau.changePage('#swipeListPage');
-}
+var list;
 
 function showActionMenu() {
     actionMenu.show();
@@ -81,8 +78,8 @@ function initActionMenu() {
     }]);
 }
 
-function setupContextMenu() {
-    new ContextMenu($('#contextMenuLi'), function () {
+function setupContextMenu(object) {
+    new ContextMenu(object, function () {
             toastMessage.show('Context menu clicked');
         },
         function () {
@@ -93,14 +90,16 @@ function setupContextMenu() {
 $(window).on('load', function () {
 
     initActionMenu();
-    toastMessage = new ToastMessage('popupToast', 'popupToastContent');
-    new SwipeList('swipeListPage', function (evt) {
-        alert('Swipe left: ' + evt.target.id);
-    }, function (evt) {
-        alert('Swipe right: ' + evt.target.id);
-    });
 
-    setupContextMenu();
+    toastMessage = new ToastMessage('popupToast', 'popupToastContent');
+
+    list = new List($('#mainList'));
+
+    var contextMenuObject = $('<li id="contextMenuLi" class="li-has-multiline"><label>Tap or hold for<span class="li-text-sub ui-li-sub-text">context menu</span></label></li>');
+
+    list.add(contextMenuObject, 4);
+    
+    setupContextMenu(contextMenuObject);
 
     tizen.systeminfo.getPropertyValue("BUILD", function (res) {
         model = res.model;
@@ -117,9 +116,6 @@ $(window).on('load', function () {
             switch (Utils.getActivePage()) {
                 case 'main':
                     tizen.application.getCurrentApplication().exit();
-                    break;
-                case 'swipeListPage':
-                    tau.changePage('#main');
                     break;
             }
         }

@@ -1,6 +1,7 @@
 /*global $*/
 /**
- * @todo Fix working with lists
+ * v1.1.0
+ * Added support for tau 1.2.9
  * v1.0.2.0
  * Code cleanup
  * v1.0.1.1
@@ -20,28 +21,30 @@ ContextMenu.HOLD_DELAY = 1000;
  */
 function ContextMenu(object, onclick, ontaphold) {
 
+    this._object = object;
+
     var self = this;
-    var releaseTimer = null;
-    var longTap = false;
+    var _releaseTimer = null;
+    var _longTap = false;
 
     /**
      * Internal properties
      */
     Object.defineProperties(this, {
-        'releaseTimer': {
+        '_releaseTimer': {
             get: function () {
-                return releaseTimer;
+                return _releaseTimer;
             },
             set: function (val) {
-                releaseTimer = val;
+                _releaseTimer = val;
             }
         },
-        'longTap': {
+        '_longTap': {
             get: function () {
-                return longTap;
+                return _longTap;
             },
             set: function (val) {
-                longTap = val;
+                _longTap = val;
             }
         }
     });
@@ -62,35 +65,39 @@ function ContextMenu(object, onclick, ontaphold) {
         }
     });
 
-    $(object).on("touchstart", function () {
-        self._touchStart($(object));
+    this._object.get(0).addEventListener('click', function(){
+        alert('clicked at last');
     });
-    $(object).on("touchend", function () {
-        self._touchEnd($(object));
+
+    $(this._object).on("touchstart", function () {
+        self._touchStart(this._object);
     });
-    $(object).on("click", function () {
-        self._touchClick($(object));
+    $(this._object).on("touchend", function () {
+        self._touchEnd(this._object);
+    });
+    $(this._object.children()[0]).on("click", function () {
+        self._touchClick(this._object);
     });
 }
 
 ContextMenu.prototype._touchClick = function (sender) {
     this._touchEnd();
-    if (this.longTap === false) {
+    if (this._longTap === false) {
         if (this.onclick && typeof this.onclick === 'function') {
             // noinspection JSValidateTypes
             this.onclick(sender);
         }
     }
-    this.longTap = false;
+    this._longTap = false;
 };
 
 ContextMenu.prototype._touchStart = function (sender) {
     var self = this;
-    this.longTap = false;
+    this._longTap = false;
 
-    if (!this.releaseTimer) {
-        this.releaseTimer = setTimeout(function () {
-            self.longTap = true;
+    if (!this._releaseTimer) {
+        this._releaseTimer = setTimeout(function () {
+            self._longTap = true;
 
             if (self.onclickhold && typeof self.onclickhold === 'function') {
                 // noinspection JSValidateTypes
@@ -101,8 +108,8 @@ ContextMenu.prototype._touchStart = function (sender) {
 };
 
 ContextMenu.prototype._touchEnd = function () {
-    if (this.releaseTimer) {
-        clearTimeout(this.releaseTimer);
+    if (this._releaseTimer) {
+        clearTimeout(this._releaseTimer);
     }
-    this.releaseTimer = null;
+    this._releaseTimer = null;
 };
