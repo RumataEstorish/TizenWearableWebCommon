@@ -3,9 +3,9 @@
 function List(jList) {
     var tList = null;
     if (jList instanceof jQuery) {
-        tList = tau.widget.Listview(jList[0]);
+        tList = new tau.widget.Listview(jList[0]);
     } else {
-        tList = tau.widget.Listview(jList);
+        tList = new tau.widget.Listview(jList);
     }
     var self = this;
     this._count = 0;
