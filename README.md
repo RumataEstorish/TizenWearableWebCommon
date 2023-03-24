@@ -35,14 +35,6 @@ Add support for tap and hold feature for object.
 
 #### [More on wiki](https://github.com/RumataEstorish/TizenWearableWebCommon/wiki/ContextMenu)
 
-### SwipeList
-Tiny wrapper around system swipe list
-
-![SwipeList left](/screenshots/swipeListLeft.png)
-![SwipeList right](/screenshots/swipeListRight.png)
-
-#### [More on wiki](https://github.com/RumataEstorish/TizenWearableWebCommon/wiki/SwipeList)
-
 ### ToastMessage
 Tiny wrapper around system toast
 
