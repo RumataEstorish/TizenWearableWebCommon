@@ -32,7 +32,7 @@
 }
 
 #confirmGearFooter{
-	position: relative; 
+	position: relative;
 	bottom: -28px;
 }
 
@@ -41,7 +41,7 @@ textarea.input-area{
 }
 
 input[type="text"].input-area{
-	 padding: 0px 0px 360px 0;
+	padding: 0px 0px 360px 0;
 }
 
 
@@ -55,7 +55,7 @@ input[type="text"].input-area{
 	resize: none;
 	text-align: left;
 	word-wrap: break-word;
-    word-break: break-all;
+	word-break: break-all;
 }
 
 input[type="text"].input-area-active{

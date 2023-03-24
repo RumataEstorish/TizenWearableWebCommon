@@ -753,6 +753,17 @@ String.prototype.startsWith = function (s) {
 };
 
 /**
+ * Get jquery id from string
+ * @returns if string starts with # return itself, otherwise add #
+ */
+String.prototype.toJQueryId = function(){
+  if (this[0] === '#'){
+      return this;
+  }
+  return '#' + this;
+};
+
+/**
  * Converts string to boolean
  * @param val - string value to convert
  * @param defaultVal - default value when incorrect string.
