@@ -62,6 +62,3 @@ Draws input window and handles input from all watch generation. For Gear 1,2 it 
 ![Input](/screenshots/input.png)
 
 #### [More on wiki](https://github.com/RumataEstorish/TizenWearableWebCommon/wiki/Input)
-
-### Bonus
-You can find lib/tau/wearable/theme/default/tau.circle-patch-0.0.0.1.min.cs which fixes circular menu icons bug, when they grow full screen. You know.
