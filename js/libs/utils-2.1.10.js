@@ -2,6 +2,10 @@
 /*jslint bitwise: true */
 
 /**
+ * v2.1.10
+ * removed createIndexScrollBar
+ * v2.1.9
+ * fixed getting jquery id for string within quotas
  * v2.1.7
  * added toDateObject for tizen.TZDate
  * v2.1.6
@@ -452,75 +456,6 @@ Utils.getFileExtension = function (fname) {
     return fname.substr((~-fname.lastIndexOf(".") >>> 0) + 2).toLowerCase();
 };
 
-
-// TODO move to separate class
-/**
- * Create indexed scrollbar
- * @param indexPage. Page where create
- * @param indexScrollBar indexScrollBar element name
- * @param listName name of list for which index scrollbar should be created
- */
-Utils.createIndexScrollBar = function (indexPage, indexScrollBar, listName) {
-    var page = document.getElementById(indexPage), listviewElement = document.getElementById(listName), isCircle = tau.support.shape.circle, scroller, indexScrollbar;
-
-    page.addEventListener("pageshow", function () {
-        var indexScrollbarElement = document.getElementById(indexScrollBar), listDividers = listviewElement.getElementsByClassName("ui-listview-divider"), // list dividers
-            dividers = {}, // collection of list dividers
-            indices = [], // index list
-            divider, i, idx;
-
-        // For all list dividers,
-        for (i = 0; i < listDividers.length; i++) {
-            // Add the list divider elements to the collection
-            divider = listDividers[i];
-            idx = divider.innerText;
-            dividers[idx] = divider;
-
-            // Add the index to the index list
-            indices.push(idx);
-        }
-
-        scroller = tau.util.selectors.getScrollableParent(listviewElement);
-
-        if (!indexScrollbarElement || !indices) {
-            return;
-        }
-        if (!isCircle) {
-            indexScrollbar = new tau.widget.IndexScrollbar(indexScrollbarElement, {
-                index: indices,
-                container: scroller
-            });
-        } else {
-            // Create IndexScrollbar
-            indexScrollbar = new tau.widget.CircularIndexScrollbar(indexScrollbarElement, {
-                index: indices
-            });
-            // Add SnapListview item "selected" event handler.
-            listviewElement.addEventListener("selected", function (ev) {
-                var indexValue = ev.target.textContent[0];
-                indexScrollbar.value(indexValue);
-            });
-        }
-
-        // Add IndexScrollbar index "select" event handler.
-        indexScrollbarElement.addEventListener("select", function (ev) {
-            var divider, idx = ev.detail.index;
-
-            divider = dividers[idx];
-            if (divider && scroller) {
-                // Scroll to the ui-listview-divider element
-                scroller.scrollTop = divider.offsetTop - scroller.offsetTop;
-            }
-        });
-    });
-
-    page.addEventListener("pagehide", function () {
-        if (indexScrollbar) {
-            indexScrollbar.destroy();
-        }
-    });
-};
-
 /**
  * Generate random UUID
  * @returns string UUID
@@ -757,10 +692,19 @@ String.prototype.startsWith = function (s) {
  * @returns if string starts with # return itself, otherwise add #
  */
 String.prototype.toJQueryId = function(){
-  if (this[0] === '#'){
-      return this;
-  }
-  return '#' + this;
+	 if (this[0] === '#') {
+	        return this;
+	    }
+	    var result = this;
+
+	    if (this[0] === "'"){
+	        result = "\\" + this;
+	    }
+
+	    if (this[this.length -1] === "'"){
+	        result = result.slice(0, result.length - 1) + "\\'";
+	    }
+	    return '#' + result;
 };
 
 /**

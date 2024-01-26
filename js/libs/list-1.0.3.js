@@ -3,6 +3,12 @@
 List.SCROLL_POSITION_DELAY = 50;
 
 /**
+ * v1.0.3
+ * - fixed refresh() and destroy() not found for square watch
+ * v1.0.2
+ * - fixed destroy list
+ * - fixed getting jquery id of id in quotas
+ * 
  * Create a list based on tizen's ArcListView
  * @param listPage - page name or jquery page object where list is placed. List should be already present in html
  * @constructor
@@ -84,7 +90,16 @@ String.prototype.toJQueryId = function () {
     if (this[0] === '#') {
         return this;
     }
-    return '#' + this;
+    var result = this;
+
+    if (this[0] === "'"){
+        result = "\\" + this;
+    }
+
+    if (this[this.length -1] === "'"){
+        result = result.slice(0, result.length - 1) + "\\'";
+    }
+    return '#' + result;
 };
 
 Number.prototype.toJQueryId = function(){
@@ -99,7 +114,8 @@ Number.prototype.toJQueryId = function(){
  * @returns jquery item
  */
 List.prototype.getRootItemById = function (id) {
-    return this.jQueryList.find(id.toJQueryId() + ' .ui-marquee-content, ' + id.toJQueryId() + ' .ui-marquee');
+	var jId = id.toJQueryId();
+    return this.jQueryList.find(jId + ' .ui-marquee-content, ' + jId + ' .ui-marquee');
 };
 
 /**
@@ -180,7 +196,7 @@ List.prototype.add = function (item, position, dontRefresh) {
 
     this._count++;
 
-    if (!dontRefresh) {
+    if (!dontRefresh && this.tList && this.tList.refresh) {
         this.tList.refresh();
     }
 };
@@ -259,8 +275,14 @@ List.prototype.empty = function () {
  */
 List.prototype.destroy = function () {
     this.clear();
-    if (this.tauList) {
-        this.tList.destroy();
+    if (this.tauList && this.tauList.length > 0){
+    		this.tauList[0].empty();
+    }
+    if (this.tauList && this.tauList.destroy) {
+        this.tauList.destroy();
+    }
+    if (this.jQueryList){
+    		this.jQueryList.empty();
     }
 };
 

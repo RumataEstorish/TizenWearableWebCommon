@@ -2,6 +2,8 @@
 /*jshint loopfunc: true */
 
 /**
+ * 2.2.1
+ * fixed bug with navigating to another page after close
  * 2.2.0
  * added menu item option to navigate some page (navigateTo)
  * added menu item option to avoid navigate back (noBack)
@@ -303,10 +305,12 @@ ActionMenu.prototype.show = function () {
                     self.close();
                 }
             });
-            tau.openPopup(self.popup);
-        } catch (e) {
-            alert(e);
-        }
+            
+            tau.openPopup(self.popup);            		
+ 
+            } catch (e) {
+            		alert(e);
+            }
     }, createMenu = function () {
         var res = "", i = 0;
 
@@ -391,7 +395,7 @@ ActionMenu.prototype.show = function () {
     this.prevPage = Utils.getActivePage();
     if ("#" + Utils.getActivePage() !== this.page) {
         $(this.page).one("pageshow", function () {
-            openPopup();
+        		openPopup();
         });
 
         tau.changePage(this.page, {
@@ -443,18 +447,29 @@ ActionMenu.prototype.close = function (onclosed, navigateTo, noBack) {
         }
     });
 
+    if (navigateTo) {
+    	
+    		$(this.popup).one('popuphide', function () {
+            $(self.page + " " + self.menuName).remove();
+            $(self.page + ' .ui-popup-overlay').remove();
+        });
+
+    		$(navigateTo.toJQueryId()).one('pagehide', function(){
+    		    tau.closePopup(self.popup);
+    		});
+    		
+        tau.changePage(navigateTo.toJQueryId(), {
+            'transition': 'none'
+        });
+      
+        return;
+    }
+    
     $(this.popup).one('popuphide', function () {
         $(self.page + " " + self.menuName).remove();
         $(self.page + ' .ui-popup-overlay').remove();
         if (self.prevPage !== self.page && !navigateTo && !noBack) {
             tau.changePage("#" + self.prevPage, {
-                'transition': 'none'
-            });
-            return;
-        }
-
-        if (navigateTo) {
-            tau.changePage(navigateTo.toJQueryId(), {
                 'transition': 'none'
             });
             return;
@@ -470,6 +485,5 @@ ActionMenu.prototype.close = function (onclosed, navigateTo, noBack) {
     });
 
     tau.closePopup(this.popup);
-
 
 };
