@@ -1,7 +1,7 @@
+# Project is deprecated since Tizen Wearable DEATH!
+
 # Tizen Wearable Web Common
 Tizen Wearable Web application common components
-
-# Project is deprecated since Tizen Wearable DEATH!
 
 ## Introduction
 I've developed tizen apps since Gear 2.0. And now I want to share some of my code base, mostly common for my apps. If someone is still interested in Web apps coding (poor you), you can feel free to use this codes.
