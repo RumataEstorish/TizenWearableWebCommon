@@ -1,6 +1,8 @@
 # Tizen Wearable Web Common
 Tizen Wearable Web application common components
 
+# Project is deprecated since Tizen Wearable DEATH!
+
 ## Introduction
 I've developed tizen apps since Gear 2.0. And now I want to share some of my code base, mostly common for my apps. If someone is still interested in Web apps coding (poor you), you can feel free to use this codes.
 
@@ -55,7 +57,7 @@ Tiny wrapper around console. Just like android log syntax
 #### [More on wiki](https://github.com/RumataEstorish/TizenWearableWebCommon/wiki/Log)
 
 ### SAP
-Wrapper around samsung accessory protocol. Android part codes I will add later. Utilizes connection, reconnection, sending data etc
+Wrapper around samsung accessory protocol. Utilizes connection, reconnection, sending data etc. If need Android sources, please contact me directly.
 #### [More on wiki](https://github.com/RumataEstorish/TizenWearableWebCommon/wiki/SAP)
 
 ### GearHttp
@@ -74,4 +76,4 @@ Draws input window and handles input from all watch generation. For Gear 1,2 it 
 #### [More on wiki](https://github.com/RumataEstorish/TizenWearableWebCommon/wiki/Input)
 
 ### Bonus
-You can find lib/tau/wearable/theme/default/tau.circle-patch-0.0.0.1.min.cs which fixes circular menu icons bug, when they grow full screen. You know.
+You can find lib/tau/wearable/theme/default/tau.circle-patch-0.0.0.1.min.cs which fixes circular menu icons bug, when they grow full screen. You know. (deprecated for tau 1.2.9)
