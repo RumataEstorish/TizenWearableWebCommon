@@ -1,5 +1,3 @@
-# Project is deprecated since Tizen Wearable DEATH!
-
 # Tizen Wearable Web Common
 Tizen Wearable Web application common components
 
@@ -57,7 +55,7 @@ Tiny wrapper around console. Just like android log syntax
 #### [More on wiki](https://github.com/RumataEstorish/TizenWearableWebCommon/wiki/Log)
 
 ### SAP
-Wrapper around samsung accessory protocol. Utilizes connection, reconnection, sending data etc. If need Android sources, please contact me directly.
+Wrapper around samsung accessory protocol. Utilizes connection, reconnection, sending data etc. Android part codes can be seen in [GearHub](https://github.com/RumataEstorish/GearHub) [SAP module](https://github.com/RumataEstorish/GearHub/tree/main/sap)
 #### [More on wiki](https://github.com/RumataEstorish/TizenWearableWebCommon/wiki/SAP)
 
 ### GearHttp
